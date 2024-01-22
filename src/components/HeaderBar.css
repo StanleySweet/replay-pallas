@@ -1,0 +1,46 @@
+#header {
+    background-color: rgb(154, 51, 52);
+    padding: 8px 16px;
+    margin: 0;
+    box-sizing: unset;
+    height: 64px;
+}
+
+#header img {
+    margin-top: 10px;
+    float: left;
+}
+nav {
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+    padding-right: 16px;
+}
+
+nav li {
+    float: left;
+    clear: none;
+}
+
+nav a {
+    display: block;
+    padding: 1.5em 1em;
+    height: 1em;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: white;
+}
+
+nav a:hover,
+nav a:focus,
+nav a:active {
+    color: #f1f1d4;
+}
