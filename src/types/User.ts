@@ -4,6 +4,7 @@
  */
 
 import EUserRole from "../enumerations/EUserRole"
+import { Replay } from "./Replay"
 
 export interface User {
     "id": number
@@ -16,4 +17,5 @@ export interface User {
     "creation_date": Date
     "SecondMostUsedCmd": string
     "MostUsedCmd": string;
+    "replays": Replay[]
 }

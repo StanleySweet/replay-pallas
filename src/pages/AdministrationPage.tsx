@@ -22,14 +22,16 @@ const AdministrationPage = function () {
             navigate("/")
             return;
         }
-    }, []);
+    }, [role, navigate]);
 
     return (<>
         <NavigationBar />
         <div className="w-3/5 mx-auto py-5">
-            <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon/>&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("AdministrationPage.Title")}</div>
+            <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("AdministrationPage.Title")} </div>
+
+
             <WelcomeBlockAdministration />
-            <div className="p-5"></div>
+            <div className="mt-4"></div>
             <LatestUserContainer />
         </div>
     </>)

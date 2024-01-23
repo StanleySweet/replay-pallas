@@ -10,11 +10,11 @@
     margin-top: 10px;
     float: left;
 }
-nav {
+#header nav {
     display: block;
 }
 
-nav ul {
+#header nav ul {
     list-style: none;
     list-style-image: none;
     margin: 0;
@@ -23,12 +23,12 @@ nav ul {
     padding-right: 16px;
 }
 
-nav li {
+#header nav li {
     float: left;
     clear: none;
 }
 
-nav a {
+#header nav a {
     display: block;
     padding: 1.5em 1em;
     height: 1em;
@@ -39,8 +39,8 @@ nav a {
     color: white;
 }
 
-nav a:hover,
-nav a:focus,
-nav a:active {
+#header nav a:hover,
+#header nav a:focus,
+#header nav a:active {
     color: #f1f1d4;
 }

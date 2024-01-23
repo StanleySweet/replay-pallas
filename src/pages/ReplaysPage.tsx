@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { NavigationBar } from "../components/NavigationBar";
 import EUserRole from "../enumerations/EUserRole";
 import { HouseIcon } from "../icons/HouseIcon";
+import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -19,26 +20,27 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const ReplaysPage = (): ReactNode => {
     const [isLoading, setLoading] = useState(true);
     const [replays, setReplays] = useState<Replay[]>()
+    const [filter, setFilter] = useState<string>()
     const [civDoughnutData, setCivDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const [mapDoughnutData, setMapDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const { token, role } = useAuth();
 
     useEffect(() => {
-        axios.get<any, AxiosResponse<Replay[], any>>('http://localhost:8080/replays/all', {
+        axios.get('http://localhost:8080/replays/all', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        }).then((response: AxiosResponse<Replay[], any>) => {
+        }).then((response: AxiosResponse<Replay[]>) => {
             if (response.data && response.data) {
 
-                var civs = response.data.map(a => {
-                    var playerData = a.metadata.settings.PlayerData;
+                const civs = response.data.map(a => {
+                    const playerData = a.metadata.settings.PlayerData;
                     return playerData.map(b => b.Civ)
                 }).reduce((a, c) => a.concat(c), []);
-                var maps = response.data.map(a => a.metadata.settings.Name || a.metadata.settings.mapName);
-                var toto = civs.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null))
-                var tata = maps.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null))
+                const maps = response.data.map(a => a.metadata.settings.Name || a.metadata.settings.mapName);
+                const toto = civs.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null))
+                const tata = maps.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null))
                 setReplays(response.data)
                 setCivDoughnutData({
                     labels: Object.keys(tata),
@@ -62,22 +64,18 @@ const ReplaysPage = (): ReactNode => {
                 });
             }
 
-
-
             setLoading(false);
         });
-    }, []);
-
-    if (!civDoughnutData || !mapDoughnutData || isLoading)
-        return <></>
+    }, [token]);
 
 
 
     return (<>
         <NavigationBar />
+
         <div className="w-3/5 mx-auto py-5">
             <div className="flex">
-                <div className="mb-5 flex-grow inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon/>&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("Replays.Title")}</div>
+                <div className="mb-5 flex-grow inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("Replays.Title")}</div>
                 {
                     role > EUserRole.READER ?
                         <Link to="/Replays/Upload" className="inline-flex items-center mb-5">
@@ -89,19 +87,31 @@ const ReplaysPage = (): ReactNode => {
                         </Link> : ""
                 }
             </div>
-            <div className="grid grid-cols-6 gap-x-4">
-                <div className="col-span-2">
-                    <div id="doughnut-container" className=" text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-                        <BlockTitle titleKey={"Replays.CivRepartition"}></BlockTitle>
-                        <Doughnut data={civDoughnutData} options={{ responsive: true }} />
-                        <Doughnut data={mapDoughnutData} options={{ responsive: true }} />
+            {
+                isLoading ? <>{translate("App.LoadingInProgress")}</> :
+                    <div className="grid grid-cols-6 gap-x-4">
+                        <div className="col-span-2">
+                            {
+                                civDoughnutData ?
+                                    <div id="doughnut-container" className=" text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                                        <BlockTitle titleKey={"Replays.MapRepartition"}></BlockTitle>
+                                        <Doughnut data={civDoughnutData} options={{ responsive: true }} />
+                                    </div> : <></>
+                            }
+                            {
+                                mapDoughnutData ? <div id="doughnut-container" className="mt-4 text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                                    <BlockTitle titleKey={"Replays.CivRepartition"}></BlockTitle>
+                                    <Doughnut data={mapDoughnutData} options={{ responsive: true }} />
+                                </div> : <></>
+                            }
 
+                        </div>
+                        <div className="col-span-4">
+                            <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value) }} />
+                            <ReplayContainer filter={filter} maxItems={20} replays={replays}></ReplayContainer>
+                        </div>
                     </div>
-                </div>
-                <div className="col-span-4">
-                    <ReplayContainer replays={replays}></ReplayContainer>
-                </div>
-            </div>
+            }
         </div>
     </>
     )

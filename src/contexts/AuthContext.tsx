@@ -18,13 +18,13 @@ interface IAuthContextProviderProps {
 
 const AuthContextProvider = (props: IAuthContextProviderProps) => {
     function getPreviousSession(): PallasToken | null {
-        var data = localStorage.getItem("user-info");
+        const data = localStorage.getItem("user-info");
         if (!data)
             return null;
 
-        var previousSession = JSON.parse(data);
+        const previousSession = JSON.parse(data);
         // Handle expiration
-        var tokenObj = JSON.parse(atob(previousSession?.token.split(".")[1] || ""));
+        const tokenObj = JSON.parse(atob(previousSession?.token.split(".")[1] || ""));
         tokenObj.exp * 1000.0;
         if (tokenObj.exp * 1000 < Date.now()) {
             return null;
@@ -33,18 +33,29 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
         return previousSession;
     }
 
-    var previousSession = getPreviousSession();
+    const previousSession = getPreviousSession();
 
     const [isLogged, setIsLogged] = useState<boolean>(!!previousSession);
     const [token, setToken] = useState<string | null>(previousSession?.token ?? null);
     const [role, setRole] = useState<EUserRole>(previousSession?.role ?? EUserRole.UNKNOWN);
+    const [nick, setNick] = useState<string | null>(previousSession?.nick ?? null);
+    const [id, setId] = useState<number | null>(previousSession?.id ?? null);
 
     const value: IAuthContextType = {
         isLogged: isLogged,
         token: token, // If animator or coanimator
         role: role,
+        nick: nick,
+        id: id,
+        onLogoutSession: handleLogout,
         onLoginSession: handleLogin,
     };
+
+    function handleLogout()
+    {
+        localStorage.removeItem("user-info");
+        setIsLogged(false);
+    }
 
     function handleLogin(email: string, password: string): void {
         hash(password, '$2a$10$CwTycUXWue0Thq9StjUM0u', function (err, hashedPassword) {
@@ -58,7 +69,7 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
                     return;
                 }
 
-                var response = await axios.post(`http://localhost:8080/users/token`, {
+                const response = await axios.post(`http://localhost:8080/users/token`, {
                     email: hashedEmail,
                     password: hashedPassword,
                 })
@@ -70,6 +81,8 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
                     const user: PallasToken = response.data;
                     setRole(user.role)
                     setToken(user.token);
+                    setNick(user.nick);
+                    setId(user.id);
                     localStorage.setItem("user-info", JSON.stringify(user));
                     setIsLogged(true);
                 }

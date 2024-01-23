@@ -8,6 +8,7 @@ import { PlayerData } from "../types/Replay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { Link } from "react-router-dom";
 import { BlockTitle } from "./BlockTitle";
+import { uid } from "chart.js/helpers";
 
 interface IPlayerStatisticsProps {
     playerData: PlayerData[];
@@ -44,7 +45,7 @@ const PlayerStatistics = (props: IPlayerStatisticsProps): JSX.Element => {
         <div id="replay-detail-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
             <BlockTitle titleKey="PlayerStatistics.Title" />
 
-                {playerData.map((playerInfo, index) =>   <div className="mb-[1em] pt-3 grid grid-cols-2"  style={{ borderTop: "1px solid #C7CCD9" }}>
+                {playerData.map((playerInfo, index) =>   <div key={uid()} className="mb-[1em] pt-3 grid grid-cols-2"  style={{ borderTop: "1px solid #C7CCD9" }}>
 
                     <article key={index} className="" >
                         <figcaption className="flex items-center space-x-4">

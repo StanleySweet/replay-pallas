@@ -5,7 +5,7 @@ interface LocalRatingUser {
     "rating": string,
     "matches": number,
     "user": User
-};
+}
 
 export type {
     LocalRatingUser

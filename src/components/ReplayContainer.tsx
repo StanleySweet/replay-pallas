@@ -13,6 +13,8 @@ import { BlockTitle } from "./BlockTitle";
 
 interface IReplayContainerProps {
     replays?:Replay[]
+    maxItems: number;
+    filter?: string;
 }
 
 const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
@@ -30,7 +32,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
             setReplays(response.data);
             setLoading(false);
         });
-    }, []);
+    }, [token]);
 
 
     if (isLoading) {
@@ -41,12 +43,22 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
         return <div className="App">{translate("App.LoadingInProgress")}</div>;
     }
 
+    const filteredReplays = replays.filter(r => {
+        if(!props.filter || props.filter.length < 3)
+            return true;
+
+        return r.match_id.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
+        r.metadata.settings.PlayerData.some(a => a.Name?.toLowerCase().includes(props.filter?.toLowerCase() ?? ""))  ||
+        r.metadata.settings.mapName?.toLowerCase().includes(props.filter.toLowerCase()) ||
+        r.metadata.settings.Name?.toLowerCase().includes(props.filter.toLowerCase())
+    }).slice(0, props.maxItems)
+
     return (
         <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
             <BlockTitle titleKey="ReplayContainer.Title" />
-            <div className="w-full">
+            <div className="w-full h-[711px] overflow-y-scroll" >
                 {
-                    replays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)
+                   filteredReplays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)
                 }
             </div>
         </div>

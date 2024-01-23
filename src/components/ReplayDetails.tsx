@@ -9,13 +9,14 @@ import { toHHMMSS } from "../utils";
 import axios from "axios";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
+import { uid } from "chart.js/helpers";
 
 interface IReplayBlockProps {
     replay: Replay;
 }
 
 const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
-    let replay: Replay = props.replay;
+    const replay: Replay = props.replay;
     const { token } = useAuth();
 
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,7 +43,7 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
             <BlockTitle titleKey="ReplayDetails.Title" />
             <article className="font-sans">
                 <div className=" grid grid-cols-4">
-                    <div className="crop-container w-[256px] h-[150px} max-h-[256px] bg-black overflow-hidden">
+                    <div className="crop-container rounded-full w-[256px] h-[150px} max-h-[256px] bg-black overflow-hidden">
                         <img
                             className="ml-[9%] mt-[20%] mb-[20%] w-[256px] h-[150px}"
                             src={`https://cdn.jsdelivr.net/gh/0ad/0ad/binaries/data/mods/public/art/textures/ui/${replay.metadata.previewImage}`}
@@ -124,7 +125,7 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                                 replay.metadata.mods ?
                                     <span className="text-sm">
                                         {translate("ReplayDetails.Mods")}&nbsp;{
-                                            replay.metadata.mods?.map(a => <span><b>{a.name}</b> ({a.version}),&nbsp;</span>)
+                                            replay.metadata.mods?.map(a => <span key={uid()}><b>{a.name}</b> ({a.version}),&nbsp;</span>)
                                         }
                                     </span> : ""
                             }

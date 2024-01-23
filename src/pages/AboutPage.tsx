@@ -28,9 +28,11 @@ const AboutPage = (): ReactNode => {
                 </p>
                 <h3 className="font-semibold mt-1 mb-1">Sources</h3>
                 <p className="text-justify">
-                    Replay Scrapper:
-                    Replay Pallas API:
-                    Replay Pallas Front:
+                    Replay Scrapper (Github): <a href="https://github.com/StanleySweet/replay-pallas-scrapper">here</a> <br/>
+                    Replay Pallas API (Github): <a href="https://github.com/StanleySweet/replay-pallas">here</a> <br/>
+                    Replay Pallas Front (Github): <a href="https://github.com/StanleySweet/replay-pallas-api">here</a> <br/>
+                    Local Ratings source (Gitlab): <a href="https://gitlab.com/mentula0ad/LocalRatings">here</a><br/>
+                    Local Ratings Thread (Forums): <a href="https://wildfiregames.com/forum/topic/80151-localratings-mod-evaluate-players-skills-based-on-previous-games/#comment-497805">here</a><br/>
                 </p>
                 <h3 className="font-semibold mt-1 mb-1">Credits</h3>
                 <p className="text-justify">

@@ -7,5 +7,7 @@ import EUserRole from "../enumerations/EUserRole"
 
 export interface PallasToken {
     token: string
+    nick : string,
+    id : number
     role: EUserRole
 }

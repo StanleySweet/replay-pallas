@@ -30,7 +30,7 @@ const LobbyUserBlock = (props: IUserBlockProps) => {
                 <div className="flex-shrink-0">
                     <Avatar
                         size={40}
-                        name={props.user.nick + props.user.id}
+                        name={props.user.nick}
                         variant="beam"
                         colors={['#e8be48', '#9a3334', '#480000', '#957531', '#1b1b1b']}
                     />

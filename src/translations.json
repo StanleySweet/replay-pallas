@@ -3,6 +3,10 @@
         "fr-FR": "Se connecter",
         "EN": "Login"
     },
+    "LoginPage.Register": {
+        "fr-FR": "S'enregistrer",
+        "EN": "Register"
+    },
     "LoginPage.WelcomeMessage": {
         "fr-FR": "Bienvenue sur Replay Pallas",
         "EN": "Welcome to Replay Pallas"
@@ -10,6 +14,10 @@
     "LoginPage.EmailFieldLabel": {
         "fr-FR": "E-mail :",
         "EN": "E-mail:"
+    },
+    "LoginPage.NickFieldLabel": {
+        "fr-FR": "Surnom en jeu :",
+        "EN": "In game nickname:"
     },
     "LoginPage.PasswordFieldLabel": {
         "fr-FR": "Mot de passe :",
@@ -26,6 +34,10 @@
     "App.LoadingInProgress": {
         "fr-FR": "Chargement...",
         "EN": "Loading..."
+    },
+    "App.SelectAPlayer": {
+        "fr-FR": "Sélectionnez un joueur",
+        "EN": "Select a player"
     },
     "ReplayContainer.Title": {
         "fr-FR": "Matchs",
@@ -47,9 +59,25 @@
         "fr-FR": "Détail utilisateur",
         "EN": "User details"
     },
+    "UserDetails.ChangePermissions": {
+        "fr-FR": "Changer les permissions",
+        "EN": "Change permissions"
+    },
+    "UserDetails.SavePermissions": {
+        "fr-FR": "Sauvegarder les permissions",
+        "EN": "Save permissions"
+    },
     "LocalRatings.Title": {
         "fr-FR": "Détail utilisateur",
         "EN": "User details"
+    },
+    "PlayerList.Title": {
+        "fr-FR": "Liste des joueurs",
+        "EN": "Player list"
+    },
+    "PlayerPerformance.Title": {
+        "fr-FR": "Performance",
+        "EN": "Performance"
     },
     "PlayerList.Rank": {
         "fr-FR": "Rang",
@@ -98,6 +126,10 @@
     "SearchPlayerBar.LookForAPlayer": {
         "fr-FR": "Rechercher un joueur",
         "EN": "Look for a player"
+    },
+    "SearchReplayBar.LookForAReplay": {
+        "fr-FR": "Rechercher un replay",
+        "EN": "Look for a replay"
     },
     "ReplayDetails.MapName": {
         "fr-FR": "Nom:",
@@ -156,8 +188,12 @@
         "EN": "Mods:"
     },
     "Replays.CivRepartition": {
-        "fr-FR": "Répartition  :",
+        "fr-FR": "Répartition des Civilisations :",
         "EN": "Civ Repartition:"
+    },
+    "Replays.MapRepartition": {
+        "fr-FR": "Répartition des Cartes :",
+        "EN": "Map Repartition:"
     },
     "Replays.Title": {
         "fr-FR": "Replays",
@@ -175,41 +211,60 @@
         "fr-FR": "A propos",
         "EN": "About"
     },
-    "ReplayUploadPage.Title":{
+    "UploadPage.UploadedReplaysTitle": {
+        "fr-FR": "Replays uploadés",
+        "EN": "Uploaded replays"
+    },
+    "ReplayUploadPage.Title": {
         "fr-FR": "Téléversement de replay",
         "EN": "Replay Upload"
     },
-    "LatestUser.Title":{
+    "LatestUser.Title": {
         "fr-FR": "Derniers utilisateurs",
         "EN": "Recent users"
     },
-    "NavigationBar.About":{
+    "NavigationBar.About": {
         "fr-FR": "A propos",
         "EN": "About"
     },
-    "NavigationBar.Home":{
+    "NavigationBar.Home": {
         "fr-FR": "Accueil",
         "EN": "Home"
     },
-    "NavigationBar.LocalRatings":{
+    "NavigationBar.LocalRatings": {
         "fr-FR": "Local Ratings",
         "EN": "Local Ratings"
     },
-    "NavigationBar.PrivacyPolicy":{
+    "NavigationBar.PrivacyPolicy": {
         "fr-FR": "Privacy Policy",
         "EN": "Privacy Policy"
     },
-    "NavigationBar.Replays":{
+    "NavigationBar.Replays": {
         "fr-FR": "Replays",
         "EN": "Replays"
     },
-    "NavigationBar.Administration":{
+    "NavigationBar.Administration": {
         "fr-FR": "Administration",
         "EN": "Administration"
     },
-    "WelcomeBlockAdministration.IfYouWantToHelp":{
-        "fr-FR":  "If you want to help with the development, please take a look at ",
+    "WelcomeBlockAdministration.IfYouWantToHelp": {
+        "fr-FR": "If you want to help with the development, please take a look at ",
         "EN": "If you want to help with the development, please take a look at "
+    },
+    "EvolutionChart.ZeroLineLegend": {
+        "fr-FR": "Ligne de zéro",
+        "EN": "Zero line"
+    },
+    "EvolutionChart.CurrentRatingLegend": {
+        "fr-FR": "Classement actuel",
+        "EN": "Current Rating"
+    },
+    "EvolutionChart.RatingEvolutionLegend": {
+        "fr-FR": "Evolution du classement",
+        "EN": "Rating evolution"
+    },
+    "EvolutionChart.PerformanceOverTimeLegend": {
+        "fr-FR": "Performance",
+        "EN": "Performance over time"
     }
-
 }

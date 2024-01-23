@@ -11,6 +11,9 @@ interface IAuthContextType {
     isLogged: boolean,
     token: string | null,
     role: EUserRole,
+    nick: string | null,
+    id: number | null,
+    onLogoutSession: () => void
     onLoginSession: (email: string, password: string) => void,
 }
 

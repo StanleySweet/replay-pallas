@@ -1,0 +1,135 @@
+{
+    "The Rating System": [
+        {
+            "title": "Overview",
+            "text": [
+                "LocalRatings is a 0 A.D. mod aimed at ranking players and rating their performance, based on the games you (the mod user) have previously played with/against them."
+            ]
+        },
+        {
+            "title": "A new rating system",
+            "text": [
+                "Normally, players who play one-versus-one online games in the 0 A.D. lobby can obtain a rating. The default rating system in use by the lobby is a ELO rating system; this system has two major disadvantages:",
+                "1. it only takes into account one-versus-one games; team games do not contribute to the ELO score of a player;",
+                "2. it only takes into account the outcome of a game (i.e. victory or defeat) and not the performance of the player during the game.",
+                "LocalRatings aims to solve the above two issues, by assigning players a rating which is different from the ELO rating and takes into consideration all games (and not just one-versus-one games) and performance (regardless of the victory/defeat outcome)."
+            ]
+        },
+        {
+            "title": "The rating system, intuitively",
+            "text": [
+                "Summary charts of various types are displayed at the end of every 0 A.D. game. The \"Total score\" chart, in particular, describes the performance of each player during the game as a combination of economy, military and exploration score.",
+                "If a player has a better-looking graph compared to the other players' graphs, that player has presumably performed better than the other players during the game, regardless of the final score and the outcome (victory or defeat).",
+                "The idea of a rating system that measures how \"better\" or \"worse\" a player's graph looks in comparison to other players' graphs is at the core of the LocalRatings system.",
+                "More precisely, the LocalRatings system analyzes the charts of all games played by a player and compares the player's graphs with the \"game average graphs\", the latter obtained from all participants to the game as if they were one single player.",
+                "For example, a player whose graphs are, on average, 5% above the game average graph, will be assigned a rating of 5.00. Similarly, a player whose graphs are, on average, 5% below the game average graph, will be assigned a rating of -5.00."
+            ]
+        },
+        {
+            "title": "There is no unique rating",
+            "text": [
+                "The LocalRatings system, by default, compares the \"Total score\" graphs of a player with the \"Total score\" average graphs. The outcome of this procedure is a unique rating assigned to each player.",
+                "However, the \"Total score\" chart is an arbitrarily fixed combination of economy, military and exploration score. The LocalRatings system allows to redistribute these factors, according to user-chosen weights. Different combinations of weights give rise to different graphs and, therefore, to different, customizable ratings!"
+            ]
+        },
+        {
+            "title": "Differences between the LocalRatings and the lobby rating systems",
+            "text": [
+                "There are some major differences between the LocalRatings system and the 0 A.D. lobby system:",
+                "1. the LocalRatings system takes into consideration all types of games; the lobby system considers one-versus-one games only;",
+                "2. the LocalRatings system does not consider the outcome of a game for the rating assignment, whereas the lobby system does. The LocalRatings system only takes into account the performance of the player during the game, regardless of the positive (victory) or negative (defeat) outcome;",
+                "3. the LocalRatings system is based on the games you (the mod user) have played: the rating of a player is only determined by the replays stored on your computer of games played with/against that player;",
+                "4. the LocalRatings system, as opposed to the lobby system, is customizable via a different combination of weights. Therefore, there is no unique rating assigned to a player, but the rating depends on the factors you (the mod user) choose to be more important."
+            ]
+        },
+        {
+            "title": "The rating algorithm in detail",
+            "text": [
+                "The rating assigned by LocalRatings to a player is obtained as follows:",
+                "1. all replays you (the mod user) own, having that player as an active player are scanned. All other replays are ignored;",
+                "2. for each replay obtained at step 1, the statistics of that player at all instants of the game (and not only at game's end) are taken;",
+                "3. the player's score at every instant of the game is obtained as the sum of all statistic values taken at step 2, multiplied by the corresponding weights. For example, with the weight 'Enemy units killed (number)' set to 2 and all other weights set to 0, the player's score at every instant of the game is equal to twice the number of enemy units killed at that instant of the game;",
+                "4. the player's average score of the game is then obtained as the arithmetic mean over all instants of the game of the scores obtained at step 3;",
+                "5. also, the average score of the game is calculated: the average score of the game is the sum of the average scores of all players participating in the game (obtained as in step 4), divided by the number of participating players. This represents the average score of all players as if they were one single player;",
+                "6. the ratio (players's score - average score) / (average score) is the player's rating relative to the replay. For example, if the ratio is equal to 0.1, then the player has an average score during the game 10% higher than the average score of all players combined;",
+                "7. the final rating of a player is obtained by computing the arithmetic mean over all replays of the ratios obtained at step 6. In other words, the final rating is the sum of ratings obtained at step 6 over all replays considered at step 1, divided by the number of replays."
+            ]
+        }
+    ],
+    "Features": [
+        {
+            "title": "Customize the rating system",
+            "text": [
+                "By default, the rating of a player is obtained by comparing the player's \"Total score\" graphs (the same graph displayed in the summary at the end of every 0 A.D. game) with the average \"Total score\" graphs. This graph is a fixed combination of economy, military and exploration scores.",
+                "LocalRatings allows to change this distribution of weights. In other words, the combination of factors that influence the score calculation can be tweaked. For example, one can give half the importance to the amount of resources gathered and twice to the value of units killed. Different weights give rise to different charts and, therefore, to different ratings.",
+                "",
+                "Weights can be changed from the \"Options > Score Weights\" menu."
+            ]
+        },
+        {
+            "title": "Choose those games that matter for the rating",
+            "text": [
+                "The rating of a player is obtained from all replays that are stored in your (the mod user) replay database. Filtering replays is possible, so that some replays (for example, too short replays) do not contribute to the final rating calculation.",
+                "There are several different types of replays one might want to filter out: for example one can ignore all one-versus-one games; or, on the contrary, one might want to consider one-versus-one games only. Explore the possibilities and find the one that suits you best.",
+                "",
+                "Filtering replays can be done from the \"Options > Match Filters\" menu."
+            ]
+        },
+        {
+            "title": "Make balancing easier",
+            "text": [
+                "The rating of a player and the number of matches can be seen directly from lobby, in the player profile area and in the game description area. Similarly, rating and number of matches can be displayed during the creation of a new game, right next the the player's name, either if you or someone else is hosting the game. This will hopefully make balancing games an easier task.",
+                "",
+                "Enabling/disabling this feature can be done from the \"Options > General\" menu."
+            ]
+        },
+        {
+            "title": "Treat players with multiple accounts as one",
+            "text": [
+                "Some players use multiple identities for various reasons: they forget the password to enter the lobby, they want to be unrecognizable or hide their true skills, they want a new ELO rating in the lobby, etc. Or they simply want to change their name.",
+                "LocalRatings can handle players with multiple identities. Different \"aliases\", owned by the same player, can be merged into one single identity, called the \"primary\" identity.",
+                "",
+                "Aliases can be set from the \"Aliases\" menu."
+            ]
+        },
+        {
+            "title": "Get accessible information on players skills when needed",
+            "text": [
+                "The LocalRatings page, that can normally be opened from the main menu, can also be toggled with a hotkey from the game session, the lobby page and the game setup.",
+                "",
+                "The hotkey that toggles the LocalRatings page can be assigned from the game \"Hotkeys\" menu."
+            ]
+        }
+    ],
+    "F.A.Q.": [
+        {
+            "title": "What is the difference between \"Rating\" and \"Performance\"?",
+            "text": [
+                "Both \"Rating\" and \"Performance\" describe the skills of player, but in different scopes. The \"Rating\" describes the skills of a player, considering all the games they played, whereas the \"Performance\" describes the same skills, but restricted to a single game only.",
+                "\"Rating\" and \"Performance\" coincide when a player has played one game only, and they generally differ when a player has played more than one game. In fact, the \"Rating\" is the average performance over all games."
+            ]
+        },
+        {
+            "title": "What are \"Rating evolution\" and \"Performance over time\" graphs?",
+            "text": [
+                "The \"Rating evolution\" graph describes the rating of a player as a function of the number games played. In other words, if a point on the \"Rating evolution\" graph has (X,Y)-coordinates, then the player had a rating equal to Y after having played X games.",
+                "The \"Performance over time\" graph describes the performance of a player as a function of the game played. In other words, if a point on the \"Performance over time\" graph has (X,Y)-coordinates, then the player had performed Y% better than the average on their X-th game played."
+            ]
+        },
+        {
+            "title": "The rating of a certain player is far from expectations. Why?",
+            "text": [
+                "There might be several reasons. For example:",
+                "- the amount of replays you own of that player is small. Data extracted from a small sample might not be fully representative of reality. The more you play with a player, the more accurate the rating of that player is;",
+                "- the choice of weights used to calculate the rating is not adequate to the expected skill set. Score weights describe certain aspects of the player, whilst ignore others. For example, assigning non-zero values to economic weights only will not reflect the player's military skills."
+            ]
+        },
+        {
+            "title": "What is the \"primary identity\" of a player with aliases?",
+            "text": [
+                "Aliases represent multiple identities of the same player. When a group of aliases is defined, the \"primary identity\" is the sole identity that will be displayed in the player list.",
+                "All other aliases, that are not primary, will be merged into the primary identity."
+            ]
+        }
+    ]
+}

@@ -45,7 +45,7 @@ const ReplayDetailsPage = function () {
     <div className="w-3/5 mx-auto py-5">
       <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon/>&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}<Link to={"/Replays"}>&nbsp;{translate("Replays.Title")}&nbsp;</Link>{">"}&nbsp;{translate("ReplayDetails.Title")}</div>
       <ReplayDetails replay={replay} />
-      <div className="p-5"></div>
+      <div className="mt-4"></div>
       <PlayerStatistics playerData={replay.metadata.settings.PlayerData} />
     </div>
   </>)

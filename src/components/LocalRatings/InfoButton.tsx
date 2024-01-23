@@ -11,7 +11,7 @@ interface InfoButtonProps {
 const InfoButton = (props: InfoButtonProps): JSX.Element => {
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        // const button: HTMLButtonElement = event.currentTarget;
+        location.href = "https://gitlab.com/mentula0ad/LocalRatings"
     };
 
     return (

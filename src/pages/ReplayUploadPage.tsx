@@ -37,7 +37,7 @@ const ReplayUploadPage = (): ReactNode => {
             }
         };
 
-        var result = await axios.post('http://localhost:8080/replays/upload-zip', formData, {
+        const result = await axios.post('http://localhost:8080/replays/upload-zip', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
@@ -45,9 +45,9 @@ const ReplayUploadPage = (): ReactNode => {
         });
 
 
-        var replays : Replay[] = [];
-        for (var matchId of result.data.AddedReplays) {
-            var replay = await axios.get<Replay>(`http://localhost:8080/replays/${matchId}`, {
+        const replays: Replay[] = [];
+        for (const matchId of result.data.AddedReplays) {
+            const replay = await axios.get<Replay>(`http://localhost:8080/replays/${matchId}`, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`
@@ -66,7 +66,7 @@ const ReplayUploadPage = (): ReactNode => {
             navigate("/")
             return;
         }
-    }, []);
+    }, [navigate, role]);
 
 
     return (
@@ -85,20 +85,20 @@ const ReplayUploadPage = (): ReactNode => {
                     <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file_input">Selection du fichier</label>
                     <input onChange={evt => setFileData(evt.target.files?.[0])} accept=".zip" className="lock w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none file:bg-gray-50 file:border-0 file:bg-gray-100 file:me-4 file:py-3 file:px-4 " aria-describedby="file_input_help" id="file_input" type="file" />
                     <p className="mt-1 text-sm text-gray-500" id="file_input_help">Zip file only. Max size 5MB</p>
-                    <center className="col-span-3">
-                        <div className="pt-2">
+                        <div className="pt-2 d-flex flex">
+                            <div className="flex-grow"></div>
                             <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                                 <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 20h14v-2H5zm0-10h4v6h6v-6h4l-7-7z" /></svg>
-                                <span>{translate("ReplayDetails.Download")}</span>
+                                <span>{translate("Replays.Upload")}</span>
                             </button>
                         </div>
-                    </center>
 
                 </div>
             </div>
             {
                 uploadReplays?.length ?
-                    <div id="uploaded-replays-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                    <div id="uploaded-replays-container" className="text-sm w-3/5 p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                        <BlockTitle titleKey="UploadPage.UploadedReplaysTitle"/>
                         {
                             uploadReplays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)
                         }</div> : ""
