@@ -4,7 +4,7 @@ import { uid } from "chart.js/helpers";
 
 const RatingSystem = (): ReactNode => {
     return (
-        <div className="max-h-[265px] overflow-y-scroll overflow-x-auto overflow-hidden text-justify">
+        <div className="max-h-[265px] overflow-y-scroll overflow-x-auto overflow-hidden text-justify pr-4">
             {
                 aboutData["The Rating System"].map(a => {
                     return <span key={uid()}><h3 className="font-semibold mt-1 mb-1">{a.title}</h3>

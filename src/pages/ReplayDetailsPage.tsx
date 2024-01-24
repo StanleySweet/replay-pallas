@@ -23,18 +23,18 @@ const ReplayDetailsPage = function () {
   const { token } = useAuth();
 
   useEffect(() => {
-    axios.get<any, AxiosResponse<Replay, any>>(`http://localhost:8080/replays/${matchId}`, {
+    axios.get<Replay>(`${import.meta.env.VITE_API_URL}/replays/${matchId}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       }
-    }).then((response: AxiosResponse<Replay, any>) => {
+    }).then((response: AxiosResponse<Replay>) => {
       if (response.data && response.data.metadata) {
         setReplay(response.data);
       }
       setLoading(false);
     });
-  }, []);
+  }, [matchId, token]);
 
   if (isLoading || !replay) {
     return <div className="App">{translate("App.LoadingInProgress")}</div>;
@@ -42,7 +42,7 @@ const ReplayDetailsPage = function () {
 
   return (<>
     <NavigationBar />
-    <div className="w-3/5 mx-auto py-5">
+    <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
       <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon/>&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}<Link to={"/Replays"}>&nbsp;{translate("Replays.Title")}&nbsp;</Link>{">"}&nbsp;{translate("ReplayDetails.Title")}</div>
       <ReplayDetails replay={replay} />
       <div className="mt-4"></div>

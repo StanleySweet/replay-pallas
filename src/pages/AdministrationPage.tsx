@@ -26,7 +26,7 @@ const AdministrationPage = function () {
 
     return (<>
         <NavigationBar />
-        <div className="w-3/5 mx-auto py-5">
+        <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
             <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("AdministrationPage.Title")} </div>
 
 

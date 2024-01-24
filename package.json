@@ -15,6 +15,7 @@
     "bcryptjs": "^2.4.3",
     "boring-avatars": "^1.10.1",
     "chart.js": "^4.4.1",
+    "nightwind": "^1.1.13",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

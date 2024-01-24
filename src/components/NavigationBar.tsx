@@ -3,9 +3,28 @@ import { useAuth } from "../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import EUserRole from "../enumerations/EUserRole";
 import Avatar from "boring-avatars";
+import { enable } from "../nightwind";
+import {  useEffect, useState } from "react";
 
 const NavigationBar = () => {
+    const storageKey = 'nightwind-mode'
+    const getColorPreference = (): string => {
+        const cache = localStorage.getItem(storageKey);
+        if (cache)
+            return cache;
+        else
+            return window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+    }
     const { role, id, nick, onLogoutSession } = useAuth()
+    const [lightMode, setLightMode] = useState<string>();
+
+    useEffect(() => {
+        setLightMode(getColorPreference());
+    }, []);
+
+
     const loginBlock = nick && id && role ?
         <article className="mb-[1em] m-auto flex pt-3"  >
             <div className="flex items-center space-x-4">
@@ -34,11 +53,23 @@ const NavigationBar = () => {
                 </div>
             </div>
         </article> : <></>;
+    const onClick = () => {
+        if (lightMode === "light") {
+            enable(false)
+            setLightMode("dark")
+        }
+        else if (lightMode === "dark") {
+            enable(true)
+            setLightMode("light")
+        }
+    }
+
+    console.log(lightMode)
 
     return (
-        <div className="grid grid-col-5 bg-white shadow-md w-full flex">
-            <div className="flex-1 flex-grow"></div>
-            <div className="flex-none col-span-3  w-3/5 mx-auto flex gap-x-1  d-flex ">
+        <div className="grid grid-cols-5 bg-white text-gray-900 shadow-md w-full">
+            <div className=" "></div>
+            <div className="flex-none col-span-3 flex gap-x-1 ">
                 <Link to="/Home" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
                     <span style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }} >{translate("NavigationBar.Home")}</span>
                 </Link><Link to="/Replays" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
@@ -60,8 +91,39 @@ const NavigationBar = () => {
                         ""
                 }
             </div>
-            <div className="">
-                {loginBlock}
+            <div className="col-span-1">
+                <div className="flex">
+                    <button className="theme-toggle" onClick={onClick} id="theme-toggle" title="Toggles light & dark" data-theme={lightMode} aria-label={lightMode} aria-live="polite">
+                        {
+                            lightMode !== "dark" ? <svg className="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                                <mask className="moon" id="moon-mask">
+                                    <rect x="0" y="0" width="100%" height="100%" className="stroke-slate-50 fill-slate-50" />
+                                    <circle cx="24" cy="10" r="6" className="stroke-slate-50 fill-slate-50" />
+                                </mask>
+                                <circle className="stroke-slate-50 fill-slate-50" cx="12" cy="12" r="6" mask="url(#moon-mask)" />
+                                <g className="stroke-slate-50 fill-slate-50">
+                                    <line x1="12" y1="1" x2="12" y2="3" />
+                                    <line x1="12" y1="21" x2="12" y2="23" />
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />²
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                    <line x1="1" y1="12" x2="3" y2="12" />
+                                    <line x1="21" y1="12" x2="23" y2="12" />
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                                </g>
+                            </svg> :
+                                <svg className="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                                    <mask className="moon" id="moon-mask">
+                                        <rect x="0" y="0" width="100%" height="100%" className="stroke-white fill-white" />
+                                        <circle cx="24" cy="10" r="6" className="stroke-black fill-black" />
+                                    </mask>
+                                    <circle className="stroke-black fill-black" cx="12" cy="12" r="6" mask="url(#moon-mask)" />
+                                </svg>
+                        }
+                    </button>
+                    {loginBlock}
+                </div>
+
             </div>
             <hr className="w-full col-span-5" />
         </div>

@@ -58,7 +58,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     // }
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/local-ratings/users`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/local-ratings/users`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -68,12 +68,12 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
             setFilteredUsers(response.data);
             setLoading(false);
         });
-    }, []);
+    }, [token]);
 
     const onPlayerSelected = async (evt: React.MouseEvent<HTMLTableRowElement>, user: LocalRatingUser) => {
         evt.preventDefault();
         setUser(user);
-        axios.post(`http://localhost:8080/local-ratings/player-profile`, {
+        axios.post(`${import.meta.env.VITE_API_URL}/local-ratings/player-profile`, {
             player: user.user.nick,
             rank: user.rank,
             players: user.matches
@@ -103,7 +103,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     }
     else if (filteredUsers && filteredUsers.length) {
         body = <tbody className="w-full">{
-            filteredUsers.map((u) => <tr className="hover:bg-wfg hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b " key={uid()} onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-center max-w-[8em] text-ellipsis overflow-hidden">{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
+            filteredUsers.map((u) => <tr className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b " key={uid()} onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-left max-w-[3em] text-ellipsis overflow-hidden" title={u.user.nick}>{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
         }</tbody>;
     }
     else {
@@ -130,56 +130,57 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     return (<>
         <div id="player-list-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
             <BlockTitle titleKey="PlayerList.Title" />
-            <SearchPlayerBar onChange={onSearchBarChange} />
-            <div className="max-h-[230px] overflow-y-scroll relative overflow-x-auto sm:rounded-md table-fixed">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+        </div>
+        <div className="mt-2">        <SearchPlayerBar onChange={onSearchBarChange} /></div>
+        <div className=" mt-2 relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
+            <div className=" overflow-y-auto relative overflow-x-auto sm:rounded-md table-fixed">
+                <table className="text-xs w-full text-sm text-left rtl:text-right text-gray-500 ">
+                    <thead className="text-gray-700 uppercase bg-gray-50 ">
                         <tr className="border-b">
-                            <th className="px-2 text-center py-3">{translate("PlayerList.Rank")}</th>
-                            <th className="px-2 text-center py-3">{translate("PlayerList.Player")}</th>
-                            <th className="px-2 text-center py-3">{translate("PlayerList.Rating")}</th>
-                            <th className="px-2 text-center py-3">{translate("PlayerList.Matches")}</th>
+                            <th className="px-2 text-center py-3" title={translate("PlayerList.Rank")}>{translate("PlayerList.RankColumn")}</th>
+                            <th className="px-2 text-center py-3" title={translate("PlayerList.Player")}>{translate("PlayerList.Player")}</th>
+                            <th className="px-2 text-center py-3 max-w-[3em] text-ellipsis overflow-hidden" title={translate("PlayerList.Rating")}>{translate("PlayerList.Rating")}</th>
+                            <th className="px-2 text-center py-3" title={translate("PlayerList.Matches")}>{translate("PlayerList.Matches")}</th>
                         </tr>
                     </thead>{body}
                 </table>
             </div>
-
         </div>
+
         <div className="p-2"></div>
-        <div id="player-detail-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-            <BlockTitle titleKey="PlayerPerformance.Title" />
-            {
-                userProfile ?
-                    <div>
-                        {
-                            user ?
-                                <LobbyUserBlock key={user.user.id} user={user.user} rank={userProfile.rankText} rankUserCount={users?.length}></LobbyUserBlock> :
-                                <></>
-                        }
-                        <div className="relative overflow-x-auto sm:rounded-md" style={{ border: '1px solid' }}>
-                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
-                                    <tr style={{ borderBottom: '1px solid' }}>
-                                        <th className="text-center px-6 py-3" colSpan={2}>Score</th>
-                                        <th className="text-center px-6 py-3" colSpan={2}>Performance</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="odd:bg-white even:bg-gray-50 border-b">
-                                    <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Current</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.currentRatingText}</td><td className="text-right" >Last</td><td className="font-bold text-center">{userProfile.lastPerformanceText}</td></tr>
-                                    <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Highest</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.highestRatingText}</td><td className="text-right">Best</td><td className="font-bold text-center">{userProfile.bestPerformanceText}</td></tr>
-                                    <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Lowest</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.lowestRatingText}</td><td className="text-right">Worst</td><td className="font-bold text-center">{userProfile.worstPerformanceText}</td></tr>
-                                    <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Average</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.averageRatingText}</td><td className="text-right">Lowest</td><td className="font-bold text-center">{userProfile.lowestRatingText}</td></tr>
-                                    <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Avg deviation</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingAverageDeviationText}</td> <td className="text-right">Avg deviation</td><td className="font-bold text-center">{userProfile.averagePerformanceText}</td></tr>
-                                    <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Std deviation</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingStandardDeviationText}</td><td className="text-right">Std deviation</td><td className="font-bold text-center">{userProfile.performanceStandardDeviationText}</td></tr>
-                                </tbody>
-                            </table>
+        {
+            userProfile ?
+                <>
+                    <div id="player-detail-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                        <BlockTitle titleKey="PlayerPerformance.Title" />
+                        <div>
+                            {
+                                user ?
+                                    <LobbyUserBlock key={user.user.id} user={user.user} rank={userProfile.rankText} rankUserCount={users?.length}></LobbyUserBlock> :
+                                    <></>
+                            }
                         </div>
                     </div>
-
-                    : <></>
-            }
-
-        </div>
+                    <div className=" mt-4 relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
+                        <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+                                <tr style={{ borderBottom: '1px solid' }}>
+                                    <th className="text-center px-6 py-3" colSpan={2}>Score</th>
+                                    <th className="text-center px-6 py-3" colSpan={2}>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody className="odd:bg-white even:bg-gray-50 border-b">
+                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Current</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.currentRatingText}</td><td className="text-right" >Last</td><td className="font-bold text-center">{userProfile.lastPerformanceText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Highest</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.highestRatingText}</td><td className="text-right">Best</td><td className="font-bold text-center">{userProfile.bestPerformanceText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Lowest</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.lowestRatingText}</td><td className="text-right">Worst</td><td className="font-bold text-center">{userProfile.worstPerformanceText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Average</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.averageRatingText}</td><td className="text-right">Lowest</td><td className="font-bold text-center">{userProfile.lowestRatingText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Avg deviation</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingAverageDeviationText}</td> <td className="text-right">Avg deviation</td><td className="font-bold text-center">{userProfile.averagePerformanceText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Std deviation</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingStandardDeviationText}</td><td className="text-right">Std deviation</td><td className="font-bold text-center">{userProfile.performanceStandardDeviationText}</td></tr>
+                            </tbody>
+                        </table>
+                    </div></>
+                : <></>
+        }
     </>
     )
 }

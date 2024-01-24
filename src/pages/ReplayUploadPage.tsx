@@ -37,7 +37,7 @@ const ReplayUploadPage = (): ReactNode => {
             }
         };
 
-        const result = await axios.post('http://localhost:8080/replays/upload-zip', formData, {
+        const result = await axios.post('${import.meta.env.VITE_API_URL}/replays/upload-zip', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
@@ -47,7 +47,7 @@ const ReplayUploadPage = (): ReactNode => {
 
         const replays: Replay[] = [];
         for (const matchId of result.data.AddedReplays) {
-            const replay = await axios.get<Replay>(`http://localhost:8080/replays/${matchId}`, {
+            const replay = await axios.get<Replay>(`${import.meta.env.VITE_API_URL}/replays/${matchId}`, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`
@@ -72,7 +72,7 @@ const ReplayUploadPage = (): ReactNode => {
     return (
         <>
             <NavigationBar />
-            <div className="w-3/5 mx-auto py-5">
+            <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
                 <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("ReplayUploadPage.Title")}</div>
 
                 <div id="upload-replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
@@ -97,7 +97,7 @@ const ReplayUploadPage = (): ReactNode => {
             </div>
             {
                 uploadReplays?.length ?
-                    <div id="uploaded-replays-container" className="text-sm w-3/5 p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                    <div id="uploaded-replays-container" className="text-sm md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
                         <BlockTitle titleKey="UploadPage.UploadedReplaysTitle"/>
                         {
                             uploadReplays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)

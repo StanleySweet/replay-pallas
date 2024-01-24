@@ -8,8 +8,8 @@
         "EN": "Register"
     },
     "LoginPage.WelcomeMessage": {
-        "fr-FR": "Bienvenue sur Replay Pallas",
-        "EN": "Welcome to Replay Pallas"
+        "fr-FR": "Bienvenue sur Replay Pallàs'",
+        "EN": "Welcome to Replay Pallàs'"
     },
     "LoginPage.EmailFieldLabel": {
         "fr-FR": "E-mail :",
@@ -82,6 +82,10 @@
     "PlayerList.Rank": {
         "fr-FR": "Rang",
         "EN": "Rank"
+    },
+    "PlayerList.RankColumn": {
+        "fr-FR": "#",
+        "EN": "#"
     },
     "PlayerList.Player": {
         "fr-FR": "Joueur",

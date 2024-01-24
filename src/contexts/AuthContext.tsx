@@ -4,7 +4,7 @@
  */
 
 import EUserRole from "../enumerations/EUserRole";
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useEffect } from "react";
 import { LoginPage } from "../pages/LoginPage";
 import { AuthContext, IAuthContextType } from "./Models/IAuthContext";
 import { hash } from "bcryptjs";
@@ -19,13 +19,13 @@ interface IAuthContextProviderProps {
 const AuthContextProvider = (props: IAuthContextProviderProps) => {
     function getPreviousSession(): PallasToken | null {
         const data = localStorage.getItem("user-info");
+
         if (!data)
             return null;
 
         const previousSession = JSON.parse(data);
         // Handle expiration
         const tokenObj = JSON.parse(atob(previousSession?.token.split(".")[1] || ""));
-        tokenObj.exp * 1000.0;
         if (tokenObj.exp * 1000 < Date.now()) {
             return null;
         }
@@ -34,6 +34,9 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
     }
 
     const previousSession = getPreviousSession();
+    useEffect(() => {
+    }, [])
+
 
     const [isLogged, setIsLogged] = useState<boolean>(!!previousSession);
     const [token, setToken] = useState<string | null>(previousSession?.token ?? null);
@@ -58,18 +61,18 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
     }
 
     function handleLogin(email: string, password: string): void {
-        hash(password, '$2a$10$CwTycUXWue0Thq9StjUM0u', function (err, hashedPassword) {
+        hash(password, import.meta.env.VITE_PASSWORD_SALT, function (err, hashedPassword) {
             if (err) {
                 console.error(err);
                 return;
             }
-            hash(email, '$2a$10$CwTycUXWue0Thq9SgjUM0u', async function (err2, hashedEmail) {
+            hash(email, import.meta.env.VITE_EMAIL_SALT, async function (err2, hashedEmail) {
                 if (err2) {
                     console.error(err2);
                     return;
                 }
 
-                const response = await axios.post(`http://localhost:8080/users/token`, {
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/token`, {
                     email: hashedEmail,
                     password: hashedPassword,
                 })

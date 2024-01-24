@@ -10,12 +10,11 @@
   #replay-detail-container a {
     @apply   hover:underline
   }
-
 }
 
 
 body {
-  background-color: #f3f5f7;
+  @apply bg-slate-200
 }
 
 .dropdown_customized:focus.rw-widget-picker:focus {
@@ -25,9 +24,30 @@ body {
 
 .radio_customized {
   background-color: #384983;
-  color: white;
+  @apply bg-slate-100
 }
 
 .bg-white {
   background-color: white;
 }
+
+.wfg-tab {
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.wfg-chart-tab {
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.wfg-top-button {
+  border: 1px solid;
+  border-radius: 4px ;
+  border-color: goldenrod;
+}
+

@@ -12,8 +12,14 @@ import { ReplaysPage } from './pages/ReplaysPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { AboutPage } from './pages/AboutPage';
 import { ReplayUploadPage } from './pages/ReplayUploadPage';
+import { useEffect } from 'react';
+import { init } from './nightwind.ts'
 
 function App() {
+
+  useEffect(() => {
+    init();
+  }, [])
 
   return (
       <AuthContextProvider>

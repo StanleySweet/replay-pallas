@@ -23,7 +23,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     const { token } = useAuth();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/replays/all`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/replays/all`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

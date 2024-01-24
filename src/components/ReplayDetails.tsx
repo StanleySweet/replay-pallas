@@ -21,7 +21,7 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
 
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        axios.get(`http://localhost:8080/replays/${props.replay.match_id}/zip`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/replays/${props.replay.match_id}/zip`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
@@ -43,7 +43,7 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
             <BlockTitle titleKey="ReplayDetails.Title" />
             <article className="font-sans">
                 <div className=" grid grid-cols-4">
-                    <div className="crop-container rounded-full w-[256px] h-[150px} max-h-[256px] bg-black overflow-hidden">
+                    <div className="sm:hidden md:hidden lg:hidden xl:hidden 2xl:block crop-container rounded-full w-[256px] h-[150px} max-h-[256px]  overflow-hidden" style={{background:"black"}}>
                         <img
                             className="ml-[9%] mt-[20%] mb-[20%] w-[256px] h-[150px}"
                             src={`https://cdn.jsdelivr.net/gh/0ad/0ad/binaries/data/mods/public/art/textures/ui/${replay.metadata.previewImage}`}

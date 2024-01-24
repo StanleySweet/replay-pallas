@@ -17,7 +17,7 @@ const LatestUserContainer = (): JSX.Element => {
     const [replays, setReplays] = useState<User[]>([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/users/latest`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/users/latest`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

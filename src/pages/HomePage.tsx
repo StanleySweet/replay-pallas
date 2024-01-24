@@ -15,7 +15,7 @@ const HomePage = function () {
     const { role } = useAuth();
     return (<>
         <NavigationBar />
-        <div className="w-3/5 mx-auto py-5">
+        <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
             <div className="flex">
             <div className="mb-5 flex-grow inline-flex items-center" ><HouseIcon />&nbsp;{translate("HomePage.Title")} </div>                      {
                 role > EUserRole.READER ?

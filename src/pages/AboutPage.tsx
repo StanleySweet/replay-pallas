@@ -13,12 +13,9 @@ import { HouseIcon } from "../icons/HouseIcon";
 const AboutPage = (): ReactNode => {
     return (<>
         <NavigationBar />
-        <div className="w-3/5 mx-auto py-5">
-
+        <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
             <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon/>&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("AboutPage.Title")}</div>
-
             <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-
                 <div />
                 <BlockTitle titleKey="AboutPage.Title"></BlockTitle>
 
@@ -28,9 +25,9 @@ const AboutPage = (): ReactNode => {
                 </p>
                 <h3 className="font-semibold mt-1 mb-1">Sources</h3>
                 <p className="text-justify">
-                    Replay Scrapper (Github): <a href="https://github.com/StanleySweet/replay-pallas-scrapper">here</a> <br/>
-                    Replay Pallas API (Github): <a href="https://github.com/StanleySweet/replay-pallas">here</a> <br/>
-                    Replay Pallas Front (Github): <a href="https://github.com/StanleySweet/replay-pallas-api">here</a> <br/>
+                    Forum Replay Scrapper (Github): <a href="https://github.com/StanleySweet/replay-pallas-scrapper">here</a> <br/>
+                    Replay Pallàs' API (Github): <a href="https://github.com/StanleySweet/replay-pallas">here</a> <br/>
+                    Replay Pallàs' Front (Github): <a href="https://github.com/StanleySweet/replay-pallas-api">here</a> <br/>
                     Local Ratings source (Gitlab): <a href="https://gitlab.com/mentula0ad/LocalRatings">here</a><br/>
                     Local Ratings Thread (Forums): <a href="https://wildfiregames.com/forum/topic/80151-localratings-mod-evaluate-players-skills-based-on-previous-games/#comment-497805">here</a><br/>
                 </p>

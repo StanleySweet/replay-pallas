@@ -17,7 +17,7 @@ const LatestReplayContainer = (): JSX.Element => {
     const [replays, setReplays] = useState<Replay[]>([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/replays/latest`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/replays/latest`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

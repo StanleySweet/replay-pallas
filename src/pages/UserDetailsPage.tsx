@@ -28,7 +28,7 @@ const UserDetailsPage = function (): JSX.Element {
     const { userId } = useParams();
 
     useEffect(() => {
-        axios.get<any, AxiosResponse<any, any>>(`http://localhost:8080/users/GetDetails/${userId}`, {
+        axios.get<any, AxiosResponse<any, any>>(`${import.meta.env.VITE_API_URL}/users/GetDetails/${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -44,7 +44,7 @@ const UserDetailsPage = function (): JSX.Element {
         if(!adminSelectValue)
             return;
 
-        axios.post(`http://localhost:8080/users/set-permissions`, {
+        axios.post(`${import.meta.env.VITE_API_URL}/users/set-permissions`, {
             id: userId,
             role: adminSelectValue
         },{
@@ -67,7 +67,7 @@ const UserDetailsPage = function (): JSX.Element {
 
     return (<>
         <NavigationBar />
-        <div className="w-3/5 mx-auto py-5">
+        <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
             <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("UserDetails.Title")}</div>
 
             <div id="user-details-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>

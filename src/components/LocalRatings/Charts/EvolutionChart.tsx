@@ -34,7 +34,7 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
 
         if (props.user)
 
-            axios.post<LocalRatingUser, AxiosResponse<EvolutionChart>>(`http://localhost:8080/local-ratings/evolution-data`, {
+            axios.post<LocalRatingUser, AxiosResponse<EvolutionChart>>(`${import.meta.env.VITE_API_URL}/local-ratings/evolution-data`, {
                 player: props.user.user.nick,
                 rank: props.user.rank,
                 players: props.user.matches
