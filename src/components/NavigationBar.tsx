@@ -4,24 +4,26 @@ import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import EUserRole from "../enumerations/EUserRole";
 import Avatar from "boring-avatars";
 import { enable } from "../nightwind";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+const storageKey = 'nightwind-mode'
+const getColorPreference = (): string => {
+    const cache = localStorage.getItem(storageKey);
+    if (cache)
+        return cache;
+    else
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
+}
 
 const NavigationBar = () => {
-    const storageKey = 'nightwind-mode'
-    const getColorPreference = (): string => {
-        const cache = localStorage.getItem(storageKey);
-        if (cache)
-            return cache;
-        else
-            return window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light'
-    }
     const { role, id, nick, onLogoutSession } = useAuth()
-    const [lightMode, setLightMode] = useState<string>();
+    const [lightMode, setLightMode] = useState<string>(getColorPreference());
+
 
     useEffect(() => {
-        setLightMode(getColorPreference());
+        onClick();
     }, []);
 
 
@@ -64,8 +66,6 @@ const NavigationBar = () => {
         }
     }
 
-    console.log(lightMode)
-
     return (
         <div className="grid grid-cols-5 bg-white text-gray-900 shadow-md w-full">
             <div className=" "></div>
@@ -80,6 +80,13 @@ const NavigationBar = () => {
                 <Link to="/PrivacyPolicy" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
                     <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.PrivacyPolicy")}</div>
                 </Link>
+                {
+                    role >= EUserRole.CONTRIBUTOR ?
+                        <Link to="/MyReplays" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
+                            <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.MyReplays")}</div>
+                        </Link> :
+                        <></>
+                }
                 <Link to="/About" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4" >
                     <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.About")}</div>
                 </Link>
@@ -88,14 +95,14 @@ const NavigationBar = () => {
                         <Link to="/Administration" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
                             <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.Administration")}</div>
                         </Link> :
-                        ""
+                        <></>
                 }
             </div>
             <div className="col-span-1">
                 <div className="flex">
                     <button className="theme-toggle" onClick={onClick} id="theme-toggle" title="Toggles light & dark" data-theme={lightMode} aria-label={lightMode} aria-live="polite">
                         {
-                            lightMode !== "dark" ? <svg className="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                            lightMode === "light" ? <svg className="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                                 <mask className="moon" id="moon-mask">
                                     <rect x="0" y="0" width="100%" height="100%" className="stroke-slate-50 fill-slate-50" />
                                     <circle cx="24" cy="10" r="6" className="stroke-slate-50 fill-slate-50" />

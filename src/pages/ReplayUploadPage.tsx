@@ -14,6 +14,7 @@ import { HouseIcon } from "../icons/HouseIcon";
 import axios from "axios";
 import { ReplayBlock } from "../components/ReplayBlock";
 import { Replay } from "../types/Replay";
+import UploadIcon from "../icons/UploadIcon";
 
 const ReplayUploadPage = (): ReactNode => {
     const { role, token } = useAuth();
@@ -88,7 +89,7 @@ const ReplayUploadPage = (): ReactNode => {
                         <div className="pt-2 d-flex flex">
                             <div className="flex-grow"></div>
                             <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 20h14v-2H5zm0-10h4v6h6v-6h4l-7-7z" /></svg>
+                                <UploadIcon/>
                                 <span>{translate("Replays.Upload")}</span>
                             </button>
                         </div>

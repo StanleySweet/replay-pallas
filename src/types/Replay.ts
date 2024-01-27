@@ -5,7 +5,7 @@
 
 
 export interface Replay {
-    match_id: number
+    match_id: string
     metadata: ReplayMetadata
 }
 

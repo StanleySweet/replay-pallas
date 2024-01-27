@@ -4,8 +4,13 @@
  * SPDX-FileCopyrightText: © 2024 Mentula
  */
 
-const DistributionChart =  (): JSX.Element => {
-    return (<></>);
+import { WipBlock } from "../WipBlock";
+
+
+const DistributionChart = (): JSX.Element => {
+    return (<>
+        <WipBlock />
+    </>);
 }
 
 export {

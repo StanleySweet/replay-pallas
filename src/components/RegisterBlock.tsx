@@ -141,7 +141,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
 
                 <span className="text-xs text-red-500" style={{ display: passwordErrorVisible ? "block" : "none" }}>Password must be at least 8 characters long</span>
                </form>
-                <button disabled={is_form_invalid()} onClick={() => { register() }} className="text-slate-50 bg-red-700 border-black border-solid border-2 w-80 flex my-3 relative self-center bg-wfg text-gray-900 font-roboto justify-center text-center items-center hover:bg-slate-50 hover:text-red-700 hover:border-wfg" style={{
+                <button disabled={is_form_invalid()} onClick={() => { register() }} className="bg-red-700 border-black border-solid border-2 w-80 flex my-3 relative self-center bg-wfg text-gray-900 font-roboto justify-center text-center items-center hover:bg-slate-50 hover:text-red-700 hover:border-wfg" style={{
                     width: "100%",
                     height: "50px",
                     fontSize: "14px",

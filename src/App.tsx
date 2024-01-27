@@ -14,6 +14,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ReplayUploadPage } from './pages/ReplayUploadPage';
 import { useEffect } from 'react';
 import { init } from './nightwind.ts'
+import { MyReplaysPage } from './pages/MyReplaysPage.tsx';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path='/UserDetails/:userId' element={<UserDetailsPage />}></Route>
             <Route path='/LobbyUserDetails/:userId' element={<LobbyUserDetailsPage />}></Route>
             <Route path='/LocalRatings' element={<LocalRatingsPage />}></Route>
+            <Route path='/MyReplays' element={<MyReplaysPage />}></Route>
             <Route path='/About' element={<AboutPage />}></Route>
             <Route path='/Replays/Upload' element={<ReplayUploadPage />}></Route>
           </Routes>

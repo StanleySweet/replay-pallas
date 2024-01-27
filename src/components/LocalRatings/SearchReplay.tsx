@@ -18,7 +18,7 @@ const SearchReplayBar = (props: ISearchPlayerBarProps): ReactNode => {
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
             </div>
-            <input type="search" onChange={props.onChange}  className="flex border-radius-2 bg-white w-full p-2 ps-10  border border-gray-700 rounded-sm focus:ring-red-700 focus:border-red-700 " placeholder={translate("SearchReplayBar.LookForAReplay")} required />
+            <input type="search" onChange={props.onChange}  className="flex border-radius-2 bg-white w-full p-2 ps-10  border border-gray-700 rounded-sm" placeholder={translate("SearchReplayBar.LookForAReplay")} required />
         </div>
     </>);
 }

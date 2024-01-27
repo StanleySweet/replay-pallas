@@ -251,6 +251,10 @@
         "fr-FR": "Administration",
         "EN": "Administration"
     },
+    "NavigationBar.MyReplays": {
+        "fr-FR": "Mes replays",
+        "EN": "My Replays"
+    },
     "WelcomeBlockAdministration.IfYouWantToHelp": {
         "fr-FR": "If you want to help with the development, please take a look at ",
         "EN": "If you want to help with the development, please take a look at "

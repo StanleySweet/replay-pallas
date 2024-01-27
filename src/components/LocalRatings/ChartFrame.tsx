@@ -28,7 +28,7 @@ const ChartFrame = (props: IChartFrameProps): JSX.Element => {
     let chart: ReactNode;
     switch (tabType) {
         case ETabType.Civilization:
-            chart = <CivilizationChart />;
+            chart = <CivilizationChart user={props.user} />;
             break;
         case ETabType.Distribution:
             chart = <DistributionChart />;

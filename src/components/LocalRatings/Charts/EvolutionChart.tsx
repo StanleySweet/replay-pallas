@@ -53,6 +53,7 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
                                 label: translate(response.data.legends[response.data.series.indexOf(a)] as ITranslationDictionaryKey),
                                 data: a,
                                 fill: false,
+                                backgroundColor: 'rgb(' + response.data.colors[response.data.series.indexOf(a)].split(" ").slice(0, 3).join(",") + ')',
                                 borderColor: 'rgb(' + response.data.colors[response.data.series.indexOf(a)].split(" ").slice(0, 3).join(",") + ')',
                                 tension: 0.1
                             }

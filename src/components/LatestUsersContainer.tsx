@@ -37,15 +37,15 @@ const LatestUserContainer = (): JSX.Element => {
         return <div className="App">{translate("App.LoadingInProgress")}</div>;
     }
 
-    return (
-        <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+    return (<>
+        <div id="replay-container" className="text-sm p-6 bg-white shadow-md wfg-chart-tab">
             <BlockTitle titleKey="LatestUser.Title" />
             <div className="w-full">
                 {
                     replays.map(r => <UserBlock key={r.id} user={r} ></UserBlock>)
                 }
             </div>
-        </div>
+        </div></>
     );
 };
 
