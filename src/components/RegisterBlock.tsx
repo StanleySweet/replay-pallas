@@ -30,7 +30,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
 
     const validate_password = (password: string) => {
         setPassword(password)
-        if (password.length <= 8) {
+        if (password.length < 8) {
             setPasswordErrorVisible(true);
             return;
         }
