@@ -18,7 +18,7 @@ import EUserRole from "../enumerations/EUserRole";
 import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import { ReplayContainer } from "../components/ReplayContainer";
 import SaveIcon from "../icons/SaveIcon";
-
+import { UserRatingBlock } from "../components/UserRatingBlock";
 
 const LobbyUserDetailsPage = function (): JSX.Element {
     const { token, role } = useAuth();
@@ -42,20 +42,19 @@ const LobbyUserDetailsPage = function (): JSX.Element {
 
     const onClick = () => {
 
-        if(!adminSelectValue)
+        if (!adminSelectValue)
             return;
 
         axios.post(`${import.meta.env.VITE_API_URL}/users/set-permissions`, {
             id: userId,
             role: adminSelectValue
-        },{
+        }, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         }).then((response: AxiosResponse<undefined>) => {
-            if(response.status === 200 && userDetails && adminSelectValue)
-            {
+            if (response.status === 200 && userDetails && adminSelectValue) {
                 userDetails.role = adminSelectValue as EUserRole;
                 setUserDetails(JSON.parse(JSON.stringify(userDetails)));
             }
@@ -70,19 +69,23 @@ const LobbyUserDetailsPage = function (): JSX.Element {
 
 
     const user: User = userDetails as User;
+
+
+
     return (<>
         <NavigationBar />
         <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
-            <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon/>&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("UserDetails.Title")}</div>
+            <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("UserDetails.Title")}</div>
 
             <div id="user-details-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
                 <BlockTitle titleKey="UserDetails.Title" />
                 <UserBlock key={userId} user={user} ></UserBlock>
                 <UserStatisticsBlock key={userId + "-statistics"} user={user} ></UserStatisticsBlock>
             </div>
-                {
-                    role !== EUserRole.ADMINISTRATOR || user.id === 0 ? <></> : <>
-            <div id="user-details-container" className="text-sm p-6 mt-4 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+            <UserRatingBlock user={user}/>
+            {
+                role !== EUserRole.ADMINISTRATOR || user.id === 0 ? <></> : <>
+                    <div id="user-permission-container" className="text-sm p-6 mt-4 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
 
                         <BlockTitle titleKey="UserDetails.ChangePermissions" />
 
@@ -98,13 +101,13 @@ const LobbyUserDetailsPage = function (): JSX.Element {
                             </div>
                             <div className="flex-grow"></div>
                             <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                <SaveIcon/>
+                                <SaveIcon />
                                 <span>{translate("UserDetails.SavePermissions")}</span>
                             </button>
                         </div>
-            </div>
-                    </>
-                }
+                    </div>
+                </>
+            }
 
             <div className="mt-4"></div>
             {userDetails.replays.length ? <>

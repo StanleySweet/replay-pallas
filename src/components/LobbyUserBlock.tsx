@@ -8,12 +8,15 @@ import { User } from "../types/User";
 import Avatar from "boring-avatars";
 import EUserRole from "../enumerations/EUserRole";
 import { LocalRatingRank } from "../types/LocalRatingRank";
+import { Line } from "react-chartjs-2";
 
 interface IUserBlockProps {
     user: User;
     rankUserCount?: number;
     rank?: LocalRatingRank
 }
+
+
 
 const LobbyUserBlock = (props: IUserBlockProps) => {
     let color = "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-300"
@@ -23,6 +26,10 @@ const LobbyUserBlock = (props: IUserBlockProps) => {
     else if (props.user.role === EUserRole.ADMINISTRATOR) {
         color = "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
     }
+
+
+
+
 
     return (
         <article className="mb-[1em] pt-3" style={{ borderTop: "1px solid #C7CCD9" }} >
@@ -51,6 +58,7 @@ const LobbyUserBlock = (props: IUserBlockProps) => {
                             </span><br /></> :
                             ""
                     }
+                    
                 </div>
             </div>
         </article>

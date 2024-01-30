@@ -13,6 +13,7 @@ import { useTranslation as translate } from "../../../contexts/Models/useTransla
 import { ChartData } from "chart.js";
 import "chart.js/auto";
 import { ITranslationDictionaryKey } from "../../../types/ITranslationDictionaryEntry";
+import { tailWindColors } from "../../../utils";
 
 interface EvolutionChartProps {
     user?: LocalRatingUser
@@ -48,13 +49,13 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
                     const valueCount = response.data.series.map(a => a.length).sort((a, b) => b - a)[0];
                     setData({
                         labels: Array(valueCount).fill(undefined).map((_, index) => index + 1),
-                        datasets: response.data.series.map((a) => {
+                        datasets: response.data.series.slice(1, 4).map((a, i) => {
                             return {
                                 label: translate(response.data.legends[response.data.series.indexOf(a)] as ITranslationDictionaryKey),
                                 data: a,
                                 fill: false,
-                                backgroundColor: 'rgb(' + response.data.colors[response.data.series.indexOf(a)].split(" ").slice(0, 3).join(",") + ')',
-                                borderColor: 'rgb(' + response.data.colors[response.data.series.indexOf(a)].split(" ").slice(0, 3).join(",") + ')',
+                                backgroundColor: tailWindColors[i * 3],
+                                borderColor: tailWindColors[i * 3],
                                 tension: 0.1
                             }
                         })

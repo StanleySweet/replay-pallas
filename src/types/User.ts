@@ -18,4 +18,5 @@ export interface User {
     "SecondMostUsedCmd": string
     "MostUsedCmd": string;
     "replays": Replay[]
+    "graph": any
 }

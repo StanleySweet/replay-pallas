@@ -103,7 +103,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     }
     else if (filteredUsers && filteredUsers.length) {
         body = <tbody className="w-full">{
-            filteredUsers.map((u) => <tr className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b " key={uid()} onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-left max-w-[3em] text-ellipsis overflow-hidden" title={u.user.nick}>{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
+            filteredUsers.map((u) => <tr  key={uid()} className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b " onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-left max-w-[3em] text-ellipsis overflow-hidden" title={u.user.nick}>{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
         }</tbody>;
     }
     else {
@@ -161,7 +161,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
                             }
                         </div>
                     </div>
-                    <div className=" mt-4 relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
+                    <div className="mt-4 relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr style={{ borderBottom: '1px solid' }}>
@@ -170,15 +170,36 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
                                 </tr>
                             </thead>
                             <tbody className="odd:bg-white even:bg-gray-50 border-b">
-                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Current</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.currentRatingText}</td><td className="text-right" >Last</td><td className="font-bold text-center">{userProfile.lastPerformanceText}</td></tr>
-                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Highest</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.highestRatingText}</td><td className="text-right">Best</td><td className="font-bold text-center">{userProfile.bestPerformanceText}</td></tr>
-                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Lowest</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.lowestRatingText}</td><td className="text-right">Worst</td><td className="font-bold text-center">{userProfile.worstPerformanceText}</td></tr>
-                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Average</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.averageRatingText}</td><td className="text-right">Lowest</td><td className="font-bold text-center">{userProfile.lowestRatingText}</td></tr>
-                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Avg deviation</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingAverageDeviationText}</td> <td className="text-right">Avg deviation</td><td className="font-bold text-center">{userProfile.averagePerformanceText}</td></tr>
-                                <tr className="odd:bg-white even:bg-gray-50 border-b "><td className="text-right">Std deviation</td><td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingStandardDeviationText}</td><td className="text-right">Std deviation</td><td className="font-bold text-center">{userProfile.performanceStandardDeviationText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">Current</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.currentRatingText}</td>
+                                    <td className="text-right" >Last</td><td className="font-bold text-center">{userProfile.lastPerformanceText}</td>
+                                </tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">Highest</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.highestRatingText}</td>
+                                    <td className="text-right">Best</td><td className="font-bold text-center">{userProfile.bestPerformanceText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">Lowest</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.lowestRatingText}</td>
+                                    <td className="text-right">Worst</td><td className="font-bold text-center">{userProfile.worstPerformanceText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">Average</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.averageRatingText}</td>
+                                    <td className="text-right">Lowest</td><td className="font-bold text-center">{userProfile.lowestRatingText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">Avg deviation</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingAverageDeviationText}</td>
+                                    <td className="text-right">Avg deviation</td><td className="font-bold text-center">{userProfile.averagePerformanceText}</td></tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">Std deviation</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingStandardDeviationText}</td>
+                                    <td className="text-right">Std deviation</td><td className="font-bold text-center">{userProfile.performanceStandardDeviationText}</td>
+                                </tr>
                             </tbody>
                         </table>
-                    </div></>
+                    </div>
+                </>
                 : <></>
         }
     </>

@@ -18,6 +18,7 @@ import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import { ReplayContainer } from "../components/ReplayContainer";
 import EUserRole from "../enumerations/EUserRole";
 import SaveIcon from "../icons/SaveIcon";
+import { UserRatingBlock } from "../components/UserRatingBlock";
 
 
 const UserDetailsPage = function (): JSX.Element {
@@ -76,7 +77,10 @@ const UserDetailsPage = function (): JSX.Element {
                 <UserStatisticsBlock key={userId + "-statistics"} user={userDetails} ></UserStatisticsBlock>
 
             </div>
-
+            {
+                userDetails.graph ? <UserRatingBlock user={userDetails}/> : <></>
+            }
+            
             <div id="user-details-container" className="text-sm p-6 mt-4 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
                 {
                     role !== EUserRole.ADMINISTRATOR ? <></> : <>

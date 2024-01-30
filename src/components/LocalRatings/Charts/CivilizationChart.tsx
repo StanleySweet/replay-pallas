@@ -25,10 +25,6 @@ type CivilizationChartData ={
     "advantages": (number)[]
 };
 
-
-
-console.log(getComputedStyle(document.documentElement).getPropertyValue('--color-font-general'));
-
 const CivilizationChart = (props : CivilizationChartProps): JSX.Element => {
     const { token } = useAuth();
     const [data, setData] = useState<ChartData<'bar', number[]>>()

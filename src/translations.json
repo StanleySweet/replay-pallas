@@ -59,6 +59,10 @@
         "fr-FR": "Détail utilisateur",
         "EN": "User details"
     },
+    "UserRatingBlock.Title":{
+        "fr-FR": "Classement utilisateur",
+        "EN": "User rating"
+    },
     "UserDetails.ChangePermissions": {
         "fr-FR": "Changer les permissions",
         "EN": "Change permissions"

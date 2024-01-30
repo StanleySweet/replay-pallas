@@ -7,8 +7,8 @@ import './HeaderBar.css'
 
 const HeaderBar = function () : JSX.Element {
     return (
-        <div id="header" className='select-none'>
-            <a href="/"><img src="https://wildfiregames.com/img/logo.png" alt="Wildfire Games" /></a>
+        <div id="header" className='select-none flex'>
+            <a className='flex-grow' href="/"><img src="https://wildfiregames.com/img/logo.png" alt="Wildfire Games" /></a>
             <nav>
                 <ul>
                     <li><a className='select-none' href="https://www.play0ad.com/">0 A.D.</a></li>

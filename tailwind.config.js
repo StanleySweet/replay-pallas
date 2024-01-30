@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'wfg':'rgb(154, 51, 52)',
+      },
       fontFamily: {
         roboto: ["ROBOTO", "sans-serif"],
       },
