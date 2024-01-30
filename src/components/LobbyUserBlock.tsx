@@ -8,7 +8,6 @@ import { User } from "../types/User";
 import Avatar from "boring-avatars";
 import EUserRole from "../enumerations/EUserRole";
 import { LocalRatingRank } from "../types/LocalRatingRank";
-import { Line } from "react-chartjs-2";
 
 interface IUserBlockProps {
     user: User;
