@@ -1,4 +1,4 @@
-import { User } from "./User"
+import { User } from "./User";
 
 interface LocalRatingUser {
     "rank": number,
@@ -9,4 +9,4 @@ interface LocalRatingUser {
 
 export type {
     LocalRatingUser
-}
+};

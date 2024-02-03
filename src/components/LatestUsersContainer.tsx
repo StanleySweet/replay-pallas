@@ -51,4 +51,4 @@ const LatestUserContainer = (): JSX.Element => {
 
 export {
     LatestUserContainer
-}
+};

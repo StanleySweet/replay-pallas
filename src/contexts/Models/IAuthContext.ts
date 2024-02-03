@@ -38,4 +38,4 @@ export {
 
 export type {
     IAuthContextType
-}
+};

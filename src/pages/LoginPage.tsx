@@ -12,6 +12,7 @@ import { RegisterBlock } from "../components/RegisterBlock";
 import { PrivacyPolicyBlock } from "./PrivacyPolicyPage";
 interface ILoginPageProps {
     onLogin: (login: string, password: string) => void;
+    loginFailed: boolean
 }
 
 enum ETabType {
@@ -26,13 +27,13 @@ const LoginPage = function (props: ILoginPageProps) {
     let body: ReactNode;
     switch (tabType) {
         case ETabType.Register:
-            body = <RegisterBlock onLogin={props.onLogin} />
+            body = <RegisterBlock onLogin={props.onLogin} />;
             break;
         case ETabType.Login:
-            body = <LoginBlock onLogin={props.onLogin} />
+            body = <LoginBlock loginFailed={props.loginFailed} onLogin={props.onLogin} />;
             break;
         default:
-            body = <PrivacyPolicyBlock />
+            body = <PrivacyPolicyBlock />;
             break;
     }
 
@@ -62,13 +63,13 @@ const LoginPage = function (props: ILoginPageProps) {
                 </div>
             </div>
 
-        </>)
-}
+        </>);
+};
 
 export {
     LoginPage
-}
+};
 
 export type {
     ILoginPageProps
-}
+};

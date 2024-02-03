@@ -26,9 +26,9 @@ const UserStatisticsBlock = (props: IUserBlockProps) => {
                 </span>
             </div>
         </article>
-    )
-}
+    );
+};
 
 export {
     UserStatisticsBlock
-}
+};

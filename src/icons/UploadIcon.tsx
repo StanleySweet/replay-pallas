@@ -4,7 +4,7 @@ const UploadIcon: React.FC = () => {
             <path  className="dark:fill-white fill-black" d="M5 20h14v-2H5zm0-10h4v6h6v-6h4l-7-7z" />
         </svg>
     );
-}
+};
 
 export default UploadIcon;
 

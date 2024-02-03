@@ -35,7 +35,7 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
 
     const previousSession = getPreviousSession();
     useEffect(() => {
-    }, [])
+    }, []);
 
 
     const [isLogged, setIsLogged] = useState<boolean>(!!previousSession);
@@ -43,6 +43,7 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
     const [role, setRole] = useState<EUserRole>(previousSession?.role ?? EUserRole.UNKNOWN);
     const [nick, setNick] = useState<string | null>(previousSession?.nick ?? null);
     const [id, setId] = useState<number | null>(previousSession?.id ?? null);
+    const [loginFailed, setLoginFailed] = useState<boolean>(false);
 
     const value: IAuthContextType = {
         isLogged: isLogged,
@@ -75,19 +76,21 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
                 const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/token`, {
                     email: hashedEmail,
                     password: hashedPassword,
-                })
+                });
 
                 if (response.status !== 200) {
-                    console.log(response)
+                    console.log(response);
+                    setLoginFailed(true);
                 }
                 else {
                     const user: PallasToken = response.data;
-                    setRole(user.role)
+                    setRole(user.role);
                     setToken(user.token);
                     setNick(user.nick);
                     setId(user.id);
                     localStorage.setItem("user-info", JSON.stringify(user));
                     setIsLogged(true);
+                    setLoginFailed(false);
                 }
             });
         });
@@ -104,17 +107,16 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
                 {
                     isLogged ?
                         <>
-
                             {props.children}
                         </> :
-                        <LoginPage onLogin={(email: string, password: string) => handleLogin(email, password)} />
+                        <LoginPage loginFailed={loginFailed} onLogin={(email: string, password: string) => handleLogin(email, password)} />
                 }
             </div>
         </AuthContext.Provider>
     </>
 
     );
-}
+};
 
 export {
     AuthContextProvider
@@ -122,4 +124,4 @@ export {
 
 export type {
     IAuthContextProviderProps
-}
+};

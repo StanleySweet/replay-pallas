@@ -27,7 +27,7 @@ type CivilizationChartData ={
 
 const CivilizationChart = (props : CivilizationChartProps): JSX.Element => {
     const { token } = useAuth();
-    const [data, setData] = useState<ChartData<'bar', number[]>>()
+    const [data, setData] = useState<ChartData<'bar', number[]>>();
 
     useEffect(() => {
         if (props.user)
@@ -57,17 +57,17 @@ const CivilizationChart = (props : CivilizationChartProps): JSX.Element => {
                     });
                 }
             });
-    }, [token, props])
+    }, [token, props]);
 
 
     if (!props.user)
-        return <>{translate("App.SelectAPlayer")}</>
+        return <>{translate("App.SelectAPlayer")}</>;
     if (!data)
-        return <>{translate("App.LoadingInProgress")}</>
+        return <>{translate("App.LoadingInProgress")}</>;
 
 
     return (<><Bar data={data} options={{responsive:true}}/></>);
-}
+};
 export {
     CivilizationChart
-}
+};

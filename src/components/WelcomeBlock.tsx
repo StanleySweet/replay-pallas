@@ -16,9 +16,9 @@ const WelcomeBlock = () : JSX.Element => {
                 <div>If you want to help with the development, please take a look at <a href="http://trac.wildfiregames.com/wiki/GettingStartedProgrammers" target="_blank" rel="noreferrer">Getting Started Programmers</a> on our Trac wiki. </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     WelcomeBlock
-}
+};

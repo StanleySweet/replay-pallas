@@ -17,9 +17,9 @@ const WelcomeBlockAdministration = () : JSX.Element => {
                 <div>{translate("WelcomeBlockAdministration.IfYouWantToHelp")}<a href="http://trac.wildfiregames.com/wiki/GettingStartedProgrammers" target="_blank" rel="noreferrer">Getting Started Programmers</a> on our Trac wiki.</div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     WelcomeBlockAdministration
-}
+};

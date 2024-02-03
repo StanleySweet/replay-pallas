@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import translationsRaw from "../../translations.json"
+import translationsRaw from "../../translations.json";
 import { ITranslationDictionaryKey, ITranslationDictionary, ITranslationEntryKey } from "../../types/ITranslationDictionaryEntry";
 
 const translations : ITranslationDictionary = translationsRaw;
@@ -30,4 +30,4 @@ const useTranslation = (key: ITranslationDictionaryKey): string | undefined => {
 
 export {
     useTranslation
-}
+};

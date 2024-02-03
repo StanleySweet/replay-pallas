@@ -48,9 +48,9 @@ const ReplayDetailsPage = function () {
       <div className="mt-4"></div>
       <PlayerStatistics playerData={replay.metadata.settings.PlayerData} />
     </div>
-  </>)
-}
+  </>);
+};
 
 export {
   ReplayDetailsPage
-}
+};

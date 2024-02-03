@@ -4,7 +4,7 @@
  * SPDX-FileCopyrightText: © 2024 Mentula
  */
 
-import { ReactNode, useState } from "react"
+import { ReactNode, useState } from "react";
 import { RatingSystem } from "./About/RatingSystem";
 import { FAQBlock } from "./About/FAQ";
 import { Features } from "./About/Features";
@@ -43,9 +43,9 @@ const AboutFrame = (): JSX.Element => {
             </div>
 
         </>
-    )
-}
+    );
+};
 
 export {
     AboutFrame
-}
+};

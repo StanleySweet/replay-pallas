@@ -21,8 +21,8 @@ const SearchReplayBar = (props: ISearchPlayerBarProps): ReactNode => {
             <input type="search" onChange={props.onChange} id="search-replay-input" className="flex border-radius-2 bg-white w-full p-2 ps-10  border border-gray-700 rounded-sm" placeholder={translate("SearchReplayBar.LookForAReplay")} required />
         </div>
     </>);
-}
+};
 
 export {
     SearchReplayBar
-}
+};

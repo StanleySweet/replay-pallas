@@ -1,9 +1,9 @@
-import { Line } from "react-chartjs-2"
-import { User } from "../types/User"
-import { BlockTitle } from "./BlockTitle"
-import { tailWindColors } from "../utils"
+import { Line } from "react-chartjs-2";
+import { User } from "../types/User";
+import { BlockTitle } from "./BlockTitle";
+import { tailWindColors } from "../utils";
 import { ChartData, ChartOptions } from "chart.js";
-import 'chartjs-adapter-moment'
+import 'chartjs-adapter-moment';
 import "chart.js/auto";
 import { Glicko2Rating } from "../types/Glicko2Rating";
 
@@ -64,9 +64,9 @@ const UserRatingBlock: React.FC<IUserRatingBlockProps> = (props: IUserRatingBloc
                 borderColor: tailWindColors[9],
             }
         ]
-    } as ChartData<'line', SeriesData[]>
+    } as ChartData<'line', SeriesData[]>;
 
-    const glicko : Glicko2Rating = Object.assign(new Glicko2Rating(), props.user.graph.current_glicko_elo)
+    const glicko : Glicko2Rating = Object.assign(new Glicko2Rating(), props.user.graph.current_glicko_elo);
 
     return (
         <div id="user-rating-container" className="text-sm p-6 mt-4 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
@@ -82,9 +82,9 @@ const UserRatingBlock: React.FC<IUserRatingBlockProps> = (props: IUserRatingBloc
                 props.user.graph ? <Line data={data} options={options} /> : <></>
             }
         </div>
-    )
-}
+    );
+};
 
 export {
     UserRatingBlock
-}
+};

@@ -42,8 +42,8 @@ const AboutPage = (): ReactNode => {
         </div>
     </>
     );
-}
+};
 
 export {
     AboutPage
-}
+};

@@ -9,8 +9,8 @@ const ManageConfigurationBlock = (): ReactNode => {
             <WipBlock />
         </div>
     </>);
-}
+};
 
 export {
     ManageConfigurationBlock
-}
+};

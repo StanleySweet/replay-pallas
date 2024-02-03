@@ -4,7 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 import { Replay } from "../types/Replay";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import axios, { AxiosResponse } from "axios";
-import colors from "tailwindcss/colors"
+import colors from "tailwindcss/colors";
 import { BlockTitle } from "../components/BlockTitle";
 import { ReplayContainer } from "../components/ReplayContainer";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
@@ -21,8 +21,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ReplaysPage = (): ReactNode => {
     const [isLoading, setLoading] = useState(true);
-    const [replays, setReplays] = useState<Replay[]>()
-    const [filter, setFilter] = useState<string>()
+    const [replays, setReplays] = useState<Replay[]>();
+    const [filter, setFilter] = useState<string>();
     const [civDoughnutData, setCivDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const [mapDoughnutData, setMapDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const { token, role } = useAuth();
@@ -38,12 +38,12 @@ const ReplaysPage = (): ReactNode => {
 
                 const civs = response.data.map(a => {
                     const playerData = a.metadata.settings.PlayerData;
-                    return playerData.map(b => b.Civ)
+                    return playerData.map(b => b.Civ);
                 }).reduce((a, c) => a.concat(c), []);
                 const maps = response.data.map(a => a.metadata.settings.Name || a.metadata.settings.mapName);
-                const toto = civs.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null))
-                const tata = maps.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null))
-                setReplays(response.data)
+                const toto = civs.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
+                const tata = maps.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
+                setReplays(response.data);
                 setCivDoughnutData({
                     labels: Object.keys(tata),
                     datasets: [
@@ -108,16 +108,16 @@ const ReplaysPage = (): ReactNode => {
 
                         </div>
                         <div className="col-span-4">
-                            <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value) }} />
+                            <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
                             <ReplayContainer filter={filter} maxItems={20} replays={replays}></ReplayContainer>
                         </div>
                     </div>
             }
         </div>
     </>
-    )
-}
+    );
+};
 
 export {
     ReplaysPage
-}
+};

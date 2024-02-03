@@ -83,10 +83,10 @@ const MaintenanceBlock = (): ReactNode => {
             </div>
         </div>
     </>);
-}
+};
 
 
 
 export {
     MaintenanceBlock
-}
+};

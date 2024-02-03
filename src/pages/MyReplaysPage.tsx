@@ -12,7 +12,7 @@ import { useTranslation as translate } from "../contexts/Models/useTranslation";
 
 
 const MyReplaysPage = (): ReactNode => {
-    const { token } = useAuth()
+    const { token } = useAuth();
     const [replays, setReplays] = useState<Replay[]>();
     const [isLoading, setLoading] = useState<boolean>();
     const [filter, setFilter] = useState<string>("");
@@ -35,7 +35,7 @@ const MyReplaysPage = (): ReactNode => {
                     setReplays(replays.filter(a => a.match_id !== match_id));
                 }
             }
-        })
+        });
     }
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const MyReplaysPage = (): ReactNode => {
         }).then((response: AxiosResponse<Replay[]>) => {
             setLoading(false);
             if (response.data && response.data) {
-                setReplays(response.data)
+                setReplays(response.data);
             }
         });
         setLoading(true);
@@ -57,13 +57,13 @@ const MyReplaysPage = (): ReactNode => {
         return r.match_id.toString().toLowerCase().includes(filter.toLowerCase()) ||
             r.metadata.settings.PlayerData.some(a => a.Name?.toLowerCase().includes(filter?.toLowerCase() ?? "")) ||
             r.metadata.settings.mapName?.toLowerCase().includes(filter.toLowerCase()) ||
-            r.metadata.settings.Name?.toLowerCase().includes(filter.toLowerCase())
-    })
+            r.metadata.settings.Name?.toLowerCase().includes(filter.toLowerCase());
+    });
 
     return (<>
         <NavigationBar />
         <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
-            <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value) }} />
+            <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
             <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
                 <BlockTitle titleKey="ReplayContainer.Title" />
                 <div className="w-full h-[711px] overflow-y-scroll" >
@@ -85,9 +85,9 @@ const MyReplaysPage = (): ReactNode => {
             </div>
 
         </div>
-    </>)
-}
+    </>);
+};
 
 export {
     MyReplaysPage
-}
+};

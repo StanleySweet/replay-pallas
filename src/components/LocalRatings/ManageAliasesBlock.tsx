@@ -9,10 +9,10 @@ const ManageAliasesBlock = (): ReactNode => {
             <WipBlock />
         </div>
     </>);
-}
+};
 
 
 
 export {
     ManageAliasesBlock
-}
+};

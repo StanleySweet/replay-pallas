@@ -4,7 +4,7 @@
  * SPDX-FileCopyrightText: © 2024 Mentula
  */
 
-import WorksIcon from "../../icons/WorksIcon"
+import WorksIcon from "../../icons/WorksIcon";
 
 const WipBlock = (): JSX.Element => {
     return <div className="mt-10">
@@ -19,9 +19,9 @@ const WipBlock = (): JSX.Element => {
             }}>
             Work in Progress
         </div>
-    </div>
-}
+    </div>;
+};
 
 export {
     WipBlock
-}
+};

@@ -1,12 +1,12 @@
 
 class Glicko2Rating {
-    static minRating: number = 400
-    static maxRating: number = 4000
-    static minDeviation: number = 45
-    static standardRankableDeviation: number = 75
-    static provisionalDeviation: number = 110
-    static cluelessDeviation: number = 230
-    static maxVolatility: number = 0.1
+    static minRating: number = 400;
+    static maxRating: number = 4000;
+    static minDeviation: number = 45;
+    static standardRankableDeviation: number = 75;
+    static provisionalDeviation: number = 110;
+    static cluelessDeviation: number = 230;
+    static maxVolatility: number = 0.1;
     
     elo: number = 1500;
     deviation: number = 350;
@@ -22,11 +22,11 @@ class Glicko2Rating {
     }
 
     intervalMin(): number {
-        return Math.round(this.elo - this.deviation * 2)
+        return Math.round(this.elo - this.deviation * 2);
     }
 
     intervalMax(): number {
-        return Math.round(this.elo + this.deviation * 2)
+        return Math.round(this.elo + this.deviation * 2);
     }
 
     interval(): number[] {
@@ -56,7 +56,7 @@ class Glicko2Rating {
             this.deviation > Glicko2Rating.minDeviation &&
             this.deviation < Glicko2Rating.minDeviation &&
             this.volatility > 0 &&
-            this.volatility < (Glicko2Rating.maxVolatility * 2)
+            this.volatility < (Glicko2Rating.maxVolatility * 2);
     }
 
     toString(): string {
@@ -66,4 +66,4 @@ class Glicko2Rating {
 
 export {
     Glicko2Rating
-}
+};

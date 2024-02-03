@@ -11,8 +11,8 @@ const DistributionChart = (): JSX.Element => {
     return (<>
         <WipBlock />
     </>);
-}
+};
 
 export {
     DistributionChart
-}
+};

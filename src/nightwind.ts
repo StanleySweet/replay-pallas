@@ -16,7 +16,7 @@ function getInitialColorMode() : string {
 const init = () => {
     const mode = getInitialColorMode();
     if (mode === 'light')
-        document.documentElement.classList.remove('dark')
+        document.documentElement.classList.remove('dark');
     else
         document.documentElement.classList.add('dark');
 };
@@ -26,7 +26,7 @@ const beforeTransition = () => {
     const onTransitionDone = () => {
         doc.classList.remove('nightwind');
         doc.removeEventListener('transitionend', onTransitionDone);
-    }
+    };
     doc.addEventListener('transitionend', onTransitionDone);
     if (!doc.classList.contains('nightwind')) {
         doc.classList.add('nightwind');
@@ -63,5 +63,5 @@ export {
     toggle,
     enable,
     init
-}
+};
 

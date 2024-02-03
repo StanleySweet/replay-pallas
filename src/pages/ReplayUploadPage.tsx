@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { NavigationBar } from "../components/NavigationBar";
 import { BlockTitle } from "../components/BlockTitle";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
@@ -15,11 +15,13 @@ import axios from "axios";
 import { ReplayBlock } from "../components/ReplayBlock";
 import { Replay } from "../types/Replay";
 import UploadIcon from "../icons/UploadIcon";
+import LoadingBar from 'react-top-loading-bar';
 
 const ReplayUploadPage = (): ReactNode => {
     const { role, token } = useAuth();
     const [fileData, setFileData] = useState<File>();
     const [uploadReplays, setUploadReplays] = useState<Replay[]>([]);
+    const [percentCompleted, setPercentageCompleted] = useState<number | undefined>(undefined);
     const navigate = useNavigate();
 
     const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,11 +40,14 @@ const ReplayUploadPage = (): ReactNode => {
             }
         };
 
-        const result = await axios.post('${import.meta.env.VITE_API_URL}/replays/upload-zip', formData, {
+        const result = await axios.post(`${import.meta.env.VITE_API_URL}/replays/upload-zip`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            onUploadProgress: function(progressEvent) {
+                setPercentageCompleted(Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 0)));
+            },
         });
 
 
@@ -60,11 +65,11 @@ const ReplayUploadPage = (): ReactNode => {
 
 
         setUploadReplays(replays);
-    }
+    };
 
     useEffect(() => {
         if (role < EUserRole.CONTRIBUTOR) {
-            navigate("/")
+            navigate("/");
             return;
         }
     }, [navigate, role]);
@@ -85,6 +90,9 @@ const ReplayUploadPage = (): ReactNode => {
 
                     <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file_input">Selection du fichier</label>
                     <input onChange={evt => setFileData(evt.target.files?.[0])} accept=".zip" className="lock w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none file:bg-gray-50 file:border-0 file:bg-gray-100 file:me-4 file:py-3 file:px-4 " aria-describedby="file_input_help" id="file_input" type="file" />
+                    {
+                       percentCompleted ? <LoadingBar progress={percentCompleted} color="#FFFFFFFF" /> : <></>
+                    }
                     <p className="mt-1 text-sm text-gray-500" id="file_input_help">Zip file only. Max size 5MB</p>
                         <div className="pt-2 d-flex flex">
                             <div className="flex-grow"></div>
@@ -107,9 +115,9 @@ const ReplayUploadPage = (): ReactNode => {
 
 
         </>
-    )
-}
+    );
+};
 
 export {
     ReplayUploadPage
-}
+};

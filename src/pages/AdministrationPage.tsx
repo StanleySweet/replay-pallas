@@ -30,25 +30,25 @@ const AdministrationPage = function () {
 
     useEffect(() => {
         if (role < EUserRole.ADMINISTRATOR) {
-            navigate("/")
+            navigate("/");
             return;
         }
     }, [role, navigate]);
 
 
-    let panel: ReactNode
+    let panel: ReactNode;
     switch (tabType) {
         case ETabType.LatestUsers:
-            panel = <LatestUserContainer />
+            panel = <LatestUserContainer />;
             break;
         case ETabType.LocalRatingAliases:
-            panel = <ManageAliasesBlock />
+            panel = <ManageAliasesBlock />;
             break;
         case ETabType.LocalRatingWeights:
-            panel = <ManageConfigurationBlock />
+            panel = <ManageConfigurationBlock />;
             break;
         default:
-            panel = <><MaintenanceBlock/></>
+            panel = <><MaintenanceBlock/></>;
             break;
     }
 
@@ -67,9 +67,9 @@ const AdministrationPage = function () {
             </div>
             {panel}
         </div>
-    </>)
-}
+    </>);
+};
 
 export {
     AdministrationPage
-}
+};

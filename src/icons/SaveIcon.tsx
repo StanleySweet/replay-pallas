@@ -9,7 +9,7 @@ const SaveIcon: React.FC = () => {
             </g>
         </svg>
     );
-}
+};
 
 export default SaveIcon;
 

@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import EUserRole from "../enumerations/EUserRole"
+import EUserRole from "../enumerations/EUserRole";
 
 export interface PallasToken {
     token: string

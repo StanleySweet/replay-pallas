@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import aboutData from './about.json'
+import aboutData from './about.json';
 import { uid } from "chart.js/helpers";
 
 const RatingSystem = (): ReactNode => {
@@ -9,13 +9,13 @@ const RatingSystem = (): ReactNode => {
                 aboutData["The Rating System"].map(a => {
                     return <span key={uid()}><h3 className="font-semibold mt-1 mb-1">{a.title}</h3>
                         {a.text.map((b) => <p key={uid()} className="text-justify">{b}</p>)}
-                    </span>
+                    </span>;
                 })
             }
         </div>
     );
-}
+};
 
 export {
     RatingSystem
-}
+};

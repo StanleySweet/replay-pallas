@@ -28,7 +28,7 @@ interface EvolutionChart {
 
 const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
     const { token } = useAuth();
-    const [data, setData] = useState<ChartData<'line', SeriesData[]>>()
+    const [data, setData] = useState<ChartData<'line', SeriesData[]>>();
 
 
     useEffect(() => {
@@ -57,22 +57,22 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
                                 backgroundColor: tailWindColors[i * 3],
                                 borderColor: tailWindColors[i * 3],
                                 tension: 0.1
-                            }
+                            };
                         })
                     } as ChartData<'line', SeriesData[]>);
                 }
             });
-    }, [token, props])
+    }, [token, props]);
 
 
     if (!props.user)
-        return <>{translate("App.SelectAPlayer")}</>
+        return <>{translate("App.SelectAPlayer")}</>;
     if (!data)
-        return <>{translate("App.LoadingInProgress")}</>
+        return <>{translate("App.LoadingInProgress")}</>;
 
 
     return (<><Line data={data} options={{responsive:true}}></Line></>);
-}
+};
 export {
     EvolutionChart
-}
+};

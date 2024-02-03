@@ -16,7 +16,7 @@ interface IUserBlockProps {
 }
 
 const UserBlock = (props: IUserBlockProps) => {
-    let color = "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-300"
+    let color = "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-300";
     if (props.user.role === EUserRole.CONTRIBUTOR) {
         color = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
     }
@@ -54,9 +54,9 @@ const UserBlock = (props: IUserBlockProps) => {
                 </div>
             </div>
         </article>
-    )
-}
+    );
+};
 
 export {
     UserBlock
-}
+};

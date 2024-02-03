@@ -59,7 +59,7 @@ const LobbyUserDetailsPage = function (): JSX.Element {
                 setUserDetails(JSON.parse(JSON.stringify(userDetails)));
             }
         });
-    }
+    };
 
 
     if (isLoading || !userDetails) {
@@ -111,16 +111,16 @@ const LobbyUserDetailsPage = function (): JSX.Element {
 
             <div className="mt-4"></div>
             {userDetails.replays.length ? <>
-                <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value) }} />
+                <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
                 <ReplayContainer filter={filter} maxItems={20} replays={userDetails.replays}></ReplayContainer>
             </>
 
                 : <></>}
 
         </div>
-    </>)
+    </>);
 };
 
 export {
     LobbyUserDetailsPage
-}
+};

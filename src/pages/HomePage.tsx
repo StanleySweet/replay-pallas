@@ -29,9 +29,9 @@ const HomePage = function () {
             <div className="mt-4"></div>
             <LatestReplayContainer />
         </div>
-    </>)
-}
+    </>);
+};
 
 export {
     HomePage
-}
+};

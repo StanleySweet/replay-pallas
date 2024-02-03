@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import './HeaderBar.css'
+import './HeaderBar.css';
 
 const HeaderBar = function () : JSX.Element {
     return (
@@ -18,9 +18,9 @@ const HeaderBar = function () : JSX.Element {
                 </ul>
             </nav>
         </div>
-    )
-}
+    );
+};
 
 export {
     HeaderBar
-}
+};

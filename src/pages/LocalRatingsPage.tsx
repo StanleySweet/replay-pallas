@@ -5,11 +5,11 @@
  */
 
 
-import { ChartFrame } from "../components/LocalRatings/ChartFrame"
-import { PlayerList } from "../components/LocalRatings/PlayerList"
+import { ChartFrame } from "../components/LocalRatings/ChartFrame";
+import { PlayerList } from "../components/LocalRatings/PlayerList";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
-import { Link } from "react-router-dom"
-import { NavigationBar } from "../components/NavigationBar"
+import { Link } from "react-router-dom";
+import { NavigationBar } from "../components/NavigationBar";
 import { HouseIcon } from "../icons/HouseIcon";
 import { useEffect, useState } from "react";
 import { LocalRatingUser } from "../types/LocalRatingUser";
@@ -19,7 +19,7 @@ import { InfoButton } from "../components/LocalRatings/InfoButton";
 const LocalRatingsPage = (): JSX.Element => {
     const [user, setSelectedUser] = useState<LocalRatingUser>();
 
-    useEffect(() => { }, [user])
+    useEffect(() => { }, [user]);
 
     return (<>
         <NavigationBar />
@@ -38,8 +38,8 @@ const LocalRatingsPage = (): JSX.Element => {
                 </div>
             </div>
         </div >
-    </>)
-}
+    </>);
+};
 export {
     LocalRatingsPage
-}
+};

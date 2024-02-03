@@ -6,7 +6,7 @@ const PlusIcon: React.FC = () => {
             </g>
         </svg>
     );
-}
+};
 
 export default PlusIcon;
 

@@ -18,4 +18,4 @@ interface LocalRatingUserProfile {
 
 export type  {
     LocalRatingUserProfile
-}
+};

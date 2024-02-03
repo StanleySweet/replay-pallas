@@ -22,7 +22,7 @@ const BlockTitle = (props: IBlockTitleProps): JSX.Element => {
             {translate(props.titleKey)}
         </div>
     );
-}
+};
 export {
     BlockTitle
-}
+};

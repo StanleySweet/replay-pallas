@@ -116,8 +116,8 @@ const PrivacyPolicyBlock = (): ReactNode => {
         </p>
     </>
 
-    )
-}
+    );
+};
 
 const PrivacyPolicyPage = (): ReactNode => {
     return (<>
@@ -136,8 +136,8 @@ const PrivacyPolicyPage = (): ReactNode => {
             <div />
         </div>
     </>);
-}
+};
 
 export {
     PrivacyPolicyPage,PrivacyPolicyBlock
-}
+};

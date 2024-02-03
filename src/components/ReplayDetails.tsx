@@ -36,7 +36,7 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                 link.download = `${props.replay.match_id}.zip`;
                 link.click();
             });
-    }
+    };
 
     return (<>
         <div id="replay-detail-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
@@ -142,9 +142,9 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                 </div>
             </article>
         </div>
-    </>)
-}
+    </>);
+};
 
 export {
     ReplayDetails
-}
+};

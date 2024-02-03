@@ -1,7 +1,7 @@
-import './App.css'
+import './App.css';
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
-import { AuthContextProvider } from "./contexts/AuthContext"
-import { DefaultNavigation } from "./contexts/DefaultNavigation"
+import { AuthContextProvider } from "./contexts/AuthContext";
+import { DefaultNavigation } from "./contexts/DefaultNavigation";
 import { HomePage } from './pages/HomePage';
 import { AdministrationPage } from './pages/AdministrationPage';
 import { ReplayDetailsPage } from './pages/ReplayDetailsPage';
@@ -13,14 +13,14 @@ import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { AboutPage } from './pages/AboutPage';
 import { ReplayUploadPage } from './pages/ReplayUploadPage';
 import { useEffect } from 'react';
-import { init } from './nightwind.ts'
+import { init } from './nightwind.ts';
 import { MyReplaysPage } from './pages/MyReplaysPage.tsx';
 
 function App() {
 
   useEffect(() => {
     init();
-  }, [])
+  }, []);
 
   return (
       <AuthContextProvider>
@@ -41,7 +41,7 @@ function App() {
           </Routes>
         </Router>
       </AuthContextProvider>
-  )
+  );
 }
 
-export default App
+export default App;

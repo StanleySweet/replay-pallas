@@ -18,9 +18,9 @@ const ReplayBlock = (props: IReplayBlockProps) => {
               <span>⚙️ Date: <i>{(new Date(props.replay.metadata.timestamp * 1000).toDateString())}</i></span>
             </span><br />
         </article>
-    )
-}
+    );
+};
 
 export {
     ReplayBlock
-}
+};

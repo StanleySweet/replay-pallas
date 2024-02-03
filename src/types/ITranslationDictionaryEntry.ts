@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import translationsRaw from "../translations.json"
+import translationsRaw from "../translations.json";
 
 type ITranslationDictionary = typeof translationsRaw;
 type ITranslationDictionaryKey = keyof ITranslationDictionary;
@@ -15,4 +15,4 @@ export type {
     ITranslationDictionaryKey,
     ITranslationEntry,
     ITranslationEntryKey
-}
+};

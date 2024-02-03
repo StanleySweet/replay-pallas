@@ -5,16 +5,16 @@
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./Models/IAuthContext";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import EUserRole from "../enumerations/EUserRole";
 
 interface IDefaultNavigationProps {
-    // children: ReactNode;
+    children: ReactNode;
 }
 
 // Handles default navigation for the app
 // Done in a tricky way to avoid rerender contexts when navigating causing issues with the MediaContext
-const DefaultNavigation = (_props: IDefaultNavigationProps) => {
+const DefaultNavigation = (props: IDefaultNavigationProps) => {
     const navigate = useNavigate();
     const { role } = useAuth();
     useEffect(() => {
@@ -27,9 +27,10 @@ const DefaultNavigation = (_props: IDefaultNavigationProps) => {
     }, []);
     return (
         <>
+            {props.children}
         </>
     );
-}
+};
 
 export {
     DefaultNavigation
@@ -37,4 +38,4 @@ export {
 
 export type {
     IDefaultNavigationProps
-}
+};

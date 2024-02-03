@@ -50,8 +50,8 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
         return r.match_id.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
         r.metadata.settings.PlayerData.some(a => a.Name?.toLowerCase().includes(props.filter?.toLowerCase() ?? ""))  ||
         r.metadata.settings.mapName?.toLowerCase().includes(props.filter.toLowerCase()) ||
-        r.metadata.settings.Name?.toLowerCase().includes(props.filter.toLowerCase())
-    }).slice(0, props.maxItems)
+        r.metadata.settings.Name?.toLowerCase().includes(props.filter.toLowerCase());
+    }).slice(0, props.maxItems);
 
     return (
         <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
@@ -67,4 +67,4 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
 
 export {
     ReplayContainer
-}
+};

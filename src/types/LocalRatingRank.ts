@@ -5,4 +5,4 @@ interface LocalRatingRank {
 
 export type {
     LocalRatingRank
-}
+};

@@ -29,7 +29,7 @@ const emblems = {
     "iber": "iberians",
     "kush": "kushites",
     "pers": "persians",
-}
+};
 
 type EmblemDictionary = typeof emblems;
 type EmblemDictionaryKey = keyof EmblemDictionary;
@@ -88,9 +88,9 @@ const PlayerStatistics = (props: IPlayerStatisticsProps): JSX.Element => {
 
         </div>
     </div>
-    )
-}
+    );
+};
 
 export {
     PlayerStatistics
-}
+};

@@ -3,8 +3,8 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import EUserRole from "../enumerations/EUserRole"
-import { Replay } from "./Replay"
+import EUserRole from "../enumerations/EUserRole";
+import { Replay } from "./Replay";
 
 export interface User {
     "id": number

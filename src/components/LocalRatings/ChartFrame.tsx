@@ -4,11 +4,11 @@
  * SPDX-FileCopyrightText: © 2024 Mentula
  */
 
-import { ReactNode, useState } from "react"
-import { CivilizationChart } from "./Charts/CivilizationChart"
-import { DistributionChart } from "./Charts/DistributionChart"
-import { EvolutionChart } from "./Charts/EvolutionChart"
-import { LocalRatingUser } from "../../types/LocalRatingUser"
+import { ReactNode, useState } from "react";
+import { CivilizationChart } from "./Charts/CivilizationChart";
+import { DistributionChart } from "./Charts/DistributionChart";
+import { EvolutionChart } from "./Charts/EvolutionChart";
+import { LocalRatingUser } from "../../types/LocalRatingUser";
 
 enum ETabType {
     Evolution,
@@ -34,7 +34,7 @@ const ChartFrame = (props: IChartFrameProps): JSX.Element => {
             chart = <DistributionChart />;
             break;
         default:
-            chart = <EvolutionChart user={props.user} />
+            chart = <EvolutionChart user={props.user} />;
             break;
     }
 
@@ -50,9 +50,9 @@ const ChartFrame = (props: IChartFrameProps): JSX.Element => {
             </div>
 
         </>
-    )
-}
+    );
+};
 
 export {
     ChartFrame
-}
+};

@@ -22,8 +22,8 @@ const SearchPlayerBar = (props: ISearchPlayerBarProps): ReactNode => {
         </div>
     </>
     );
-}
+};
 
 export {
     SearchPlayerBar
-}
+};

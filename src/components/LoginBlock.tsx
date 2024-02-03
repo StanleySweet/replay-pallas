@@ -1,15 +1,20 @@
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react";
 
 import { useState } from "react";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 
 interface ILoginPageProps {
     onLogin: (login: string, password: string) => void;
+    loginFailed: boolean;
 }
 
 const LoginBlock = (props: ILoginPageProps): ReactNode => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+
+    useEffect(() => {
+
+    }, [props.loginFailed]);
 
     return (
         <div className="flex flex-col gap-2 relative justify-start w-full">
@@ -69,11 +74,12 @@ const LoginBlock = (props: ILoginPageProps): ReactNode => {
 
             }}
             >{translate("LoginPage.Login")}</button>
+            <span className="text-xs text-red-500" style={{ display: props.loginFailed ? "block" : "none" }}>We could not log you in. Please check your username or password.</span>
         </div>
     );
-}
+};
 
 
 export {
     LoginBlock
-}
+};

@@ -6,7 +6,7 @@ import Avatar from "boring-avatars";
 import { enable } from "../nightwind";
 import { useEffect, useState } from "react";
 
-const storageKey = 'nightwind-mode'
+const storageKey = 'nightwind-mode';
 const getColorPreference = (): string => {
     const cache = localStorage.getItem(storageKey);
     if (cache)
@@ -14,11 +14,11 @@ const getColorPreference = (): string => {
     else
         return window.matchMedia('(prefers-color-scheme: dark)').matches
             ? 'dark'
-            : 'light'
-}
+            : 'light';
+};
 
 const NavigationBar = () => {
-    const { role, id, nick, onLogoutSession } = useAuth()
+    const { role, id, nick, onLogoutSession } = useAuth();
     const [lightMode, setLightMode] = useState<string>(getColorPreference());
 
 
@@ -57,14 +57,14 @@ const NavigationBar = () => {
         </article> : <></>;
     const onClick = () => {
         if (lightMode === "light") {
-            enable(false)
-            setLightMode("dark")
+            enable(false);
+            setLightMode("dark");
         }
         else if (lightMode === "dark") {
-            enable(true)
-            setLightMode("light")
+            enable(true);
+            setLightMode("light");
         }
-    }
+    };
 
     return (
         <div className="grid grid-cols-5 bg-white text-gray-900 shadow-md w-full">
@@ -135,8 +135,8 @@ const NavigationBar = () => {
             <hr className="w-full col-span-5" />
         </div>
     );
-}
+};
 
 export {
     NavigationBar
-}
+};

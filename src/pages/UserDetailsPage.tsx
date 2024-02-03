@@ -60,7 +60,7 @@ const UserDetailsPage = function (): JSX.Element {
                 setUserDetails(JSON.parse(JSON.stringify(userDetails)));
             }
         });
-    }
+    };
 
     if (isLoading || !userDetails) {
         return <div className="App">{translate("App.LoadingInProgress")}</div>;
@@ -108,16 +108,16 @@ const UserDetailsPage = function (): JSX.Element {
             </div>
             <div className="mt-4"></div>
             {userDetails.replays.length ? <>
-                <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value) }} />
+                <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
                 <ReplayContainer filter={filter} maxItems={20} replays={userDetails.replays}></ReplayContainer>
             </>
 
                 : <></>}
         </div>
     </>
-    )
+    );
 };
 
 export {
     UserDetailsPage
-}
+};

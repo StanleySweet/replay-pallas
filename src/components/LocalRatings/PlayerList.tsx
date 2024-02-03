@@ -57,7 +57,10 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     //   this.playerList.list_data = this.playerList.list_playername;
     // }
 
+    let body: JSX.Element;
+
     useEffect(() => {
+        setLoading(true);
         axios.get(`${import.meta.env.VITE_API_URL}/local-ratings/users`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -84,30 +87,114 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
             }
         }).then(response => {
             if (response.data) {
-                setUserProfile(response.data)
+                setUserProfile(response.data);
                 props.onPlayerSelected?.(user);
             }
         });
-    }
+    };
 
 
-    let body: JSX.Element;
-    if (isLoading || !users || !users.length) {
+    if (isLoading) {
         body = <tbody className="w-full">
-            <tr className="animate-pulse"><td colSpan={4}><div className="h-2 bg-gray-200 rounded-full w-60 mb-4"></div></td></tr>
-            <tr className="animate-pulse"><td colSpan={4}><div className="h-2 bg-gray-200 rounded-full w-60 mb-4"></div></td></tr>
-            <tr className="animate-pulse"><td colSpan={4}><div className="h-2 bg-gray-200 rounded-full w-60 mb-4"></div></td></tr>
-            <tr className="animate-pulse"><td colSpan={4}><div className="h-2 bg-gray-200 rounded-full w-60 mb-4"></div></td></tr>
-            <tr className="animate-pulse"><td colSpan={4}><div className="h-2 bg-gray-200 rounded-full w-60 mb-4"></div></td></tr>
-        </tbody>
+            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+            </tr>
+            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+            </tr>
+            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+            </tr>
+            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+            </tr>
+            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+                <td>
+                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                    </div>
+                </td>
+            </tr>
+        </tbody>;
     }
-    else if (filteredUsers && filteredUsers.length) {
+    else if (users && users.length > 0 && filteredUsers && filteredUsers.length > 0) {
         body = <tbody className="w-full">{
-            filteredUsers.map((u) => <tr  key={uid()} className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b " onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-left max-w-[3em] text-ellipsis overflow-hidden" title={u.user.nick}>{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
+            filteredUsers.map((u) => <tr key={uid()} className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b " onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-left max-w-[3em] text-ellipsis overflow-hidden" title={u.user.nick}>{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
         }</tbody>;
     }
     else {
-        body = <tbody className="w-full"><tr><td className="text-center" colSpan={4}>No users found</td></tr></tbody>;
+        body = <tbody className="w-full"><tr className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b"><td className="text-center" colSpan={4}>No users found</td></tr></tbody>;
     }
 
     const onSearchBarChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -125,7 +212,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
 
             setFilteredUsers(rows);
         }
-    }
+    };
 
     return (<>
         <div id="player-list-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
@@ -203,8 +290,8 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
                 : <></>
         }
     </>
-    )
-}
+    );
+};
 export {
     PlayerList
-}
+};

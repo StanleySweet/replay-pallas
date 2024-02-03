@@ -40,7 +40,7 @@ const LatestReplayContainer = (): JSX.Element => {
             {
                 replays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)
             }
-        </>
+        </>;
 
     }
 
@@ -57,4 +57,4 @@ const LatestReplayContainer = (): JSX.Element => {
 
 export {
     LatestReplayContainer
-}
+};

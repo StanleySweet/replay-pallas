@@ -1,4 +1,4 @@
-import colors from 'tailwindcss/colors'
+import colors from 'tailwindcss/colors';
 
 const toHHMMSS = function (s: string) {
     const sec_num : number = parseInt(s, 10); // don't forget the second param
@@ -30,7 +30,7 @@ const tailWindColors = [
     colors.fuchsia['500'],
     colors.pink['500'],
     colors.rose['500']
-]
+];
 
 const tailWindColorsTransparent = tailWindColors.map(a => a + "33");
 
@@ -38,4 +38,4 @@ export {
     toHHMMSS,
     tailWindColors,
     tailWindColorsTransparent
-}
+};

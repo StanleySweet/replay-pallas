@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode } from "react";
 
 import { useState } from "react";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
@@ -20,26 +20,26 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
     const [password, setPassword] = useState<string>("");
 
     const validate_email = (email: string) => {
-        setEmail(email)
+        setEmail(email);
         if (!emailRegex.test(email)) {
             setEmailErrorVisible(true);
             return;
         }
         setEmailErrorVisible(false);
-    }
+    };
 
     const validate_password = (password: string) => {
-        setPassword(password)
+        setPassword(password);
         if (password.length < 8) {
             setPasswordErrorVisible(true);
             return;
         }
         setPasswordErrorVisible(false);
-    }
+    };
 
     const is_form_invalid = (): boolean => {
         return password.length < 8 || !emailRegex.test(email);
-    }
+    };
 
     const register = () => {
         if (passwordErrorVisible || emailErrorVisible)
@@ -74,7 +74,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
 
 
 
-    }
+    };
 
     return (
         <div className="flex flex-col gap-2 relative justify-start w-full">
@@ -141,7 +141,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
 
                 <span className="text-xs text-red-500" style={{ display: passwordErrorVisible ? "block" : "none" }}>Password must be at least 8 characters long</span>
                </form>
-                <button disabled={is_form_invalid()} onClick={() => { register() }} className="w-80 flex my-3 relative self-center bg-wfg  font-roboto justify-center text-center text-white dark:text-slate-900 items-center hover:bg-slate-50 hover:text-wfg dark:hover:text-wfg hover:border-2 hover:border-solid hover:border-wfg" style={{
+                <button disabled={is_form_invalid()} onClick={() => { register(); }} className="w-80 flex my-3 relative self-center bg-wfg  font-roboto justify-center text-center text-white dark:text-slate-900 items-center hover:bg-slate-50 hover:text-wfg dark:hover:text-wfg hover:border-2 hover:border-solid hover:border-wfg" style={{
                     height: "50px",
                     fontSize: "14px",
                     fontWeight: "900",
@@ -153,9 +153,9 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
                 >{translate("LoginPage.Register")}</button>
             </div>
     );
-}
+};
 
 
 export {
     RegisterBlock
-}
+};

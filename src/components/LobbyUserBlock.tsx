@@ -15,20 +15,14 @@ interface IUserBlockProps {
     rank?: LocalRatingRank
 }
 
-
-
 const LobbyUserBlock = (props: IUserBlockProps) => {
-    let color = "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-300"
+    let color = "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-300";
     if (props.user.role === EUserRole.CONTRIBUTOR) {
         color = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
     }
     else if (props.user.role === EUserRole.ADMINISTRATOR) {
         color = "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
     }
-
-
-
-
 
     return (
         <article className="mb-[1em] pt-3" style={{ borderTop: "1px solid #C7CCD9" }} >
@@ -61,9 +55,9 @@ const LobbyUserBlock = (props: IUserBlockProps) => {
                 </div>
             </div>
         </article>
-    )
-}
+    );
+};
 
 export {
     LobbyUserBlock
-}
+};

@@ -11,7 +11,7 @@ interface InfoButtonProps {
 const InfoButton = (props: InfoButtonProps): JSX.Element => {
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        location.href = "https://gitlab.com/mentula0ad/LocalRatings"
+        location.href = "https://gitlab.com/mentula0ad/LocalRatings";
     };
 
     return (
@@ -23,9 +23,9 @@ const InfoButton = (props: InfoButtonProps): JSX.Element => {
                 </svg>
             {props.text}
         </button>
-    )
-}
+    );
+};
 
 export {
     InfoButton
-}
+};
