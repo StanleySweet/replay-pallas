@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { NavigationBar } from "../components/NavigationBar";
 import { BlockTitle } from "../components/BlockTitle";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";

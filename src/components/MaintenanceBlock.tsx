@@ -48,7 +48,7 @@ const MaintenanceBlock = (): ReactNode => {
 
     async function rebuild_local_ratings(event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
         event.preventDefault();
-        await axios.post(`${import.meta.env.VITE_API_URL}/local-ratings/rebuild-database`, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/local-ratings/rebuild-database`, undefined , {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
