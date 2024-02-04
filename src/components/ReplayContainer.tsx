@@ -23,16 +23,21 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     const { token } = useAuth();
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/replays/all`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(response => {
-            setReplays(response.data);
+        if(!props.replays || !props.replays.length){
+            axios.get(`${import.meta.env.VITE_API_URL}/replays/all`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                setReplays(response.data);
+                setLoading(false);
+            });
+        }
+        else{
             setLoading(false);
-        });
-    }, [token]);
+        }
+    }, [token, props.replays]);
 
 
     if (isLoading) {

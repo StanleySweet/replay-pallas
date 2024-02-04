@@ -10,11 +10,11 @@
     margin-top: 10px;
     float: left;
 }
-#header nav {
+#header {
     display: block;
 }
 
-#header nav ul {
+#header > div > nav > .DESKTOP-MENU ul {
     list-style: none;
     list-style-image: none;
     margin: 0;
@@ -23,12 +23,12 @@
     padding-right: 16px;
 }
 
-#header nav li {
+#header > div > nav > .DESKTOP-MENU li {
     float: left;
     clear: none;
 }
 
-#header nav a {
+#header > div > nav > .DESKTOP-MENU > ul a {
     display: block;
     padding: 1.5em 1em;
     height: 1em;
@@ -39,8 +39,8 @@
     color: white;
 }
 
-#header nav a:hover,
-#header nav a:focus,
-#header nav a:active {
+#header > div > nav > a:hover,
+#header > div > nav > a:focus,
+#header > div > nav > a:active {
     color: #f1f1d4;
 }

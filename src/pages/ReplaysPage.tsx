@@ -77,7 +77,7 @@ const ReplaysPage = (): ReactNode => {
     return (<>
         <NavigationBar />
 
-        <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
+        <div className="w-5/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
             <div className="flex">
                 <div className="mb-5 flex-grow inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("Replays.Title")}</div>
                 {
@@ -90,8 +90,8 @@ const ReplaysPage = (): ReactNode => {
             </div>
             {
                 isLoading ? <>{translate("App.LoadingInProgress")}</> :
-                    <div className="grid grid-cols-6 gap-x-4">
-                        <div className="col-span-2">
+                    <div className="grid lg:grid-cols-6 gap-x-4">
+                        <div className="lg:col-span-2">
                             {
                                 civDoughnutData ?
                                     <div id="doughnut-container" className=" text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
@@ -107,7 +107,7 @@ const ReplaysPage = (): ReactNode => {
                             }
 
                         </div>
-                        <div className="col-span-4">
+                        <div className="mt-2 lg:mt-0 lg:col-span-4">
                             <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
                             <ReplayContainer filter={filter} maxItems={20} replays={replays}></ReplayContainer>
                         </div>

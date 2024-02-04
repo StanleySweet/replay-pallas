@@ -42,8 +42,8 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
         <div id="replay-detail-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
             <BlockTitle titleKey="ReplayDetails.Title" />
             <article className="font-sans">
-                <div className=" grid grid-cols-4">
-                    <div className="sm:hidden md:hidden lg:hidden xl:hidden 2xl:block crop-container rounded-full w-[256px] h-[150px} max-h-[256px]  overflow-hidden" style={{background:"black"}}>
+                <div className="flex">
+                    <div className="flex-none hidden xl:block crop-container rounded-full w-[256px] h-[150px} max-h-[256px] overflow-hidden" style={{background:"black"}}>
                         <img
                             className="ml-[9%] mt-[20%] mb-[20%] w-[256px] h-[150px}"
                             src={`https://cdn.jsdelivr.net/gh/0ad/0ad/binaries/data/mods/public/art/textures/ui/${replay.metadata.previewImage}`}
@@ -55,7 +55,7 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                             aria-hidden="true"
                         />
                     </div>
-                    <div className="grid grid-cols-2 p-5 col-span-3">
+                    <div className="grid grid-cols-2 p-5 flex-grow">
                         <span className="text-sm">
                             {translate("ReplayDetails.MapName")} <b
                             >{replay.metadata.settings.Name ||
@@ -131,7 +131,8 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                             }
                         </div>
                     </div>
-                    <center className="col-span-3">
+                </div>
+                <center className="flex-3">
                         <div className="pt-2">
                             <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                                 <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z" /></svg>
@@ -139,7 +140,6 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                             </button>
                         </div>
                     </center>
-                </div>
             </article>
         </div>
     </>);

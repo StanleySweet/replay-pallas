@@ -28,8 +28,7 @@ const MyReplaysPage = (): ReactNode => {
                 'Authorization': `Bearer ${token}`
             }
         }).then((response) => {
-            if (response.status === 200)
-            {
+            if (response.status === 200) {
                 const replay = replays.find(a => a.match_id === match_id);
                 if (replay) {
                     setReplays(replays.filter(a => a.match_id !== match_id));
@@ -53,7 +52,7 @@ const MyReplaysPage = (): ReactNode => {
         setLoading(true);
     }, []);
 
-    const filteredReplays : Replay[] = (replays ?? []).filter(r => {
+    const filteredReplays: Replay[] = (replays ?? []).filter(r => {
         return r.match_id.toString().toLowerCase().includes(filter.toLowerCase()) ||
             r.metadata.settings.PlayerData.some(a => a.Name?.toLowerCase().includes(filter?.toLowerCase() ?? "")) ||
             r.metadata.settings.mapName?.toLowerCase().includes(filter.toLowerCase()) ||
@@ -79,7 +78,7 @@ const MyReplaysPage = (): ReactNode => {
                                 <button onClick={() => delete_replay(r.match_id)} className="h-5 w-5 my-auto">
                                     <TrashIcon />
                                 </button>
-                            </article>)
+                            </article>).slice(0, 20)
                     }
                 </div>
             </div>
