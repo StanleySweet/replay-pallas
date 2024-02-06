@@ -1,7 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartData } from "chart.js";
 import { ReactNode, useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { Replay } from "../types/Replay";
+import { ReplayListItem } from "../types/Replay";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import axios, { AxiosResponse } from "axios";
 import colors from "tailwindcss/colors";
@@ -21,26 +21,23 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ReplaysPage = (): ReactNode => {
     const [isLoading, setLoading] = useState(true);
-    const [replays, setReplays] = useState<Replay[]>();
+    const [replays, setReplays] = useState<ReplayListItem[]>();
     const [filter, setFilter] = useState<string>();
     const [civDoughnutData, setCivDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const [mapDoughnutData, setMapDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const { token, role } = useAuth();
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/replays/all`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/replays/all-list-items`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        }).then((response: AxiosResponse<Replay[]>) => {
+        }).then((response: AxiosResponse<ReplayListItem[]>) => {
             if (response.data && response.data) {
-
-                const civs = response.data.map(a => {
-                    const playerData = a.metadata.settings.PlayerData;
-                    return playerData.map(b => b.Civ);
-                }).reduce((a, c) => a.concat(c), []);
-                const maps = response.data.map(a => a.metadata.settings.Name || a.metadata.settings.mapName);
+                console.log(response.data);
+                const civs = response.data.flatMap(a => a.civs);
+                const maps = response.data.map(a => a.mapName);
                 const toto = civs.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
                 const tata = maps.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
                 setReplays(response.data);

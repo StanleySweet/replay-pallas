@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { ReplayBlock } from "./ReplayBlock";
-import { Replay } from "../types/Replay";
+import { ReplayListItem } from "../types/Replay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
@@ -14,10 +14,10 @@ import { BlockTitle } from "./BlockTitle";
 const LatestReplayContainer = (): JSX.Element => {
     const [isLoading, setLoading] = useState(true);
     const { token } = useAuth();
-    const [replays, setReplays] = useState<Replay[]>([]);
+    const [replays, setReplays] = useState<ReplayListItem[]>([]);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/replays/latest`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/replays/latest-list-items`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -38,7 +38,7 @@ const LatestReplayContainer = (): JSX.Element => {
     else {
         body = <>
             {
-                replays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)
+                replays.map(r => <ReplayBlock key={r.matchId} replay={r} ></ReplayBlock>)
             }
         </>;
 

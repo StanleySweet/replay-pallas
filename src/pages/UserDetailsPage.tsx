@@ -30,12 +30,12 @@ const UserDetailsPage = function (): JSX.Element {
     const { userId } = useParams();
 
     useEffect(() => {
-        axios.get<any, AxiosResponse<any, any>>(`${import.meta.env.VITE_API_URL}/users/GetDetails/${userId}`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/users/GetDetails/${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        }).then((response: AxiosResponse<any, any>) => {
+        }).then((response: AxiosResponse<User>) => {
             setUserDetails(response.data);
             setLoading(false);
         });
@@ -54,7 +54,7 @@ const UserDetailsPage = function (): JSX.Element {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        }).then((response: AxiosResponse<any, any>) => {
+        }).then((response: AxiosResponse) => {
             if (response.status === 200 && userDetails && adminSelectValue) {
                 userDetails.role = adminSelectValue as EUserRole;
                 setUserDetails(JSON.parse(JSON.stringify(userDetails)));

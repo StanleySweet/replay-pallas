@@ -6,20 +6,20 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { ReplayBlock } from "./ReplayBlock";
-import { Replay } from "../types/Replay";
+import { ReplayListItem } from "../types/Replay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
 
 interface IReplayContainerProps {
-    replays?:Replay[]
+    replays?:ReplayListItem[]
     maxItems: number;
     filter?: string;
 }
 
 const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     const [isLoading, setLoading] = useState(true);
-    const [replays, setReplays] = useState<Replay[]>(props.replays ?? []);
+    const [replays, setReplays] = useState<ReplayListItem[]>(props.replays ?? []);
     const { token } = useAuth();
 
     useEffect(() => {
@@ -52,10 +52,9 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
         if(!props.filter || props.filter.length < 3)
             return true;
 
-        return r.match_id.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
-        r.metadata.settings.PlayerData.some(a => a.Name?.toLowerCase().includes(props.filter?.toLowerCase() ?? ""))  ||
-        r.metadata.settings.mapName?.toLowerCase().includes(props.filter.toLowerCase()) ||
-        r.metadata.settings.Name?.toLowerCase().includes(props.filter.toLowerCase());
+        return r.matchId.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
+        r.playerNames.some(a => a.includes(props.filter?.toLowerCase() ?? ""))  ||
+        r.mapName?.toLowerCase().includes(props.filter.toLowerCase());
     }).slice(0, props.maxItems);
 
     return (
@@ -63,7 +62,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
             <BlockTitle titleKey="ReplayContainer.Title" />
             <div className="w-full h-[711px] overflow-y-scroll" >
                 {
-                   filteredReplays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)
+                   filteredReplays.map(r => <ReplayBlock key={r.matchId} replay={r} ></ReplayBlock>)
                 }
             </div>
         </div>

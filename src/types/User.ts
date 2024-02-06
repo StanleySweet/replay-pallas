@@ -4,7 +4,7 @@
  */
 
 import EUserRole from "../enumerations/EUserRole";
-import { Replay } from "./Replay";
+import { ReplayListItem } from "./Replay";
 
 export interface User {
     "id": number
@@ -17,6 +17,6 @@ export interface User {
     "creation_date": Date
     "SecondMostUsedCmd": string
     "MostUsedCmd": string;
-    "replays": Replay[]
+    "replays": ReplayListItem[]
     "graph": any
 }

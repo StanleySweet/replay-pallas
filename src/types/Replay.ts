@@ -9,6 +9,14 @@ export interface Replay {
     metadata: ReplayMetadata
 }
 
+export type ReplayListItem = {
+    "mapName": string
+    "playerNames": string[]
+    "civs": string[]
+    "matchId": string
+    "date": string
+}
+
 export interface Mod {
     name: number
     mod: string
@@ -32,7 +40,7 @@ export interface MetadataSettings {
     RatingEnabled: boolean
     LockTeams: boolean
     Seed: string
-    StartingResources: any
+    StartingResources: number
     PopulationCap: number
     Size: number
     Name: string | undefined,
@@ -44,7 +52,7 @@ export interface PlayerData {
     Name: string
     NameWithoutRating: string
     LobbyUserId: number
-    Color: any
+    Color: { r:number, g: number, b:number}
     Team: number
     Civ: string
     AverageCPM: number

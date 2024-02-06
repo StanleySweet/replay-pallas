@@ -13,7 +13,7 @@ import EUserRole from "../enumerations/EUserRole";
 import { HouseIcon } from "../icons/HouseIcon";
 import axios from "axios";
 import { ReplayBlock } from "../components/ReplayBlock";
-import { Replay } from "../types/Replay";
+import { Replay, ReplayListItem } from "../types/Replay";
 import UploadIcon from "../icons/UploadIcon";
 import LoadingBar from 'react-top-loading-bar';
 
@@ -45,7 +45,7 @@ const ReplayUploadPage = (): ReactNode => {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
             },
-            onUploadProgress: function(progressEvent) {
+            onUploadProgress: function (progressEvent) {
                 setPercentageCompleted(Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 0)));
             },
         });
@@ -91,25 +91,31 @@ const ReplayUploadPage = (): ReactNode => {
                     <label className="block mb-2 text-sm font-medium text-gray-900" htmlFor="file_input">Selection du fichier</label>
                     <input onChange={evt => setFileData(evt.target.files?.[0])} accept=".zip" className="lock w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none file:bg-gray-50 file:border-0 file:bg-gray-100 file:me-4 file:py-3 file:px-4 " aria-describedby="file_input_help" id="file_input" type="file" />
                     {
-                       percentCompleted ? <LoadingBar progress={percentCompleted} color="#FFFFFFFF" /> : <></>
+                        percentCompleted ? <LoadingBar progress={percentCompleted} color="#FFFFFFFF" /> : <></>
                     }
                     <p className="mt-1 text-sm text-gray-500" id="file_input_help">Zip file only. Max size 5MB</p>
-                        <div className="pt-2 d-flex flex">
-                            <div className="flex-grow"></div>
-                            <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                <UploadIcon/>
-                                <span>{translate("Replays.Upload")}</span>
-                            </button>
-                        </div>
+                    <div className="pt-2 d-flex flex">
+                        <div className="flex-grow"></div>
+                        <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                            <UploadIcon />
+                            <span>{translate("Replays.Upload")}</span>
+                        </button>
+                    </div>
 
                 </div>
             </div>
             {
                 uploadReplays?.length ?
                     <div id="uploaded-replays-container" className="text-sm md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-                        <BlockTitle titleKey="UploadPage.UploadedReplaysTitle"/>
+                        <BlockTitle titleKey="UploadPage.UploadedReplaysTitle" />
                         {
-                            uploadReplays.map(r => <ReplayBlock key={r.match_id} replay={r} ></ReplayBlock>)
+                            uploadReplays.map(r => <ReplayBlock key={r.match_id} replay={({
+                                "matchId": r.match_id,
+                                "mapName": r.metadata.settings.Name ?? r.metadata.settings.mapName,
+                                "civs": r.metadata.settings.PlayerData.map(a => a.Civ),
+                                "playerNames": r.metadata.settings.PlayerData.map(a => a.NameWithoutRating),
+                                "date": (r.metadata.timestamp * 1000) + ""
+                            } as ReplayListItem)} ></ReplayBlock>)
                         }</div> : ""
             }
 
