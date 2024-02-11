@@ -17,6 +17,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
     const [nick, setNick] = useState<string>("");
     const [emailErrorVisible, setEmailErrorVisible] = useState<boolean>(false);
     const [passwordErrorVisible, setPasswordErrorVisible] = useState<boolean>(false);
+    const [registerErrorVisible, setRegisterErrorVisible] = useState<boolean>(false);
     const [password, setPassword] = useState<string>("");
 
     const validate_email = (email: string) => {
@@ -55,30 +56,31 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
                     console.error(err2);
                     return;
                 }
+                try {
+                    const response = await axios.post<User, AxiosResponse<User>>(`${import.meta.env.VITE_API_URL}/users/`, {
+                        "password": hashedPassword,
+                        "email": hashedEmail,
+                        "nick": nick
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
 
-                const response = await axios.post<User, AxiosResponse<User>>(`${import.meta.env.VITE_API_URL}/users/`, {
-                    "password": hashedPassword,
-                    "email": hashedEmail,
-                    "nick": nick
-                }, {
-                    headers: {
-                        'Content-Type': 'application/json',
+                    if (response.status === 204) {
+                        props.onLogin(email, password);
                     }
-                });
-
-                if (response.data.id !== 0) {
-                    props.onLogin(email, password);
+                } catch (error) {
+                    console.log(error);
+                    setRegisterErrorVisible(true);
                 }
             });
         });
-
-
-
     };
 
     return (
         <div className="flex flex-col gap-2 relative justify-start w-full">
-                <form>
+            <form>
                 <label htmlFor="email_input" className="flex select-none font-roboto text-black">
                     {translate("LoginPage.EmailFieldLabel")}
                 </label>
@@ -140,18 +142,19 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
                     onChange={(value) => validate_password(value.target.value)} />
 
                 <span className="text-xs text-red-500" style={{ display: passwordErrorVisible ? "block" : "none" }}>Password must be at least 8 characters long</span>
-               </form>
-                <button disabled={is_form_invalid()} onClick={() => { register(); }} className="w-80 flex my-3 relative self-center bg-wfg  font-roboto justify-center text-center text-white dark:text-slate-900 items-center hover:bg-slate-50 hover:text-wfg dark:hover:text-wfg hover:border-2 hover:border-solid hover:border-wfg" style={{
-                    height: "50px",
-                    fontSize: "14px",
-                    fontWeight: "900",
-                    lineHeight: "14px",
-                    textTransform: "uppercase",
-                    fontStyle: "normal",
+            </form>
+            <button disabled={is_form_invalid()} onClick={() => { register(); }} className="w-80 flex my-3 relative self-center bg-wfg  font-roboto justify-center text-center text-white dark:text-slate-900 items-center hover:bg-slate-50 hover:text-wfg dark:hover:text-wfg hover:border-2 hover:border-solid hover:border-wfg" style={{
+                height: "50px",
+                fontSize: "14px",
+                fontWeight: "900",
+                lineHeight: "14px",
+                textTransform: "uppercase",
+                fontStyle: "normal",
 
-                }}
-                >{translate("LoginPage.Register")}</button>
-            </div>
+            }}
+            >{translate("LoginPage.Register")}</button>
+                <span className="text-xs text-red-500" style={{ display: registerErrorVisible ? "block" : "none" }}>An error occured when registering your account, maybe you already have one? If so login instead.</span>
+        </div>
     );
 };
 

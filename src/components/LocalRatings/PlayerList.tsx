@@ -201,11 +201,12 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
         evt.preventDefault();
         const filter = evt.target.value;
         if (users?.length) {
-            const rows = users.filter(a => Object.values(a).some(a => {
+            const rows = users.filter(a => Object.values(a).some(b => {
                 if (!filter || !filter.length)
                     return true;
 
-                const value = a + "";
+                
+                const value = JSON.stringify(b);
                 return value.includes(filter);
             }));
 
@@ -220,7 +221,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
         </div>
         <div className="mt-2">        <SearchPlayerBar onChange={onSearchBarChange} /></div>
         <div className=" mt-2 relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
-            <div className=" overflow-y-auto relative overflow-x-auto sm:rounded-md table-fixed">
+            <div className="relative max-h-[216px] min-h-[216px] overflow-auto sm:rounded-md table-fixed">
                 <table className="text-xs w-full text-sm text-left rtl:text-right text-gray-500 ">
                     <thead className="text-gray-700 uppercase bg-gray-50 ">
                         <tr className="border-b">
@@ -238,25 +239,15 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
         {
             userProfile ?
                 <>
-                    <div id="player-detail-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-                        <BlockTitle titleKey="PlayerPerformance.Title" />
-                        <div>
-                            {
-                                user ?
-                                    <LobbyUserBlock key={user.user.id} user={user.user} rank={userProfile.rankText} rankUserCount={users?.length}></LobbyUserBlock> :
-                                    <></>
-                            }
-                        </div>
-                    </div>
-                    <div className="mt-4 relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
-                        <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                    <div className="relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
+                        <table className="w-full text-sm text-left rtl:text-right text-gray-500">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr style={{ borderBottom: '1px solid' }}>
                                     <th className="text-center px-6 py-3" colSpan={2}>Score</th>
                                     <th className="text-center px-6 py-3" colSpan={2}>Performance</th>
                                 </tr>
                             </thead>
-                            <tbody className="odd:bg-white even:bg-gray-50 border-b">
+                            <tbody>
                                 <tr className="odd:bg-white even:bg-gray-50 border-b">
                                     <td className="text-right">Current</td>
                                     <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.currentRatingText}</td>
@@ -285,6 +276,16 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div id="player-detail-container" className="text-sm mt-4  p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                        <BlockTitle titleKey="PlayerPerformance.Title" />
+                        <div>
+                            {
+                                user ?
+                                    <LobbyUserBlock key={user.user.id} user={user.user} rank={userProfile.rankText} rankUserCount={users?.length}></LobbyUserBlock> :
+                                    <></>
+                            }
+                        </div>
                     </div>
                 </>
                 : <></>

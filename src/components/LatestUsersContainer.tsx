@@ -42,7 +42,7 @@ const LatestUserContainer = (): JSX.Element => {
         if (!replays || !replays.length)
             return;
 
-        axios.delete(`${import.meta.env.VITE_API_URL}/replays/${id}`, {
+        axios.delete(`${import.meta.env.VITE_API_URL}/users/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

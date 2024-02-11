@@ -60,6 +60,9 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     return (
         <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
             <BlockTitle titleKey="ReplayContainer.Title" />
+            
+            <span className="text-left text-xs"><i>Showing <b>{filteredReplays.length}</b> out of <b>{replays.length}</b> replays. Use the search bar to see specific replays.</i></span>
+ 
             <div className="w-full h-[711px] overflow-y-scroll" >
                 {
                    filteredReplays.map(r => <ReplayBlock key={r.matchId} replay={r} ></ReplayBlock>)
