@@ -119,7 +119,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
 
                 
                 const value = JSON.stringify(b);
-                return value.includes(filter);
+                return value.toLowerCase().includes(filter.toLowerCase());
             }));
 
 
