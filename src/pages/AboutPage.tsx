@@ -19,9 +19,9 @@ const AboutPage = (): ReactNode => {
                 <div />
                 <BlockTitle titleKey="AboutPage.Title"></BlockTitle>
 
-                <h3 className="font-semibold mt-1 mb-1">Goal</h3>
+                <h3 className="font-semibold mt-1 mb-1">{translate("AboutPage.GoalTitle")}</h3>
                 <p className="text-justify">
-                    This website aims to help players share their 0 A.D. Empires Ascendant replays in an attempt to make them more easily accessible. In the future, it might be possible to export replays directly from the game.
+                    {translate("AboutPage.Goal")}
                 </p>
                 <h3 className="font-semibold mt-1 mb-1">Sources</h3>
                 <p className="text-justify">

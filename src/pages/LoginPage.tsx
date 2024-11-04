@@ -10,6 +10,7 @@ import { BlockTitle } from "../components/BlockTitle";
 import { LoginBlock } from "../components/LoginBlock";
 import { RegisterBlock } from "../components/RegisterBlock";
 import { PrivacyPolicyBlock } from "./PrivacyPolicyPage";
+import { useTranslation as translate } from "../contexts/Models/useTranslation";
 interface ILoginPageProps {
     onLogin: (login: string, password: string) => void;
     loginFailed: boolean
@@ -59,6 +60,10 @@ const LoginPage = function (props: ILoginPageProps) {
                 </div>
                 <div className="flex flex-col bg-white p-8 wfg-chart-tab" >
                     <BlockTitle titleKey="LoginPage.WelcomeMessage" />
+                    {
+                        tabType !== ETabType.Policy &&
+                        <span className="text-xs mb-2">{translate("LoginPage.Goal")}</span>
+                    }
                     {body}
                 </div>
             </div>

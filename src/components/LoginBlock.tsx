@@ -74,7 +74,9 @@ const LoginBlock = (props: ILoginPageProps): ReactNode => {
 
             }}
             >{translate("LoginPage.Login")}</button>
-            <span className="text-xs text-red-500" style={{ display: props.loginFailed ? "block" : "none" }}>We could not log you in. Please check your username or password.</span>
+            <span className="text-xs text-red-500" style={{ display: props.loginFailed ? "block" : "none" }}>
+                {translate("LoginPage.LoginFailed")}
+            </span>
         </div>
     );
 };

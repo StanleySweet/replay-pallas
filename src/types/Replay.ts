@@ -9,6 +9,28 @@ export interface Replay {
     metadata: ReplayMetadata
 }
 
+export interface ReplayDetails {
+    match_id: string
+    metadata: ReplayMetadata
+    command_statistics: CommandStatistics
+}
+
+export interface CommandStatistics {
+    turns : number[]
+    playerCommandDatas: PlayerCommandData[]
+}
+
+export interface PlayerCommandData {
+    playerCommands : number[]
+    playerName: string
+}
+
+export interface ReplayDetails {
+    match_id: string
+    metadata: ReplayMetadata
+    command_statistics: CommandStatistics
+}
+
 export type ReplayListItem = {
     "mapName": string
     "playerNames": string[]

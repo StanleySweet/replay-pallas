@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import nightwind from 'nightwind'
+import nightwind from 'nightwind';
 
 
 export default {
@@ -20,4 +20,4 @@ export default {
     },
   },
   plugins: [nightwind],
-}
+};

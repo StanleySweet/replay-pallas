@@ -27,36 +27,6 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     const [userProfile, setUserProfile] = useState<LocalRatingUserProfile>();
     const { token } = useAuth();
 
-
-    // Filter rows according to search entry
-    // if (request.params) {
-    //   const search = request.params.searchValue;
-    //   rows = rows.filter(x => x[4].toLowerCase().includes(search));
-
-    //   // Sort rows according to table preferences
-    //   const column = this.getColumn();
-    //   const sortColumn = (a, b) => {
-    //     return (column == "rank") ? b[0] - a[0] :
-    //       (column == "rating") ? a[0] - b[0] :
-    //         (column == "matches") && (b[3] === a[3]) ? b[0] - a[0] :
-    //           (column == "matches") && (b[3] !== a[3]) ? b[3] - a[3] :
-    //             sortString_LocalRatings(b[4], a[4]);
-    //   };
-    //   rows.sort(sortColumn);
-
-    //   // Set order according to table preferences
-    //   const order = this.getColumnOrder();
-    //   if (order > 0)
-    //     rows.reverse();
-
-    //   // Populate table with columns
-    //   this.columns.forEach((x, i) => this.playerList["list_" + x] = rows.map(y => y[i]));
-    //   this.playerList.selected = -1;
-    //   // Change these last, otherwise crash
-    //   this.playerList.list = this.playerList.list_playername;
-    //   this.playerList.list_data = this.playerList.list_playername;
-    // }
-
     let body: JSX.Element;
 
     useEffect(() => {
@@ -95,106 +65,48 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
 
 
     if (isLoading) {
+        const id_array = [];
+        for(let i = 0 ; i < 10; ++i){
+            id_array.push("placeholder_" + i);
+        }
+
+        const data = id_array.map((a ) => (
+            <tr key={a} className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
+            <td>
+                <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                </div>
+            </td>
+            <td>
+                <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                </div>
+            </td>
+            <td>
+                <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                </div>
+            </td>
+            <td>
+                <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
+                </div>
+            </td>
+        </tr>
+        ));
+
+
         body = <tbody className="w-full">
-            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-            </tr>
-            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-            </tr>
-            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-            </tr>
-            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-            </tr>
-            <tr className="odd:bg-white even:bg-gray-50 border-b animate-pulse">
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-                <td>
-                    <div className="h-2 bg-gray-400 rounded-full w-100 m-2">
-                    </div>
-                </td>
-            </tr>
+         {data}
         </tbody>;
     }
     else if (users && users.length > 0 && filteredUsers && filteredUsers.length > 0) {
         body = <tbody className="w-full">{
-            filteredUsers.map((u) => <tr key={uid()} className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b " onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-left max-w-[3em] text-ellipsis overflow-hidden" title={u.user.nick}>{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
+            filteredUsers.map((u) => <tr key={uid()} className={u === user ?
+                "bg-red-700 text-white font-semibold border-b" : "hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b"
+            } onClick={(evt) => onPlayerSelected(evt, u)}><td className="text-center">{u.rank}</td><td className="text-left max-w-[3em] text-ellipsis overflow-hidden" title={u.user.nick}>{u.user.nick}</td><td className="text-center">{u.rating}</td><td className="text-center">{u.matches}</td></tr>)
         }</tbody>;
     }
     else {
-        body = <tbody className="w-full"><tr className="hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b"><td className="text-center" colSpan={4}>No users found</td></tr></tbody>;
+        body = <tbody className="w-full"><tr className={
+            "hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b"
+        }><td className="text-center" colSpan={4}>No users found</td></tr></tbody>;
     }
 
     const onSearchBarChange = (evt: ChangeEvent<HTMLInputElement>) => {

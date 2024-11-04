@@ -91,9 +91,9 @@ const LobbyUserDetailsPage = function (): JSX.Element {
 
                         <div className="d-flex flex">
                             <div className="flex">
-                                <label htmlFor="countries" className="flex  text-sm font-medium text-gray-900">Select an option</label>
+                                <label htmlFor="countries" className="flex  text-sm font-medium text-gray-900">{translate("UserDetails.SelectAnOption")}</label>
                                 <select value={adminSelectValue} onChange={(evt) => setSelectValue(+evt.target.value as EUserRole)} id="countries" className="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option>Choose a permission</option>
+                                    <option>{translate("UserDetails.ChoosePermissions")}</option>
                                     <option value={EUserRole.READER}>{EUserRole[EUserRole.READER]}</option>
                                     <option value={EUserRole.CONTRIBUTOR}>{EUserRole[EUserRole.CONTRIBUTOR]}</option>
                                     <option value={EUserRole.ADMINISTRATOR}>{EUserRole[EUserRole.ADMINISTRATOR]}</option>

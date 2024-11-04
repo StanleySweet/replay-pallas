@@ -3,20 +3,25 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import { Replay } from "../types/Replay";
+import { ReplayDetails } from "../types/Replay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { toHHMMSS } from "../utils";
 import axios from "axios";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
 import { uid } from "chart.js/helpers";
+import { ChartData, ChartOptions } from "chart.js";
+import { Line } from "react-chartjs-2";
+import { tailWindColors } from "../utils";
+import 'chartjs-adapter-moment';
+import "chart.js/auto";
 
 interface IReplayBlockProps {
-    replay: Replay;
+    replay: ReplayDetails;
 }
 
-const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
-    const replay: Replay = props.replay;
+const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
+    const replay: ReplayDetails = props.replay;
     const { token } = useAuth();
 
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,6 +42,36 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                 link.click();
             });
     };
+
+    const options = {
+        animation: false,
+        title: "Command Per Turn",
+        type: 'line',
+        spanGaps: true,
+        responsive: true,
+        x: {
+            type: 'linear',
+        },
+    } as ChartOptions<'line'>;
+    let data: ChartData<'line', number[]> | undefined = undefined;
+    if(replay.command_statistics){
+        data = {
+            datasets: [
+            ],
+            labels: replay.command_statistics.turns.map(a => a.toString()),
+        } as ChartData<'line', number[]>;
+
+        for(const playerData of replay.command_statistics.playerCommandDatas){
+            data.datasets.push({
+                label: playerData.playerName,
+                data: playerData.playerCommands,
+                fill: false,
+                backgroundColor: tailWindColors[data.datasets.length * 2],
+                borderColor: tailWindColors[data.datasets.length * 2],
+            }); 
+        }
+
+    }
 
     return (<>
         <div id="replay-detail-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
@@ -132,6 +167,13 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
                         </div>
                     </div>
                 </div>
+                {
+                    data ? 
+                        <Line data={data} options={options} /> 
+                    
+                    : 
+                    <></>
+                }
                 <center className="flex-3">
                         <div className="pt-2">
                             <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
@@ -146,5 +188,5 @@ const ReplayDetails = (props: IReplayBlockProps): JSX.Element => {
 };
 
 export {
-    ReplayDetails
+    ReplayDetailsBlock
 };

@@ -197,11 +197,43 @@
     },
     "Replays.CivRepartition": {
         "fr-FR": "Répartition des Civilisations :",
-        "EN": "Civ Repartition:"
+        "EN": "Civ Distribution:"
     },
     "Replays.MapRepartition": {
         "fr-FR": "Répartition des Cartes :",
-        "EN": "Map Repartition:"
+        "EN": "Map Distribution:"
+    },
+    "UserDetails.Permissions": {
+        "fr-FR": "Permissions",
+        "EN": "Permissions"
+    },
+    "UserDetails.ChoosePermissions": {
+        "fr-FR": "Choisissez une permissions",
+        "EN": "Choose a permissions"
+    },
+    "UserDetails.SelectAnOption":{ 
+        "fr-FR": "Sélectionnez une option",
+        "EN": "Select an option"
+    },
+    "RegisterBlock.InvalidMailAddress":
+    {
+        "fr-FR": "Adresse mail invalide",
+        "EN": "Invalid mail address"
+    },
+    "RegisterBlock.InvalidNick":
+    {
+        "fr-FR": "Surnom invalide",
+        "EN": "Invalid nickname"
+    },
+    "RegisterBlock.InvalidPassword":
+    {
+        "EN": "Password must be at least 8 characters long",
+        "fr-FR": "Le mot de passe doit faire au moins 8 caractères"
+    },
+    "RegisterBlock.RegisterError":
+    {
+        "EN": "An error occured when registering your account, maybe you already have one? If so login instead.",
+        "fr-FR": "Une erreur est survenue lors de l'enregistrement de votre compte, peut-être en avez-vous déjà un? Si c'est le cas, connectez-vous plutôt."
     },
     "Replays.Title": {
         "fr-FR": "Replays",
@@ -218,6 +250,18 @@
     "AboutPage.Title": {
         "fr-FR": "A propos",
         "EN": "About"
+    },
+    "AboutPage.GoalTitle": {
+        "EN": "Goal",
+        "fr-FR": "Objectif"
+    },
+    "LoginPage.Goal": {
+        "EN": "This website aims to help players share their 0 A.D. Empires Ascendant replays in an attempt to make them more easily accessible.",
+        "fr-FR": "Ce site a pour but d'aider les joueurs à partager leurs replays de 0 A.D. Empires Ascendant dans le but de les rendre plus facilement accessibles."
+    },
+    "AboutPage.Goal": {
+        "EN": "This website aims to help players share their 0 A.D. Empires Ascendant replays in an attempt to make them more easily accessible. In the future, it might be possible to export replays directly from the game.",
+        "fr-FR": "Ce site a pour but d'aider les joueurs à partager leurs replays de 0 A.D. Empires Ascendant dans le but de les rendre plus facilement accessibles. Dans le futur, il pourrait être possible d'exporter les replays directement depuis le jeu."
     },
     "UploadPage.UploadedReplaysTitle": {
         "fr-FR": "Replays uploadés",
@@ -278,5 +322,9 @@
     "EvolutionChart.PerformanceOverTimeLegend": {
         "fr-FR": "Performance",
         "EN": "Performance over time"
+    },
+    "LoginPage.LoginFailed": {
+        "EN": "We could not log you in. Please check your username or password.",
+        "fr-FR": "Nous n'avons pas pu vous connecter. Veuillez vérifier votre nom d'utilisateur ou votre mot de passe."
     }
 }
