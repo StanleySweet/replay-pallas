@@ -133,7 +133,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
         </div>
         <div className="mt-2">        <SearchPlayerBar onChange={onSearchBarChange} /></div>
         <div className=" mt-2 relative overflow-x-auto sm:rounded-md text-sm shadow-md" style={{ border: "1px solid", borderRadius: "4px" }} >
-            <div className="relative max-h-[216px] min-h-[216px] overflow-auto sm:rounded-md table-fixed">
+            <div className="relative max-h-[216px] min-h-[216px] overflow-auto sm:rounded-md table-fixed bg-gray-50">
                 <table className="text-xs w-full text-sm text-left rtl:text-right text-gray-500 ">
                     <thead className="text-gray-700 uppercase bg-gray-50 ">
                         <tr className="border-b">
