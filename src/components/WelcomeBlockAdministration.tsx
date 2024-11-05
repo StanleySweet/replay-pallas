@@ -14,7 +14,7 @@ const WelcomeBlockAdministration = () : JSX.Element => {
             <div>
                 <div>Welcome to the <a href="https://wildfiregames.com/" target="_blank" rel="noreferrer">Wildfire Games</a> Replay Pallàs' instance, where we store replays for <a href="https://play0ad.com/" target="_blank" rel="noreferrer">0 A.D.</a>, a free and open-source game of ancient warfare.</div>
                 <br />
-                <div>{translate("WelcomeBlockAdministration.IfYouWantToHelp")}<a href="http://trac.wildfiregames.com/wiki/GettingStartedProgrammers" target="_blank" rel="noreferrer">Getting Started Programmers</a> on our Trac wiki.</div>
+                <div>{translate("WelcomeBlockAdministration.IfYouWantToHelp")}<a href="http://gitea.wildfiregames.com/wiki/GettingStartedProgrammers" target="_blank" rel="noreferrer">Getting Started Programmers</a> on our Trac wiki.</div>
             </div>
         </div>
     );

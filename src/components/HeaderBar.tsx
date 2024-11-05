@@ -40,7 +40,7 @@ const HeaderBar = function (): JSX.Element {
                             <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center text-gray-600 justify-between min-h-[250px]">
                                 <ul>
                                     <li className='border-b-2 border-solid border-gray-300'><a className='select-none' href="https://www.play0ad.com/">0 A.D.</a></li>
-                                    <li className='border-b-2 border-solid border-gray-300'><a className='select-none' href="http://trac.wildfiregames.com/">Development</a></li>
+                                    <li className='border-b-2 border-solid border-gray-300'><a className='select-none' href="http://gitea.wildfiregames.com/">Development</a></li>
                                     <li className='border-b-2 border-solid border-gray-300'><a className='select-none' href="https://www.wildfiregames.com/forum/">Forums</a></li>
                                     <li className='border-b-2 border-solid border-gray-300'><a className='select-none' href="https://www.wildfiregames.com/irc.html">Chat</a></li>
                                 </ul>
@@ -56,7 +56,7 @@ const HeaderBar = function (): JSX.Element {
                         </div>
                         <ul> 
                             <li><a className='select-none' href="https://www.play0ad.com/">0 A.D.</a></li>
-                            <li><a className='select-none' href="http://trac.wildfiregames.com/">Development</a></li>
+                            <li><a className='select-none' href="http://gitea.wildfiregames.com/">Development</a></li>
                             <li><a className='select-none' href="https://www.wildfiregames.com/forum/">Forums</a></li>
                             <li><a className='select-none' href="https://www.wildfiregames.com/irc.html">Chat</a></li>
                         </ul>
