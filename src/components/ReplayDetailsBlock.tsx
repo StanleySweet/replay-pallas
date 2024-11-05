@@ -16,14 +16,21 @@ import { uid } from "chart.js/helpers";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import axios from "axios";
+import { useState } from 'react';
 
 interface IReplayBlockProps {
     replay: ReplayDetails;
 }
 
+enum ETabType {
+    CPM,
+    CPT,
+}
+
 const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
     const replay: ReplayDetails = props.replay;
     const { token } = useAuth();
+    const [tabType, setTabType] = useState<ETabType>(ETabType.CPT);
 
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -105,6 +112,30 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
             });
         }
 
+    }
+
+    let chart: JSX.Element;
+    switch (tabType) {
+        case ETabType.CPT:
+            chart = (<article className="font-sans">
+                <div className="flex">
+                    {
+                        data ?
+                            <Line className="mt-4" data={data} options={options} />
+
+                            :
+                            <></>
+                    }
+                </div>
+            </article>);
+
+            break;
+        case ETabType.CPM:
+            chart = <CPMChartBlock replay={replay} />;
+            break;
+        default:
+            chart = <></>;
+            break;
     }
 
     return (<>
@@ -211,20 +242,15 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
                 </center>
             </article>
         </div>
-        <div id="replay-cpt-container" className="text-sm mt-4 p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-            <article className="font-sans">
-                <div className="flex">
-                    {
-                        data ?
-                            <Line className="mt-4" data={data} options={options} />
 
-                            :
-                            <></>
-                    }
-                </div>
-            </article>
-        </div>
-        <CPMChartBlock replay={replay}></CPMChartBlock>
+
+        <div className="grid grid-cols-2 gap-x-1 mt-4 ">
+                <div onClick={() => setTabType(ETabType.CPT)} className={(tabType === ETabType.CPT ? "bg-white" : "bg-gray-300 hover:bg-white border border-b-1 border-solid border-gray-500") + " flex justify-center cursor-pointer py-2 px-4 focus:outline-none transition-all duration-500 ease-in-out wfg-tab"} >Commands per turn (CPT)</div>
+                <div onClick={() => setTabType(ETabType.CPM)} className={(tabType === ETabType.CPM ? "bg-white" : "bg-gray-300 hover:bg-white border border-b-1 border-solid border-gray-500") + " flex justify-center cursor-pointer py-2 px-4 focus:outline-none transition-all duration-500 ease-in-out wfg-tab"} >Commands per minutes (CPM)</div>
+            </div>
+            <div className="text-sm p-6  bg-white shadow-md  wfg-chart-tab ">
+                <center> {chart}</center>
+            </div>
     </>);
 };
 

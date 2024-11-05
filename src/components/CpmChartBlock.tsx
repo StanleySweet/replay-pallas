@@ -79,16 +79,13 @@ const CPMChartBlock = (props: IReplayBlockProps): JSX.Element => {
     }
 
     return (data ?
-        <div id= "replay-cpm-container" className = "text-sm p-6 mt-4 bg-white shadow-md" style = {{ border: "1px solid", borderRadius: "4px" }
-}>
-    <article className="font-sans" >
-        <div className="flex" >
-            <Line data={ data } options = { options } />
+            <article className="font-sans" >
+                <div className="flex" >
+                    <Line data={data} options={options} />
                 </div>
-                </article>
-                </div>
+            </article>
         :
-<></>);
+        <></>);
 
 };
 export {
