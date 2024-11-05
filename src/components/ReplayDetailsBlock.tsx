@@ -45,30 +45,63 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
 
     const options = {
         animation: false,
-        title: "Command Per Turn",
         type: 'line',
         spanGaps: true,
         responsive: true,
-        x: {
-            type: 'linear',
+        scales: {
+            x: {
+                type: 'time', // Set the x-axis to be a time scale
+                time: {
+                    unit: 'second', // Time unit for spacing
+                    stepSize: 1,  // Show each second on the axis
+                    displayFormats: {
+                        second: 'HH:mm:ss' // Format time as hours:minutes:seconds
+                    },
+                    tooltipFormat: 'HH:mm:ss', // Tooltip format to match
+                },
+            },
+            y: {
+
+            }
+
         },
+        plugins: {
+            title: {
+                display: true, // Show the title
+                text: "Commands Per Turn (CPT) (200ms)",
+                font: {
+                    size: 18 // Font size for the title
+                },
+                padding: {
+                    top: 10,
+                    bottom: 10
+                }
+            }
+        }
+
     } as ChartOptions<'line'>;
     let data: ChartData<'line', number[]> | undefined = undefined;
-    if(replay.command_statistics){
+    if (replay.command_statistics) {
         data = {
             datasets: [
             ],
-            labels: replay.command_statistics.turns.map(a => a.toString()),
+            labels: replay.command_statistics.turns.map(a => {
+                const date = new Date(a * 200);
+                date.setHours(date.getHours() - 1);
+                return date;
+            }),
         } as ChartData<'line', number[]>;
 
-        for(const playerData of replay.command_statistics.playerCommandDatas){
+        for (const playerData of replay.command_statistics.playerCommandDatas) {
             data.datasets.push({
                 label: playerData.playerName,
                 data: playerData.playerCommands,
                 fill: false,
+                pointRadius: 1,
+                borderWidth: 1,
                 backgroundColor: tailWindColors[data.datasets.length * 2],
                 borderColor: tailWindColors[data.datasets.length * 2],
-            }); 
+            });
         }
 
     }
@@ -78,7 +111,7 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
             <BlockTitle titleKey="ReplayDetails.Title" />
             <article className="font-sans">
                 <div className="flex">
-                    <div className="flex-none hidden xl:block crop-container rounded-full w-[256px] h-[150px} max-h-[256px] overflow-hidden" style={{background:"black"}}>
+                    <div className="flex-none hidden xl:block crop-container rounded-full w-[256px] h-[150px} max-h-[256px] overflow-hidden" style={{ background: "black" }}>
                         <img
                             className="ml-[9%] mt-[20%] mb-[20%] w-[256px] h-[150px}"
                             src={`https://cdn.jsdelivr.net/gh/0ad/0ad/binaries/data/mods/public/art/textures/ui/${replay.metadata.previewImage}`}
@@ -167,21 +200,27 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
                         </div>
                     </div>
                 </div>
-                {
-                    data ? 
-                        <Line data={data} options={options} /> 
-                    
-                    : 
-                    <></>
-                }
                 <center className="flex-3">
-                        <div className="pt-2">
-                            <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z" /></svg>
-                                <span>{translate("ReplayDetails.Download")}</span>
-                            </button>
-                        </div>
-                    </center>
+                    <div className="pt-2">
+                        <button onClick={onClick} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                            <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z" /></svg>
+                            <span>{translate("ReplayDetails.Download")}</span>
+                        </button>
+                    </div>
+                </center>
+            </article>
+        </div>
+        <div id="replay-cpt-container" className="text-sm mt-4 p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+            <article className="font-sans">
+                <div className="flex">
+                    {
+                        data ?
+                            <Line className="mt-4" data={data} options={options} />
+
+                            :
+                            <></>
+                    }
+                </div>
             </article>
         </div>
     </>);
