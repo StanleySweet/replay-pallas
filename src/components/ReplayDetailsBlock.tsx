@@ -3,18 +3,19 @@
  * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
  */
 
-import { ReplayDetails } from "../types/Replay";
-import { useTranslation as translate } from "../contexts/Models/useTranslation";
-import { toHHMMSS } from "../utils";
-import axios from "axios";
-import { useAuth } from "../contexts/Models/IAuthContext";
-import { BlockTitle } from "./BlockTitle";
-import { uid } from "chart.js/helpers";
-import { ChartData, ChartOptions } from "chart.js";
-import { Line } from "react-chartjs-2";
-import { tailWindColors } from "../utils";
 import 'chartjs-adapter-moment';
 import "chart.js/auto";
+import { BlockTitle } from "./BlockTitle";
+import { ChartData, ChartOptions } from "chart.js";
+import { CPMChartBlock } from "./CpmChartBlock";
+import { Line } from "react-chartjs-2";
+import { ReplayDetails } from "../types/Replay";
+import { tailWindColors } from "../utils";
+import { toHHMMSS } from "../utils";
+import { uid } from "chart.js/helpers";
+import { useAuth } from "../contexts/Models/IAuthContext";
+import { useTranslation as translate } from "../contexts/Models/useTranslation";
+import axios from "axios";
 
 interface IReplayBlockProps {
     replay: ReplayDetails;
@@ -223,6 +224,7 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
                 </div>
             </article>
         </div>
+        <CPMChartBlock replay={replay}></CPMChartBlock>
     </>);
 };
 
