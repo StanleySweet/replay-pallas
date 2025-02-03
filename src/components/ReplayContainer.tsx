@@ -1,6 +1,6 @@
 /**
  * SPDX-License-Identifier: GPL-3.0-or-later
- * SPDX-FileCopyrightText: © 2024 Stanislas Daniel Claude Dolcini
+ * SPDX-FileCopyrightText: © 2025 Stanislas Daniel Claude Dolcini
  */
 
 import { useEffect, useState } from "react";
@@ -53,19 +53,19 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
             return true;
 
         return r.matchId.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
-        r.playerNames.some(a => a.includes(props.filter?.toLowerCase() ?? ""))  ||
+        r.playerNames.some(a => a.toLowerCase().includes(props.filter?.toLowerCase() ?? ""))  ||
         r.mapName?.toLowerCase().includes(props.filter.toLowerCase());
     }).slice(0, props.maxItems);
 
     return (
         <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
             <BlockTitle titleKey="ReplayContainer.Title" />
-            
+
             <span className="text-left text-xs"><i>Showing <b>{filteredReplays.length}</b> out of <b>{replays.length}</b> replays. Use the search bar to see specific replays.</i></span>
- 
+
             <div className="w-full h-[711px] overflow-y-scroll" >
                 {
-                   filteredReplays.map(r => <ReplayBlock key={r.matchId} replay={r} ></ReplayBlock>)
+                    filteredReplays.map(r => <ReplayBlock key={r.matchId} replay={r} ></ReplayBlock>)
                 }
             </div>
         </div>

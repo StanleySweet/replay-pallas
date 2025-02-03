@@ -1,3 +1,8 @@
+/**
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: © 2025 Stanislas Daniel Claude Dolcini
+ */
+
 import { ReactNode, useEffect, useState } from "react";
 import { NavigationBar } from "../components/NavigationBar";
 import TrashIcon from "../icons/TrashIcon";
@@ -54,7 +59,7 @@ const MyReplaysPage = (): ReactNode => {
 
     const filteredReplays: ReplayListItem[] = (replays ?? []).filter(r => {
         return r.matchId.toString().toLowerCase().includes(filter.toLowerCase()) ||
-        r.playerNames.some(a => a.includes(filter?.toLowerCase() ?? ""))  ||
+        r.playerNames.some(a => a.toLowerCase().includes(filter?.toLowerCase() ?? ""))  ||
         r.mapName?.toLowerCase().includes(filter.toLowerCase());
     });
 
