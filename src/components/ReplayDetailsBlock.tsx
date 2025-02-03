@@ -201,7 +201,7 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
                         {
                             replay.metadata.settings.LockTeams !== undefined ? <>
                                 <span className="text-sm">
-                                    {translate("ReplayDetails.Ranked")} <b>{replay.metadata.settings.LockTeams.toString()}</b>
+                                    {translate("ReplayDetails.TeamsLocked")} <b>{replay.metadata.settings.LockTeams.toString()}</b>
                                 </span></> :
                                 null
                         }
