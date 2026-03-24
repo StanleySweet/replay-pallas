@@ -87,6 +87,54 @@
         "fr-FR": "Performance",
         "EN": "Performance"
     },
+    "ManageAliases.Title": {
+        "fr-FR": "Groupes d'alias",
+        "EN": "Alias groups"
+    },
+    "ManageAliases.Description": {
+        "fr-FR": "Chaque groupe fusionne plusieurs pseudos sous une identite principale.",
+        "EN": "Each group merges multiple nicknames under one primary identity."
+    },
+    "ManageAliases.Primary": {
+        "fr-FR": "Principal",
+        "EN": "Primary"
+    },
+    "ManageAliases.Aliases": {
+        "fr-FR": "Alias",
+        "EN": "Aliases"
+    },
+    "ManageAliases.PrimaryPlaceholder": {
+        "fr-FR": "Nom principal",
+        "EN": "Primary name"
+    },
+    "ManageAliases.AliasesPlaceholder": {
+        "fr-FR": "alias1, alias2, alias3",
+        "EN": "alias1, alias2, alias3"
+    },
+    "ManageAliases.AddGroup": {
+        "fr-FR": "Ajouter un groupe",
+        "EN": "Add group"
+    },
+    "ManageAliases.Remove": {
+        "fr-FR": "Retirer",
+        "EN": "Remove"
+    },
+    "ManageAliases.Save": {
+        "fr-FR": "Sauvegarder",
+        "EN": "Save"
+    },
+    "ManageAliases.SaveSuccess": {
+        "fr-FR": "Groupes d'alias sauvegardes.",
+        "EN": "Alias groups saved."
+    },
+    "ManageAliases.SaveError": {
+        "fr-FR": "Impossible de sauvegarder les groupes d'alias.",
+        "EN": "Could not save alias groups."
+    },
+    "ManageAliases.LoadError": {
+        "fr-FR": "Impossible de charger les groupes d'alias.",
+        "EN": "Could not load alias groups."
+    },
     "PlayerList.Rank": {
         "fr-FR": "Rang",
         "EN": "Rank"
