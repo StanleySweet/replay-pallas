@@ -323,6 +323,38 @@
         "fr-FR": "Performance",
         "EN": "Performance over time"
     },
+    "ChartTabs.Evolution": {
+        "fr-FR": "Evolution",
+        "EN": "Evolution"
+    },
+    "ChartTabs.Civilization": {
+        "fr-FR": "Civilisation",
+        "EN": "Civilization"
+    },
+    "ChartTabs.Distribution": {
+        "fr-FR": "Distribution",
+        "EN": "Distribution"
+    },
+    "DistributionChart.Tier": {
+        "fr-FR": "Palier",
+        "EN": "Tier"
+    },
+    "DistributionChart.RatingRange": {
+        "fr-FR": "Plage de classement",
+        "EN": "Rating range"
+    },
+    "DistributionChart.PlayersInTier": {
+        "fr-FR": "Joueurs dans ce palier",
+        "EN": "Players in this tier"
+    },
+    "DistributionChart.AverageRating": {
+        "fr-FR": "Classement moyen",
+        "EN": "Average rating"
+    },
+    "DistributionChart.PlayerCount": {
+        "fr-FR": "Nombre de joueurs",
+        "EN": "Player count"
+    },
     "LoginPage.LoginFailed": {
         "EN": "We could not log you in. Please check your username or password.",
         "fr-FR": "Nous n'avons pas pu vous connecter. Veuillez vérifier votre nom d'utilisateur ou votre mot de passe."
