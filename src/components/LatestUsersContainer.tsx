@@ -11,20 +11,22 @@ import { User } from "../types/User";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
 import TrashIcon from "../icons/TrashIcon";
+import { SearchPlayerBar } from "./LocalRatings/SearchPlayer";
 
 const LatestUserContainer = (): JSX.Element => {
     const [isLoading, setLoading] = useState(true);
     const { token } = useAuth();
-    const [replays, setReplays] = useState<User[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
+    const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/users/latest`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/users`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         }).then(response => {
-            setReplays(response.data);
+            setUsers(response.data.sort((left: User, right: User) => right.id - left.id));
             setLoading(false);
         });
     }, [token]);
@@ -34,12 +36,12 @@ const LatestUserContainer = (): JSX.Element => {
         return <div className="App">{translate("App.LoadingInProgress")}</div>;
     }
 
-    if (!replays || replays.length === 0) {
+    if (!users || users.length === 0) {
         return <div className="App">{translate("App.LoadingInProgress")}</div>;
     }
 
     function delete_user(id: number): void {
-        if (!replays || !replays.length)
+        if (!users || !users.length)
             return;
 
         axios.delete(`${import.meta.env.VITE_API_URL}/users/${id}`, {
@@ -49,20 +51,28 @@ const LatestUserContainer = (): JSX.Element => {
             }
         }).then((response) => {
             if (response.status === 200) {
-                const replay = replays.find(a => a.id === id);
-                if (replay) {
-                    setReplays(replays.filter(a => a.id !== id));
+                const user = users.find(a => a.id === id);
+                if (user) {
+                    setUsers(users.filter(a => a.id !== id));
                 }
             }
         });
     }
 
+    const filteredUsers = users.filter(user =>
+        !filter.length ||
+        user.nick.toLowerCase().includes(filter.toLowerCase()) ||
+        String(user.id).includes(filter));
+
     return (<>
         <div id="replay-container" className="text-sm p-6 bg-white shadow-md wfg-chart-tab">
-            <BlockTitle titleKey="LatestUser.Title" />
+            <BlockTitle titleKey="AdministrationPage.Users" />
+            <div className="mb-4">
+                <SearchPlayerBar onChange={evt => setFilter(evt.target.value)} />
+            </div>
             <div className="w-full">
                 {
-                    replays.map(r => <div key={r.id} className="flex" >
+                    filteredUsers.map(r => <div key={r.id} className="flex" >
                         <div className="flex-shrink">
                             <div className="items-center m-auto p-5" style={{ borderTop: "1px solid #C7CCD9" }}>
                                 <button onClick={() => delete_user(r.id)} className="h-5 my-auto w-5">

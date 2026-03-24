@@ -27,6 +27,10 @@
         "fr-FR": "Page d'administration",
         "EN": "Administration Page"
     },
+    "AdministrationPage.Users": {
+        "fr-FR": "Utilisateurs",
+        "EN": "Users"
+    },
     "HomePage.Title": {
         "fr-FR": "Accueil",
         "EN": "Home"

@@ -41,9 +41,15 @@ const UserBlock = (props: IUserBlockProps) => {
                         <div className="flex items-center space-x-4"><b className="flex-1 min-w-0">{props.user.nick}</b><span className={`ml-3 ${color} text-xs font-medium me-2 px-2.5 py-0.5 rounded`}>{EUserRole[props.user.role]}</span></div>
                     }
                     </h4>
-                    <span className="text-gray-500 text-sm">
-                        <span>⚙️ Date: <i>{new Date(props.user.creation_date).toDateString()}</i></span>
-                    </span><br />
+                    {
+                        props.user.creation_date ?
+                            <>
+                                <span className="text-gray-500 text-sm">
+                                    <span>⚙️ Date: <i>{new Date(props.user.creation_date).toDateString()}</i></span>
+                                </span><br />
+                            </> :
+                            null
+                    }
                     {
                         props.rank ? <>
                             <span className="text-gray-500 text-sm">
