@@ -27,10 +27,19 @@ enum ETabType {
     CPT,
 }
 
+const ReplayDetailsRow = ({ label, value }: { label?: string, value: string | number | boolean | null | undefined }): JSX.Element => (
+    <span className="text-sm">
+        {label ?? ""} <b>{value === undefined || value === null || value === "" ? "-" : String(value)}</b>
+    </span>
+);
+
 const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
     const replay: ReplayDetails = props.replay;
     const { token } = useAuth();
     const [tabType, setTabType] = useState<ETabType>(ETabType.CPT);
+    const pyrogenesisVersion =
+        replay.metadata.engine_version ||
+        replay.metadata.mods?.find(mod => mod.mod === "public")?.version;
 
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -156,69 +165,75 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
                         />
                     </div>
                     <div className="grid grid-cols-2 p-5 flex-grow">
-                        <span className="text-sm">
-                            {translate("ReplayDetails.MapName")} <b
-                            >{replay.metadata.settings.Name ||
-                                replay.metadata.settings.mapName}</b>
-                        </span>
-                        <span className="text-sm">
-                            {translate("ReplayDetails.PlayerCount")}  <b
-                            >{replay.metadata.settings.PlayerData.length}</b>
-                        </span>
-                        <span className="text-sm">
-                            {translate("ReplayDetails.MatchDuration")}  <b>{toHHMMSS(replay.metadata.settings.MatchDuration + "")}</b            >
-                        </span>
-                        <span className="text-sm">
-                            {translate("ReplayDetails.Date")} <b >{new Date(replay.metadata.timestamp * 1000).toLocaleDateString(
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.MapName")}
+                            value={replay.metadata.settings.Name || replay.metadata.settings.mapName}
+                        />
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.PlayerCount")}
+                            value={replay.metadata.settings.PlayerData.length}
+                        />
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.MatchDuration")}
+                            value={toHHMMSS(replay.metadata.settings.MatchDuration + "")}
+                        />
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.Date")}
+                            value={new Date(replay.metadata.timestamp * 1000).toLocaleDateString(
                                 "en-GB",
                                 {
                                     year: "numeric",
                                     month: "2-digit",
                                     day: "2-digit",
                                 }
-                            )}</b>
-                        </span>
-                        <span className="text-sm">
-                            {translate("ReplayDetails.PyrogenesisVersion")} <b>{replay.metadata.engine_version}</b>
-                        </span>
+                            )}
+                        />
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.PyrogenesisVersion")}
+                            value={pyrogenesisVersion}
+                        />
                         {
                             replay.metadata.settings.Biome ?
-                                <>
-                                    <span className="text-sm">
-                                        {translate("ReplayDetails.Biome")} <b>{replay.metadata.settings.Biome}</b>
-                                    </span>
-
-                                </> :
+                                <ReplayDetailsRow
+                                    label={translate("ReplayDetails.Biome")}
+                                    value={replay.metadata.settings.Biome}
+                                /> :
                                 null
                         }
                         {
-                            replay.metadata.settings.RatingEnabled ? <>
-                                <span className="text-sm">
-                                    {translate("ReplayDetails.Ranked")} <b>{replay.metadata.settings.RatingEnabled.toString()}</b>
-                                </span></> :
+                            replay.metadata.settings.RatingEnabled !== undefined ?
+                                <ReplayDetailsRow
+                                    label={translate("ReplayDetails.Ranked")}
+                                    value={replay.metadata.settings.RatingEnabled}
+                                /> :
                                 null
                         }
                         {
-                            replay.metadata.settings.LockTeams !== undefined ? <>
-                                <span className="text-sm">
-                                    {translate("ReplayDetails.TeamsLocked")} <b>{replay.metadata.settings.LockTeams.toString()}</b>
-                                </span></> :
+                            replay.metadata.settings.LockTeams !== undefined ?
+                                <ReplayDetailsRow
+                                    label={translate("ReplayDetails.TeamsLocked")}
+                                    value={replay.metadata.settings.LockTeams}
+                                /> :
                                 null
                         }
-                        <span className="text-sm">
-                            {translate("ReplayDetails.RandomMapSeed")} : <b>{replay.metadata.settings.Seed}</b>
-                        </span>
-                        <span className="text-sm">
-                            {translate("ReplayDetails.StartingResources")}<b>{replay.metadata.settings.StartingResources}</b>
-                        </span>
-                        <span className="text-sm">
-                            {translate("ReplayDetails.PopulationCap")} <b>{replay.metadata.settings.PopulationCap}</b>
-                        </span>
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.RandomMapSeed")}
+                            value={replay.metadata.settings.Seed}
+                        />
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.StartingResources")}
+                            value={replay.metadata.settings.StartingResources}
+                        />
+                        <ReplayDetailsRow
+                            label={translate("ReplayDetails.PopulationCap")}
+                            value={replay.metadata.settings.PopulationCap}
+                        />
                         {
                             replay.metadata.settings.Size ?
-                                <span className="text-sm">
-                                    {translate("ReplayDetails.Size")} <b>{replay.metadata.settings.Size}</b>
-                                </span> : null
+                                <ReplayDetailsRow
+                                    label={translate("ReplayDetails.Size")}
+                                    value={replay.metadata.settings.Size}
+                                /> : null
                         }<br />
                         <div>
                             {
