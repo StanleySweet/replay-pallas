@@ -18,6 +18,7 @@ const LatestUserContainer = (): JSX.Element => {
     const { token } = useAuth();
     const [users, setUsers] = useState<User[]>([]);
     const [filter, setFilter] = useState("");
+    const [message, setMessage] = useState<string>();
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/users`, {
@@ -44,6 +45,8 @@ const LatestUserContainer = (): JSX.Element => {
         if (!users || !users.length)
             return;
 
+        setMessage(undefined);
+
         axios.delete(`${import.meta.env.VITE_API_URL}/users/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -54,8 +57,11 @@ const LatestUserContainer = (): JSX.Element => {
                 const user = users.find(a => a.id === id);
                 if (user) {
                     setUsers(users.filter(a => a.id !== id));
+                    setMessage(translate("AdministrationPage.UserDeleteSuccess"));
                 }
             }
+        }).catch(() => {
+            setMessage(translate("AdministrationPage.UserDeleteError"));
         });
     }
 
@@ -88,6 +94,11 @@ const LatestUserContainer = (): JSX.Element => {
                         <div className="text-sm text-gray-600">{translate("App.NoUsersMatchFilter")}</div>
                 }
             </div>
+            {
+                message ?
+                    <div className="mt-4 text-sm text-gray-700">{message}</div> :
+                    null
+            }
         </div></>
     );
 };

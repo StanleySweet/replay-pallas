@@ -39,6 +39,14 @@
         "fr-FR": "Config locale",
         "EN": "Local Rating Config"
     },
+    "AdministrationPage.UserDeleteSuccess": {
+        "fr-FR": "Utilisateur supprime.",
+        "EN": "User deleted."
+    },
+    "AdministrationPage.UserDeleteError": {
+        "fr-FR": "Impossible de supprimer l'utilisateur.",
+        "EN": "Could not delete the user."
+    },
     "HomePage.Title": {
         "fr-FR": "Accueil",
         "EN": "Home"
@@ -74,6 +82,14 @@
     "LatestReplayContainer.Title": {
         "fr-FR": "Derniers Matchs",
         "EN": "Recent Games"
+    },
+    "MyReplays.DeleteSuccess": {
+        "fr-FR": "Replay supprime.",
+        "EN": "Replay deleted."
+    },
+    "MyReplays.DeleteError": {
+        "fr-FR": "Impossible de supprimer le replay.",
+        "EN": "Could not delete the replay."
     },
     "ReplayDetails.Title": {
         "fr-FR": "Détails du match",
@@ -438,6 +454,34 @@
     "WelcomeBlockAdministration.IfYouWantToHelp": {
         "fr-FR": "If you want to help with the development, please take a look at ",
         "EN": "If you want to help with the development, please take a look at "
+    },
+    "WelcomeBlock.WelcomeTextBeforeLink": {
+        "fr-FR": "Bienvenue sur l'instance Replay Pallàs de",
+        "EN": "Welcome to the Replay Pallàs instance of"
+    },
+    "WelcomeBlock.WelcomeTextAfterLink": {
+        "fr-FR": ", ou nous stockons des replays pour",
+        "EN": ", where we store replays for"
+    },
+    "WelcomeBlock.WelcomeTextTail": {
+        "fr-FR": "un jeu libre et open source de guerre antique.",
+        "EN": "a free and open-source game of ancient warfare."
+    },
+    "WelcomeBlock.HelpTextBeforeLink": {
+        "fr-FR": "Si vous voulez aider au developpement, consultez",
+        "EN": "If you want to help with development, take a look at"
+    },
+    "WelcomeBlock.HelpTextAfterLink": {
+        "fr-FR": "sur notre wiki.",
+        "EN": "on our wiki."
+    },
+    "UserDetails.SavePermissionsSuccess": {
+        "fr-FR": "Permissions sauvegardees.",
+        "EN": "Permissions saved."
+    },
+    "UserDetails.SavePermissionsError": {
+        "fr-FR": "Impossible de sauvegarder les permissions.",
+        "EN": "Could not save permissions."
     },
     "EvolutionChart.ZeroLineLegend": {
         "fr-FR": "Ligne de zéro",

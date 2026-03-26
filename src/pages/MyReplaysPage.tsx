@@ -21,11 +21,13 @@ const MyReplaysPage = (): ReactNode => {
     const [replays, setReplays] = useState<ReplayListItem[]>();
     const [isLoading, setLoading] = useState<boolean>();
     const [filter, setFilter] = useState<string>("");
-    // const [filteredReplays, setFilteredReplays] = useState<Replay[]>();
+    const [message, setMessage] = useState<string>();
 
     async function delete_replay(match_id: string) {
         if (!replays || !replays.length)
             return;
+
+        setMessage(undefined);
 
         axios.delete(`${import.meta.env.VITE_API_URL}/replays/${match_id}`, {
             headers: {
@@ -37,8 +39,11 @@ const MyReplaysPage = (): ReactNode => {
                 const replay = replays.find(a => a.matchId === match_id);
                 if (replay) {
                     setReplays(replays.filter(a => a.matchId !== match_id));
+                    setMessage(translate("MyReplays.DeleteSuccess"));
                 }
             }
+        }).catch(() => {
+            setMessage(translate("MyReplays.DeleteError"));
         });
     }
 
@@ -69,6 +74,11 @@ const MyReplaysPage = (): ReactNode => {
             <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
             <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
                 <BlockTitle titleKey="ReplayContainer.Title" />
+                {
+                    message ?
+                        <div className="mb-3 text-sm text-gray-700">{message}</div> :
+                        null
+                }
                 <div className="w-full h-[711px] overflow-y-scroll" >
                     {
                         !filteredReplays || !filteredReplays.length ? (isLoading ? <div className="App">{translate("App.LoadingInProgress")}</div> : <>{translate("App.NoReplaysToDisplay")}</>) :
