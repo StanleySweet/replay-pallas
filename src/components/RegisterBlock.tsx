@@ -71,7 +71,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
                         props.onLogin(email, password);
                     }
                 } catch (error) {
-                    console.log(error);
+                    console.error(error);
                     setRegisterErrorVisible(true);
                 }
             });

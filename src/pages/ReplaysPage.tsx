@@ -35,17 +35,16 @@ const ReplaysPage = (): ReactNode => {
             }
         }).then((response: AxiosResponse<ReplayListItem[]>) => {
             if (response.data && response.data) {
-                console.log(response.data);
                 const civs = response.data.flatMap(a => a.civs);
                 const maps = response.data.map(a => a.mapName);
-                const toto = civs.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
-                const tata = maps.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
+                const civCounts = civs.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
+                const mapCounts = maps.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), Object.create(null));
                 setReplays(response.data);
                 setCivDoughnutData({
-                    labels: Object.keys(tata),
+                    labels: Object.keys(civCounts),
                     datasets: [
                         {
-                            data: Object.values(tata),
+                            data: Object.values(civCounts),
                             backgroundColor: tailWindColorsTransparent,
                             borderColor: tailWindColors,
                             hoverBackgroundColor: Object.values(colors.red).reverse(),
@@ -53,10 +52,10 @@ const ReplaysPage = (): ReactNode => {
                     ],
                 });
                 setMapDoughnutData({
-                    labels: Object.keys(toto),
+                    labels: Object.keys(mapCounts),
                     datasets: [
                         {
-                            data: Object.values(toto),
+                            data: Object.values(mapCounts),
                             backgroundColor: tailWindColorsTransparent,
                             borderColor: tailWindColors,
                             hoverBackgroundColor: Object.values(colors.red).reverse(),
@@ -92,13 +91,13 @@ const ReplaysPage = (): ReactNode => {
                             {
                                 civDoughnutData ?
                                     <div id="doughnut-container" className=" text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-                                        <BlockTitle titleKey={"Replays.MapRepartition"}></BlockTitle>
+                                        <BlockTitle titleKey={"Replays.CivRepartition"}></BlockTitle>
                                         <Doughnut data={civDoughnutData} options={{ responsive: true }} />
                                     </div> : <></>
                             }
                             {
                                 mapDoughnutData ? <div id="doughnut-container" className="mt-4 text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-                                    <BlockTitle titleKey={"Replays.CivRepartition"}></BlockTitle>
+                                    <BlockTitle titleKey={"Replays.MapRepartition"}></BlockTitle>
                                     <Doughnut data={mapDoughnutData} options={{ responsive: true }} />
                                 </div> : <></>
                             }

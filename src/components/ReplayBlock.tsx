@@ -11,7 +11,6 @@ interface IReplayBlockProps {
 }
 
 const ReplayBlock = (props: IReplayBlockProps) => {
-    console.log(props.replay.date);
     return (
         <article className="mb-[1em] pt-3" style={{ borderTop: "1px solid #C7CCD9"}} >
             <h4><Link to={`/Replays/ReplayDetails/${props.replay.matchId}`}> <b>{props.replay.mapName}</b> ({props.replay.playerNames.join(", ")})</Link></h4>

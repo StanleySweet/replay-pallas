@@ -45,7 +45,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     }
 
     if (!replays || replays.length === 0) {
-        return <div className="App">{translate("App.LoadingInProgress")}</div>;
+        return <div className="App">{translate("App.NoReplaysToDisplay")}</div>;
     }
 
     const filteredReplays = replays.filter(r => {
@@ -56,6 +56,15 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
         r.playerNames.some(a => a.toLowerCase().includes(props.filter?.toLowerCase() ?? ""))  ||
         r.mapName?.toLowerCase().includes(props.filter.toLowerCase());
     }).slice(0, props.maxItems);
+
+    if (!filteredReplays.length) {
+        return (
+            <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
+                <BlockTitle titleKey="ReplayContainer.Title" />
+                <div className="text-sm text-gray-600">{translate("App.NoReplaysMatchFilter")}</div>
+            </div>
+        );
+    }
 
     return (
         <div id="replay-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>

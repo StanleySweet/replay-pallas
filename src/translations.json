@@ -51,6 +51,22 @@
         "fr-FR": "Sélectionnez un joueur",
         "EN": "Select a player"
     },
+    "App.NoReplaysToDisplay": {
+        "fr-FR": "Aucun replay a afficher.",
+        "EN": "No replays to display."
+    },
+    "App.NoReplaysMatchFilter": {
+        "fr-FR": "Aucun replay ne correspond a ce filtre.",
+        "EN": "No replays match this filter."
+    },
+    "App.NoUsersToDisplay": {
+        "fr-FR": "Aucun utilisateur a afficher.",
+        "EN": "No users to display."
+    },
+    "App.NoUsersMatchFilter": {
+        "fr-FR": "Aucun utilisateur ne correspond a ce filtre.",
+        "EN": "No users match this filter."
+    },
     "ReplayContainer.Title": {
         "fr-FR": "Matchs",
         "EN": "Games"

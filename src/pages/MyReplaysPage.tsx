@@ -71,7 +71,7 @@ const MyReplaysPage = (): ReactNode => {
                 <BlockTitle titleKey="ReplayContainer.Title" />
                 <div className="w-full h-[711px] overflow-y-scroll" >
                     {
-                        !filteredReplays || !filteredReplays.length ? (isLoading ? <div className="App">{translate("App.LoadingInProgress")}</div> : <>No replays to display</>) :
+                        !filteredReplays || !filteredReplays.length ? (isLoading ? <div className="App">{translate("App.LoadingInProgress")}</div> : <>{translate("App.NoReplaysToDisplay")}</>) :
                             filteredReplays.map(r => <article key={r.matchId} className="mb-[1em] pt-3 flex" style={{ borderTop: "1px solid #C7CCD9" }} >
                                 <div className="flex-grow">
                                     <h4><Link to={`/Replays/ReplayDetails/${r.matchId}`}> <b>{r.mapName}</b> ({r.playerNames.join(", ")})</Link></h4>

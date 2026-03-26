@@ -37,7 +37,7 @@ const LatestUserContainer = (): JSX.Element => {
     }
 
     if (!users || users.length === 0) {
-        return <div className="App">{translate("App.LoadingInProgress")}</div>;
+        return <div className="App">{translate("App.NoUsersToDisplay")}</div>;
     }
 
     function delete_user(id: number): void {
@@ -72,18 +72,20 @@ const LatestUserContainer = (): JSX.Element => {
             </div>
             <div className="w-full">
                 {
-                    filteredUsers.map(r => <div key={r.id} className="flex" >
-                        <div className="flex-shrink">
-                            <div className="items-center m-auto p-5" style={{ borderTop: "1px solid #C7CCD9" }}>
-                                <button onClick={() => delete_user(r.id)} className="h-5 my-auto w-5">
-                                    <TrashIcon />
-                                </button>
+                    filteredUsers.length ?
+                        filteredUsers.map(r => <div key={r.id} className="flex" >
+                            <div className="flex-shrink">
+                                <div className="items-center m-auto p-5" style={{ borderTop: "1px solid #C7CCD9" }}>
+                                    <button onClick={() => delete_user(r.id)} className="h-5 my-auto w-5">
+                                        <TrashIcon />
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex-grow" >
-                            <UserBlock user={r} ></UserBlock>
-                        </div>
-                    </div>)
+                            <div className="flex-grow" >
+                                <UserBlock user={r} ></UserBlock>
+                            </div>
+                        </div>) :
+                        <div className="text-sm text-gray-600">{translate("App.NoUsersMatchFilter")}</div>
                 }
             </div>
         </div></>

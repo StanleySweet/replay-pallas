@@ -27,13 +27,16 @@ const LatestReplayContainer = (): JSX.Element => {
             setReplays(response.data);
             setLoading(false);
         });
-    }, []);
+    }, [token]);
 
 
     let body: JSX.Element;
 
-    if (isLoading || !replays || replays.length === 0) {
+    if (isLoading) {
         body = <div className="App">{translate("App.LoadingInProgress")}</div>;
+    }
+    else if (!replays || replays.length === 0) {
+        body = <div className="App">{translate("App.NoReplaysToDisplay")}</div>;
     }
     else {
         body = <>

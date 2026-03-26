@@ -79,7 +79,6 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
                 });
 
                 if (response.status !== 200) {
-                    console.log(response);
                     setLoginFailed(true);
                 }
                 else {
