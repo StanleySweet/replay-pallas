@@ -31,6 +31,14 @@
         "fr-FR": "Utilisateurs",
         "EN": "Users"
     },
+    "AdministrationPage.LocalRatingAliases": {
+        "fr-FR": "Alias locaux",
+        "EN": "Local Rating Aliases"
+    },
+    "AdministrationPage.LocalRatingConfig": {
+        "fr-FR": "Config locale",
+        "EN": "Local Rating Config"
+    },
     "HomePage.Title": {
         "fr-FR": "Accueil",
         "EN": "Home"
@@ -134,6 +142,34 @@
     "ManageAliases.LoadError": {
         "fr-FR": "Impossible de charger les groupes d'alias.",
         "EN": "Could not load alias groups."
+    },
+    "ManageConfiguration.Title": {
+        "fr-FR": "Configuration locale",
+        "EN": "Local Rating Config"
+    },
+    "Maintenance.Title": {
+        "fr-FR": "Maintenance",
+        "EN": "Maintenance"
+    },
+    "Maintenance.Vacuum": {
+        "fr-FR": "Vacuum",
+        "EN": "Vacuum"
+    },
+    "Maintenance.RebuildGlicko": {
+        "fr-FR": "Reconstruire Glicko",
+        "EN": "Rebuild Glicko"
+    },
+    "Maintenance.RebuildRatingHistory": {
+        "fr-FR": "Reconstruire l'historique de classement",
+        "EN": "Rebuild Rating History"
+    },
+    "Maintenance.RebuildReplayData": {
+        "fr-FR": "Reconstruire les donnees de replay",
+        "EN": "Rebuild Replay Data"
+    },
+    "Maintenance.RebuildLocalRating": {
+        "fr-FR": "Reconstruire le classement local",
+        "EN": "Rebuild Local Rating"
     },
     "PlayerList.Rank": {
         "fr-FR": "Rang",
@@ -260,8 +296,8 @@
         "EN": "Permissions"
     },
     "UserDetails.ChoosePermissions": {
-        "fr-FR": "Choisissez une permissions",
-        "EN": "Choose a permissions"
+        "fr-FR": "Choisissez une permission",
+        "EN": "Choose a permission"
     },
     "UserDetails.SelectAnOption":{ 
         "fr-FR": "Sélectionnez une option",
