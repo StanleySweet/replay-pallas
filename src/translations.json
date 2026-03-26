@@ -147,6 +147,34 @@
         "fr-FR": "Configuration locale",
         "EN": "Local Rating Config"
     },
+    "ManageConfiguration.Description": {
+        "fr-FR": "Modifiez les options Local Ratings et les poids utilises pour les calculs.",
+        "EN": "Edit Local Ratings options and the weights used for calculations."
+    },
+    "ManageConfiguration.Save": {
+        "fr-FR": "Sauvegarder",
+        "EN": "Save"
+    },
+    "ManageConfiguration.RestoreDefaults": {
+        "fr-FR": "Restaurer les valeurs par defaut",
+        "EN": "Restore defaults"
+    },
+    "ManageConfiguration.SaveSuccess": {
+        "fr-FR": "Configuration locale sauvegardee.",
+        "EN": "Local Rating configuration saved."
+    },
+    "ManageConfiguration.ResetSuccess": {
+        "fr-FR": "Configuration locale restauree.",
+        "EN": "Local Rating configuration restored."
+    },
+    "ManageConfiguration.SaveError": {
+        "fr-FR": "Impossible de sauvegarder la configuration locale.",
+        "EN": "Could not save Local Rating configuration."
+    },
+    "ManageConfiguration.LoadError": {
+        "fr-FR": "Impossible de charger la configuration locale.",
+        "EN": "Could not load Local Rating configuration."
+    },
     "Maintenance.Title": {
         "fr-FR": "Maintenance",
         "EN": "Maintenance"
