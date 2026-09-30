@@ -1,0 +1,10 @@
+node_modules/
+dist/
+
+# The local .env points at the production API. The image gets VITE_API_URL as a
+# build arg instead, so shipping it into the build context would be both
+# misleading and a path to leaking the real endpoint into an image.
+.env
+
+*.log
+.DS_Store
