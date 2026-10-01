@@ -13,6 +13,7 @@ import { BlockTitle } from "../components/BlockTitle";
 import { Link } from "react-router-dom";
 import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
+import { ConfirmDialog } from "../components/ConfirmDialog";
 
 
 
@@ -22,6 +23,7 @@ const MyReplaysPage = (): ReactNode => {
     const [isLoading, setLoading] = useState<boolean>();
     const [filter, setFilter] = useState<string>("");
     const [message, setMessage] = useState<string>();
+    const [pendingDeletion, setPendingDeletion] = useState<string>();
 
     async function delete_replay(match_id: string) {
         if (!replays || !replays.length)
@@ -89,13 +91,24 @@ const MyReplaysPage = (): ReactNode => {
                                         <span className="flex-grow">⚙️ Date: <i>{(new Date(r.date).toDateString())}</i></span>
                                     </span>
                                 </div>
-                                <button onClick={() => delete_replay(r.matchId)} className="h-5 w-5 my-auto">
+                                <button onClick={() => setPendingDeletion(r.matchId)} className="h-5 w-5 my-auto">
                                     <TrashIcon />
                                 </button>
                             </article>).slice(0, 20)
                     }
                 </div>
             </div>
+
+            <ConfirmDialog
+                open={pendingDeletion !== undefined}
+                message={translate("MyReplays.DeleteConfirm")}
+                onConfirm={() => {
+                    if (pendingDeletion !== undefined)
+                        delete_replay(pendingDeletion);
+                    setPendingDeletion(undefined);
+                }}
+                onCancel={() => setPendingDeletion(undefined)}
+            />
 
         </div>
     </>);

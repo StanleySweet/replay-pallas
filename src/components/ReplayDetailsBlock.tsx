@@ -17,6 +17,7 @@ import { useAuth } from "../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import axios from "axios";
 import { useState } from 'react';
+import { DistributionChart } from "./LocalRatings/Charts/DistributionChart";
 
 interface IReplayBlockProps {
     replay: ReplayDetails;
@@ -25,6 +26,7 @@ interface IReplayBlockProps {
 enum ETabType {
     CPM,
     CPT,
+    Distribution,
 }
 
 const ReplayDetailsRow = ({ label, value }: { label?: string, value: string | number | boolean | null | undefined }): JSX.Element => (
@@ -141,6 +143,11 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
             break;
         case ETabType.CPM:
             chart = <CPMChartBlock replay={replay} />;
+            break;
+        case ETabType.Distribution:
+            chart = replay.metadata.settings.RatingEnabled
+                ? <DistributionChart matchId={replay.match_id} />
+                : <>{translate("ReplayDetails.NotRanked")}</>;
             break;
         default:
             chart = <></>;
@@ -259,9 +266,10 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
         </div>
 
 
-        <div className="grid grid-cols-2 gap-x-1 mt-4 ">
+        <div className="grid grid-cols-3 gap-x-1 mt-4 ">
                 <div onClick={() => setTabType(ETabType.CPT)} className={(tabType === ETabType.CPT ? "bg-white" : "bg-gray-300 hover:bg-white border border-b-1 border-solid border-gray-500") + " flex justify-center cursor-pointer py-2 px-4 focus:outline-none transition-all duration-500 ease-in-out wfg-tab"} >Commands per turn (CPT)</div>
                 <div onClick={() => setTabType(ETabType.CPM)} className={(tabType === ETabType.CPM ? "bg-white" : "bg-gray-300 hover:bg-white border border-b-1 border-solid border-gray-500") + " flex justify-center cursor-pointer py-2 px-4 focus:outline-none transition-all duration-500 ease-in-out wfg-tab"} >Commands per minutes (CPM)</div>
+                <div onClick={() => setTabType(ETabType.Distribution)} className={(tabType === ETabType.Distribution ? "bg-white" : "bg-gray-300 hover:bg-white border border-b-1 border-solid border-gray-500") + " flex justify-center cursor-pointer py-2 px-4 focus:outline-none transition-all duration-500 ease-in-out wfg-tab"} >{translate("ReplayDetails.RatingDistribution")}</div>
             </div>
             <div className="text-sm p-6  bg-white shadow-md  wfg-chart-tab ">
                 <center> {chart}</center>

@@ -3,6 +3,7 @@ import { ChangeEvent, ReactNode, useEffect, useState } from "react";
 import { useAuth } from "../../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../../contexts/Models/useTranslation";
 import { BlockTitle } from "../BlockTitle";
+import { ConfirmDialog } from "../ConfirmDialog";
 
 interface AliasGroup {
     primary: string
@@ -20,6 +21,7 @@ const ManageAliasesBlock = (): ReactNode => {
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const [message, setMessage] = useState<string>();
+    const [pendingRemoval, setPendingRemoval] = useState<number>();
 
     useEffect(() => {
         axios.get<AliasGroup[], AxiosResponse<AliasGroup[]>>(`${import.meta.env.VITE_API_URL}/local-ratings/aliases`, {
@@ -123,7 +125,7 @@ const ManageAliasesBlock = (): ReactNode => {
                                             </div>
                                             <div className="flex items-end">
                                                 <button
-                                                    onClick={() => removeGroup(index)}
+                                                    onClick={() => setPendingRemoval(index)}
                                                     className="rounded bg-gray-200 px-3 py-2 text-sm font-semibold hover:bg-gray-300"
                                                 >
                                                     {translate("ManageAliases.Remove")}
@@ -158,6 +160,16 @@ const ManageAliasesBlock = (): ReactNode => {
                         }
                     </>
             }
+            <ConfirmDialog
+                open={pendingRemoval !== undefined}
+                message={translate("ManageAliases.RemoveConfirm")}
+                onConfirm={() => {
+                    if (pendingRemoval !== undefined)
+                        removeGroup(pendingRemoval);
+                    setPendingRemoval(undefined);
+                }}
+                onCancel={() => setPendingRemoval(undefined)}
+            />
         </div>
     );
 };

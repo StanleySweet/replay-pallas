@@ -12,6 +12,7 @@ import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
 import TrashIcon from "../icons/TrashIcon";
 import { SearchPlayerBar } from "./LocalRatings/SearchPlayer";
+import { ConfirmDialog } from "./ConfirmDialog";
 
 const LatestUserContainer = (): JSX.Element => {
     const [isLoading, setLoading] = useState(true);
@@ -19,6 +20,7 @@ const LatestUserContainer = (): JSX.Element => {
     const [users, setUsers] = useState<User[]>([]);
     const [filter, setFilter] = useState("");
     const [message, setMessage] = useState<string>();
+    const [pendingDeletion, setPendingDeletion] = useState<number>();
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/users`, {
@@ -82,7 +84,7 @@ const LatestUserContainer = (): JSX.Element => {
                         filteredUsers.map(r => <div key={r.id} className="flex" >
                             <div className="flex-shrink">
                                 <div className="items-center m-auto p-5" style={{ borderTop: "1px solid #C7CCD9" }}>
-                                    <button onClick={() => delete_user(r.id)} className="h-5 my-auto w-5">
+                                    <button onClick={() => setPendingDeletion(r.id)} className="h-5 my-auto w-5">
                                         <TrashIcon />
                                     </button>
                                 </div>
@@ -99,7 +101,17 @@ const LatestUserContainer = (): JSX.Element => {
                     <div className="mt-4 text-sm text-gray-700">{message}</div> :
                     null
             }
-        </div></>
+        </div>
+        <ConfirmDialog
+            open={pendingDeletion !== undefined}
+            message={translate("AdministrationPage.UserDeleteConfirm")}
+            onConfirm={() => {
+                if (pendingDeletion !== undefined)
+                    delete_user(pendingDeletion);
+                setPendingDeletion(undefined);
+            }}
+            onCancel={() => setPendingDeletion(undefined)}
+        /></>
     );
 };
 
