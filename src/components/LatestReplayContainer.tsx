@@ -10,6 +10,7 @@ import { ReplayListItem } from "../types/Replay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
+import { authHeaders } from "../utils";
 
 const LatestReplayContainer = (): JSX.Element => {
     const [isLoading, setLoading] = useState(true);
@@ -18,10 +19,7 @@ const LatestReplayContainer = (): JSX.Element => {
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/replays/latest-list-items`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
 
             setReplays(response.data);

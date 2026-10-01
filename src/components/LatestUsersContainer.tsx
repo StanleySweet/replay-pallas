@@ -13,6 +13,7 @@ import { BlockTitle } from "./BlockTitle";
 import TrashIcon from "../icons/TrashIcon";
 import { SearchPlayerBar } from "./LocalRatings/SearchPlayer";
 import { ConfirmDialog } from "./ConfirmDialog";
+import { authHeaders } from "../utils";
 
 const LatestUserContainer = (): JSX.Element => {
     const [isLoading, setLoading] = useState(true);
@@ -24,10 +25,7 @@ const LatestUserContainer = (): JSX.Element => {
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/users`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             setUsers(response.data.sort((left: User, right: User) => right.id - left.id));
             setLoading(false);
@@ -50,10 +48,7 @@ const LatestUserContainer = (): JSX.Element => {
         setMessage(undefined);
 
         axios.delete(`${import.meta.env.VITE_API_URL}/users/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then((response) => {
             if (response.status === 200) {
                 const user = users.find(a => a.id === id);

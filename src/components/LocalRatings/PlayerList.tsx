@@ -14,6 +14,7 @@ import { LocalRatingUser } from "../../types/LocalRatingUser";
 import { LocalRatingUserProfile } from "../../types/LocalRatingUserProfile";
 import { LobbyUserBlock } from "../LobbyUserBlock";
 import { uid } from "chart.js/helpers";
+import { authHeaders } from "../../utils";
 
 interface IPlayerListProps {
     onPlayerSelected?: (user: LocalRatingUser) => void
@@ -32,10 +33,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     useEffect(() => {
         setLoading(true);
         axios.get(`${import.meta.env.VITE_API_URL}/local-ratings/users`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             setUsers(response.data);
             setFilteredUsers(response.data);
@@ -51,10 +49,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
             rank: user.rank,
             players: user.matches
         }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             if (response.data) {
                 setUserProfile(response.data);

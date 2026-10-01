@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { ConfirmDialog } from "../components/ConfirmDialog";
+import { authHeaders } from "../utils";
 
 
 
@@ -32,10 +33,7 @@ const MyReplaysPage = (): ReactNode => {
         setMessage(undefined);
 
         axios.delete(`${import.meta.env.VITE_API_URL}/replays/${match_id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then((response) => {
             if (response.status === 200) {
                 const replay = replays.find(a => a.matchId === match_id);
@@ -51,10 +49,7 @@ const MyReplaysPage = (): ReactNode => {
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/replays/my-list-items`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then((response: AxiosResponse<ReplayListItem[]>) => {
             setLoading(false);
             if (response.data && response.data) {

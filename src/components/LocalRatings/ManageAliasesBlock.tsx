@@ -4,6 +4,7 @@ import { useAuth } from "../../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../../contexts/Models/useTranslation";
 import { BlockTitle } from "../BlockTitle";
 import { ConfirmDialog } from "../ConfirmDialog";
+import { authHeaders } from "../../utils";
 
 interface AliasGroup {
     primary: string
@@ -25,10 +26,7 @@ const ManageAliasesBlock = (): ReactNode => {
 
     useEffect(() => {
         axios.get<AliasGroup[], AxiosResponse<AliasGroup[]>>(`${import.meta.env.VITE_API_URL}/local-ratings/aliases`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             setGroups(response.data);
             setIsLoading(false);
@@ -71,10 +69,7 @@ const ManageAliasesBlock = (): ReactNode => {
         axios.put<{ groups: AliasGroup[] }, AxiosResponse<AliasGroup[]>>(`${import.meta.env.VITE_API_URL}/local-ratings/aliases`, {
             groups
         }, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             setGroups(response.data);
             setMessage(translate("ManageAliases.SaveSuccess"));

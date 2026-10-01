@@ -10,6 +10,7 @@ import { ReplayListItem } from "../types/Replay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
+import { authHeaders } from "../utils";
 
 interface IReplayContainerProps {
     replays?:ReplayListItem[]
@@ -25,10 +26,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     useEffect(() => {
         if(!props.replays || !props.replays.length){
             axios.get(`${import.meta.env.VITE_API_URL}/replays/all`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
+                headers: authHeaders(token)
             }).then(response => {
                 setReplays(response.data);
                 setLoading(false);

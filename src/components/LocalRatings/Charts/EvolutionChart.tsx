@@ -14,6 +14,7 @@ import { ChartData } from "chart.js";
 import "chart.js/auto";
 import { ITranslationDictionaryKey } from "../../../types/ITranslationDictionaryEntry";
 import { tailWindColors } from "../../../utils";
+import { authHeaders } from "../../../utils";
 
 interface EvolutionChartProps {
     user?: LocalRatingUser
@@ -40,10 +41,7 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
                 rank: props.user.rank,
                 players: props.user.matches
             }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
+                headers: authHeaders(token)
             }).then(response => {
                 if (response.data) {
                     const valueCount = response.data.series.map(a => a.length).sort((a, b) => b - a)[0];

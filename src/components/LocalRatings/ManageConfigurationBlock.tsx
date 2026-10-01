@@ -3,6 +3,7 @@ import { ChangeEvent, ReactNode, useEffect, useState } from "react";
 import { useAuth } from "../../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../../contexts/Models/useTranslation";
 import { BlockTitle } from "../BlockTitle";
+import { authHeaders } from "../../utils";
 
 interface LocalRatingsOptionListItem {
     value: string | number | boolean
@@ -42,10 +43,7 @@ const ManageConfigurationBlock = (): ReactNode => {
 
     useEffect(() => {
         axios.get<LocalRatingsOptionsPayload, AxiosResponse<LocalRatingsOptionsPayload>>(`${import.meta.env.VITE_API_URL}/local-ratings/options`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             setCategories(response.data.categories);
             setValues(response.data.values);
@@ -74,10 +72,7 @@ const ManageConfigurationBlock = (): ReactNode => {
         axios.put<Record<string, string>, AxiosResponse<Record<string, string | null>>>(`${import.meta.env.VITE_API_URL}/local-ratings/options`, {
             values: payload
         }, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             setValues(response.data);
             setMessage(translate("ManageConfiguration.SaveSuccess"));
@@ -93,10 +88,7 @@ const ManageConfigurationBlock = (): ReactNode => {
         setMessage(undefined);
 
         axios.post<Record<string, never>, AxiosResponse<Record<string, string | null>>>(`${import.meta.env.VITE_API_URL}/local-ratings/options/restore-defaults`, {}, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             setValues(response.data);
             setMessage(translate("ManageConfiguration.ResetSuccess"));

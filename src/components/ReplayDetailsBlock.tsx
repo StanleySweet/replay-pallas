@@ -18,6 +18,7 @@ import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import axios from "axios";
 import { useState } from 'react';
 import { DistributionChart } from "./LocalRatings/Charts/DistributionChart";
+import { authHeaders } from "../utils";
 
 interface IReplayBlockProps {
     replay: ReplayDetails;
@@ -46,10 +47,7 @@ const ReplayDetailsBlock = (props: IReplayBlockProps): JSX.Element => {
     const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         axios.get(`${import.meta.env.VITE_API_URL}/replays/${props.replay.match_id}/zip`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
+            headers: authHeaders(token),
             responseType: 'blob'
         }
         )

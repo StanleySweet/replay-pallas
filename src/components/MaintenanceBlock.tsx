@@ -3,6 +3,7 @@ import { BlockTitle } from "./BlockTitle";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import axios from "axios";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
+import { authHeaders } from "../utils";
 
 const MaintenanceBlock = (): ReactNode => {
     const { token } = useAuth();
@@ -11,50 +12,35 @@ const MaintenanceBlock = (): ReactNode => {
     async function rebuild_rating_history(event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
         event.preventDefault();
         await axios.get(`${import.meta.env.VITE_API_URL}/replays/rebuild-lobby-rank-history`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         });
     }
 
     async function rebuild_glicko2_history(event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
         event.preventDefault();
         await axios.get(`${import.meta.env.VITE_API_URL}/replays/rebuild-glicko-rank-history`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         });
     }
 
     async function rebuild_replay_metadata(event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
         event.preventDefault();
         await axios.get(`${import.meta.env.VITE_API_URL}/replays/rebuild-replay-metadata`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         });
     }
 
     async function vacuum_database(event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
         event.preventDefault();
         await axios.get(`${import.meta.env.VITE_API_URL}/health/vacuum`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         });
     }
 
     async function rebuild_local_ratings(event: React.MouseEvent<HTMLButtonElement>): Promise<void> {
         event.preventDefault();
         await axios.post(`${import.meta.env.VITE_API_URL}/local-ratings/rebuild-database`, undefined , {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         });
     }
 

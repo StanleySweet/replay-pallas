@@ -16,6 +16,7 @@ import { ReplayBlock } from "../components/ReplayBlock";
 import { Replay, ReplayListItem } from "../types/Replay";
 import UploadIcon from "../icons/UploadIcon";
 import LoadingBar from 'react-top-loading-bar';
+import { authHeaders } from "../utils";
 
 const ReplayUploadPage = (): ReactNode => {
     const { role, token } = useAuth();
@@ -41,10 +42,7 @@ const ReplayUploadPage = (): ReactNode => {
         };
 
         const result = await axios.post(`${import.meta.env.VITE_API_URL}/replays/upload-zip`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${token}`
-            },
+            headers: authHeaders(token, 'multipart/form-data'),
             onUploadProgress: function (progressEvent) {
                 setPercentageCompleted(Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 0)));
             },
@@ -54,10 +52,7 @@ const ReplayUploadPage = (): ReactNode => {
         const replays: Replay[] = [];
         for (const matchId of result.data.AddedReplays) {
             const replay = await axios.get<Replay>(`${import.meta.env.VITE_API_URL}/replays/${matchId}`, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}`
-                }
+                headers: authHeaders(token, 'multipart/form-data')
             });
 
             replays.push(replay.data);

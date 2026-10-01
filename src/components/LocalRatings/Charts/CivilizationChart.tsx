@@ -13,6 +13,7 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import "chart.js/auto";
 import { tailWindColors, tailWindColorsTransparent } from "../../../utils";
+import { authHeaders } from "../../../utils";
 
 type CivilizationChartProps = {
     user?: LocalRatingUser
@@ -36,10 +37,7 @@ const CivilizationChart = (props : CivilizationChartProps): JSX.Element => {
                 rank: props.user.rank,
                 players: props.user.matches
             }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
+                headers: authHeaders(token)
             }).then(response => {
                 if (response.data) {
                     const labels = response.data.civKeys;

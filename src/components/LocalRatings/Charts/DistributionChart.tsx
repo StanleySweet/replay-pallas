@@ -11,6 +11,7 @@ import { Chart } from "react-chartjs-2";
 import { useAuth } from "../../../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../../../contexts/Models/useTranslation";
 import { LocalRatingUser } from "../../../types/LocalRatingUser";
+import { authHeaders } from "../../../utils";
 
 interface DistributionChartProps {
     user?: LocalRatingUser
@@ -158,10 +159,7 @@ const DistributionChart = (props: DistributionChartProps): JSX.Element => {
             : { player: props.user?.user.nick, rank: props.user?.rank, players: props.user?.matches };
 
         axios.post<unknown, AxiosResponse<DistributionChartResponse>>(endpoint, body, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then(response => {
             if (!response.data.bins.length) {
                 setData(undefined);

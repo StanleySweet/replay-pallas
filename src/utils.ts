@@ -1,5 +1,10 @@
 import colors from 'tailwindcss/colors';
 
+const authHeaders = (token: string | null, contentType: string = 'application/json') => ({
+    'Content-Type': contentType,
+    'Authorization': `Bearer ${token}`
+});
+
 const toHHMMSS = function (s: string) {
     const sec_num : number = parseInt(s, 10);
     const hours = Math.floor(sec_num / 3600);
@@ -34,6 +39,7 @@ const tailWindColors = [
 const tailWindColorsTransparent = tailWindColors.map(a => a + "33");
 
 export {
+    authHeaders,
     toHHMMSS,
     tailWindColors,
     tailWindColorsTransparent

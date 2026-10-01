@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { NavigationBar } from "../components/NavigationBar";
 import { HouseIcon } from "../icons/HouseIcon";
+import { authHeaders } from "../utils";
 
 const ReplayDetailsPage = function () {
   const [isLoading, setLoading] = useState(true);
@@ -24,10 +25,7 @@ const ReplayDetailsPage = function () {
 
   useEffect(() => {
     axios.get<ReplayDetails>(`${import.meta.env.VITE_API_URL}/replays/${matchId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+      headers: authHeaders(token)
     }).then((response: AxiosResponse<ReplayDetails>) => {
       if (response.data && response.data.metadata) {
         setReplay(response.data);

@@ -15,6 +15,7 @@ import { HouseIcon } from "../icons/HouseIcon";
 import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import PlusIcon from "../icons/PlusIcon";
 import { tailWindColors, tailWindColorsTransparent } from "../utils";
+import { authHeaders } from "../utils";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -29,10 +30,7 @@ const ReplaysPage = (): ReactNode => {
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/replays/all-list-items`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then((response: AxiosResponse<ReplayListItem[]>) => {
             if (response.data && response.data) {
                 const civs = response.data.flatMap(a => a.civs);

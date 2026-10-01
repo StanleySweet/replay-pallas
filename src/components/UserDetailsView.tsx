@@ -14,6 +14,7 @@ import { SearchReplayBar } from "./LocalRatings/SearchReplay";
 import { ReplayContainer } from "./ReplayContainer";
 import SaveIcon from "../icons/SaveIcon";
 import EUserRole from "../enumerations/EUserRole";
+import { authHeaders } from "../utils";
 
 interface UserDetailsViewProps {
     requestUrl: string
@@ -30,10 +31,7 @@ const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewP
 
     useEffect(() => {
         axios.get<undefined, AxiosResponse<User>>(requestUrl, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then((response: AxiosResponse<User>) => {
             setUserDetails(response.data);
             setLoading(false);
@@ -51,10 +49,7 @@ const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewP
             id: userDetails.id,
             role: adminSelectValue
         }, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            }
+            headers: authHeaders(token)
         }).then((response: AxiosResponse<undefined>) => {
             if (response.status === 200) {
                 setUserDetails({
