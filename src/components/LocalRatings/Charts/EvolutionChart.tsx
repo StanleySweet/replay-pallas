@@ -13,8 +13,7 @@ import { useTranslation as translate } from "../../../contexts/Models/useTransla
 import { ChartData } from "chart.js";
 import "chart.js/auto";
 import { ITranslationDictionaryKey } from "../../../types/ITranslationDictionaryEntry";
-import { tailWindColors } from "../../../utils";
-import { authHeaders } from "../../../utils";
+import { tailWindColors, authHeaders } from "../../../utils";
 
 interface EvolutionChartProps {
     user?: LocalRatingUser

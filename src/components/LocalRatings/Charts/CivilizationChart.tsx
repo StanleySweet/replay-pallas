@@ -12,8 +12,7 @@ import { LocalRatingUser } from "../../../types/LocalRatingUser";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import "chart.js/auto";
-import { tailWindColors, tailWindColorsTransparent } from "../../../utils";
-import { authHeaders } from "../../../utils";
+import { tailWindColors, tailWindColorsTransparent, authHeaders } from "../../../utils";
 
 type CivilizationChartProps = {
     user?: LocalRatingUser

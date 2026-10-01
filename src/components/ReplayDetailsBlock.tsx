@@ -10,15 +10,13 @@ import { ChartData, ChartOptions } from "chart.js";
 import { CPMChartBlock } from "./CpmChartBlock";
 import { Line } from "react-chartjs-2";
 import { ReplayDetails } from "../types/Replay";
-import { tailWindColors } from "../utils";
-import { toHHMMSS } from "../utils";
+import { tailWindColors, toHHMMSS, authHeaders } from "../utils";
 import { uid } from "chart.js/helpers";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import axios from "axios";
 import { useState } from 'react';
 import { DistributionChart } from "./LocalRatings/Charts/DistributionChart";
-import { authHeaders } from "../utils";
 
 interface IReplayBlockProps {
     replay: ReplayDetails;

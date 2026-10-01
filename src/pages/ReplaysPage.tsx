@@ -14,8 +14,7 @@ import EUserRole from "../enumerations/EUserRole";
 import { HouseIcon } from "../icons/HouseIcon";
 import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import PlusIcon from "../icons/PlusIcon";
-import { tailWindColors, tailWindColorsTransparent } from "../utils";
-import { authHeaders } from "../utils";
+import { tailWindColors, tailWindColorsTransparent, authHeaders } from "../utils";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
