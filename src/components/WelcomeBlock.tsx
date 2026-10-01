@@ -5,11 +5,12 @@
 
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { BlockTitle } from "./BlockTitle";
+import { ITranslationDictionaryKey } from "../types/ITranslationDictionaryEntry";
 
-const WelcomeBlock = () : JSX.Element => {
+const WelcomeBlock = (props: { titleKey: ITranslationDictionaryKey }) : JSX.Element => {
     return (
         <div id="welcome-block-container" className="text-sm p-6 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
-            <BlockTitle titleKey="HomePage.Title" />
+            <BlockTitle titleKey={props.titleKey} />
             <div>
                 <div>{translate("WelcomeBlock.WelcomeTextBeforeLink")} <a href="https://wildfiregames.com/" target="_blank" rel="noreferrer">Wildfire Games</a> {translate("WelcomeBlock.WelcomeTextAfterLink")} <a href="https://play0ad.com/" target="_blank" rel="noreferrer">0 A.D.</a>, {translate("WelcomeBlock.WelcomeTextTail")}</div>
                 <br />

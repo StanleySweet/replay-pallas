@@ -14,17 +14,7 @@ const translations : ITranslationDictionary = translationsRaw;
  */
 const useTranslation = (key: ITranslationDictionaryKey): string | undefined => {
     const translation = translations[key];
-    let languageKey : ITranslationEntryKey;
-    switch(navigator.language)
-    {
-        case "fr-FR":
-            languageKey = navigator.language;
-            break;
-        default:
-            languageKey = "EN";
-            break;
-    }
-
+    const languageKey: ITranslationEntryKey = navigator.language === "fr-FR" ? "fr-FR" : "EN";
     return translation[languageKey];
 };
 

@@ -6,7 +6,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { LatestUserContainer } from "../components/LatestUsersContainer";
-import { WelcomeBlockAdministration } from "../components/WelcomeBlockAdministration";
+import { WelcomeBlock } from "../components/WelcomeBlock";
 import { NavigationBar } from "../components/NavigationBar";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import EUserRole from "../enumerations/EUserRole";
@@ -57,7 +57,7 @@ const AdministrationPage = function () {
         <div className="md:w-2/5 sm:w-4/5 lg:w-3/5 xl:w-3/5 mx-auto py-5">
             <div className="mb-5 inline-flex items-center" ><Link to="/Home" className="inline-flex items-center"><HouseIcon />&nbsp;{translate("HomePage.Title")}&nbsp;</Link>{">"}&nbsp;{translate("AdministrationPage.Title")} </div>
 
-            <WelcomeBlockAdministration />
+            <WelcomeBlock titleKey="AdministrationPage.Title" />
             <div className="mt-4"></div>
             <div className="grid grid-cols-4 gap-x-1 mt-4 ">
                 <div onClick={() => setTabType(ETabType.LatestUsers)} className={(tabType === ETabType.LatestUsers ? "bg-white" : "bg-gray-300 hover:bg-white border border-b-1 border-solid border-gray-500") + " flex justify-center cursor-pointer py-2 px-4 focus:outline-none transition-all duration-500 ease-in-out wfg-tab"} >{translate("AdministrationPage.Users")}</div>

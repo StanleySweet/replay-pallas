@@ -33,18 +33,6 @@ const beforeTransition = () => {
     }
 };
 
-const toggle = () => {
-    beforeTransition();
-    if (!document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.add('dark');
-        window.localStorage.setItem('nightwind-mode', 'dark');
-    } else {
-        document.documentElement.classList.remove('dark');
-        window.localStorage.setItem('nightwind-mode', 'light');
-    }
-};
-
-
 const enable = (dark : boolean) => {
     const mode = dark ? "dark" : "light";
     const opposite = dark ? "light" : "dark";
@@ -60,7 +48,6 @@ const enable = (dark : boolean) => {
 
 
 export {
-    toggle,
     enable,
     init
 };

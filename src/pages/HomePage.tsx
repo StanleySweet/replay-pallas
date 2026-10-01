@@ -25,7 +25,7 @@ const HomePage = function () {
                         <span>{translate("Replays.Upload")}</span>
                     </Link> : ""
             }</div>
-            <WelcomeBlock />
+            <WelcomeBlock titleKey="HomePage.Title" />
             <div className="mt-4"></div>
             <LatestReplayContainer />
         </div>
