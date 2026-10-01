@@ -4,7 +4,7 @@ import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import EUserRole from "../enumerations/EUserRole";
 import Avatar from "boring-avatars";
 import { enable } from "../nightwind";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const storageKey = 'nightwind-mode';
 const getColorPreference = (): string => {
@@ -21,10 +21,6 @@ const NavigationBar = () => {
     const { role, id, nick, onLogoutSession } = useAuth();
     const [lightMode, setLightMode] = useState<string>(getColorPreference());
     const [isSubNavOpen, setIsSubNavOpen] = useState(false); // initiate isNavOpen state with false
-
-    useEffect(() => {
-        onClick();
-    }, []);
 
 
     const loginBlock = nick && id && role ?
@@ -57,11 +53,11 @@ const NavigationBar = () => {
         </article> : <></>;
     const onClick = () => {
         if (lightMode === "light") {
-            enable(false);
+            enable(true);
             setLightMode("dark");
         }
         else if (lightMode === "dark") {
-            enable(true);
+            enable(false);
             setLightMode("light");
         }
     };

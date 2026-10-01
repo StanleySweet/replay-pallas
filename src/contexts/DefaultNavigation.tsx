@@ -20,7 +20,7 @@ const DefaultNavigation = () => {
             navigate("/Home");
         else
             navigate('/Administration');
-    }, []);
+    }, [navigate, role]);
     return (
         <>
         </>
