@@ -102,7 +102,7 @@ const ReplaysPage = (): ReactNode => {
                         </div>
                         <div className="mt-2 lg:mt-0 lg:col-span-4">
                             <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
-                            <ReplayContainer filter={filter} maxItems={20} replays={replays}></ReplayContainer>
+                            <ReplayContainer filter={filter} replays={replays}></ReplayContainer>
                         </div>
                     </div>
             }

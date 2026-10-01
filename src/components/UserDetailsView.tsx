@@ -118,7 +118,7 @@ const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewP
                     userDetails.replays.length ?
                         <>
                             <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
-                            <ReplayContainer filter={filter} maxItems={20} replays={userDetails.replays} />
+                            <ReplayContainer filter={filter} replays={userDetails.replays} />
                         </> :
                         null
                 }

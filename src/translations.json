@@ -79,6 +79,10 @@
         "fr-FR": "Matchs",
         "EN": "Games"
     },
+    "ReplayContainer.ShowMore": {
+        "fr-FR": "Afficher plus de replays",
+        "EN": "Show more replays"
+    },
     "LatestReplayContainer.Title": {
         "fr-FR": "Derniers Matchs",
         "EN": "Recent Games"
