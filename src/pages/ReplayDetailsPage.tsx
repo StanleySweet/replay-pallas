@@ -9,7 +9,7 @@ import axios from "axios";
 import { AxiosResponse } from "axios";
 import { ReplayDetails } from "../types/Replay";
 import { PlayerStatistics } from "../components/PlayerStatistics";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { ReplayDetailsBlock } from "../components/ReplayDetailsBlock";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/Models/IAuthContext";

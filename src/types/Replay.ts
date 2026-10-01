@@ -9,6 +9,10 @@ export interface Replay {
     metadata: ReplayMetadata
 }
 
+export interface Command {
+    type: string
+}
+
 export interface ReplayDetails {
     match_id: string
     metadata: ReplayMetadata
@@ -49,7 +53,7 @@ export interface Mod {
 export interface ReplayMetadata {
     timestamp: number
     mapPreview: string
-    playerStates: any[]
+    playerStates: PlayerData[]
     mods: Mod[]
     settings: MetadataSettings
     engine_version: string
@@ -79,7 +83,7 @@ export interface PlayerData {
     Civ: string
     AverageCPM: number
     State: string
-    Commands: any[]
+    Commands: Command[]
     SecondMostUsedCmd: string
     MostUsedCmd: string;
 }

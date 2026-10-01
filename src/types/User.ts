@@ -5,6 +5,21 @@
 
 import EUserRole from "../enumerations/EUserRole";
 import { ReplayListItem } from "./Replay";
+import { Glicko2Rating } from "./Glicko2Rating";
+
+export interface SeriesData {
+    "x": string
+    "y": number
+}
+
+export interface UserGraph {
+    "current_game_elo"?: number
+    "current_glicko_elo"?: Glicko2Rating
+    "glicko_series": SeriesData[]
+    "glicko_series_avg": SeriesData[]
+    "game_series": SeriesData[]
+    "game_series_avg": SeriesData[]
+}
 
 export interface User {
     "id": number
@@ -18,5 +33,5 @@ export interface User {
     "SecondMostUsedCmd": string
     "MostUsedCmd": string;
     "replays": ReplayListItem[]
-    "graph": any
+    "graph": UserGraph
 }

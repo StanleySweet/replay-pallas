@@ -11,15 +11,13 @@ import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { Link } from "react-router-dom";
 import { NavigationBar } from "../components/NavigationBar";
 import { HouseIcon } from "../icons/HouseIcon";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LocalRatingUser } from "../types/LocalRatingUser";
 import { AboutFrame } from "../components/LocalRatings/AboutFrame";
 import { InfoButton } from "../components/LocalRatings/InfoButton";
 
 const LocalRatingsPage = (): JSX.Element => {
     const [user, setSelectedUser] = useState<LocalRatingUser>();
-
-    useEffect(() => { }, [user]);
 
     return (<>
         <NavigationBar />
