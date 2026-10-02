@@ -7,6 +7,7 @@ import 'chartjs-adapter-moment';
 import "chart.js/auto";
 import { Glicko2Rating } from "../types/Glicko2Rating";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
+import { Link } from "react-router-dom";
 
 interface SeriesData { x: string, y: number }
 
@@ -88,6 +89,9 @@ const UserRatingBlock: React.FC<IUserRatingBlockProps> = (props: IUserRatingBloc
                         ? <p className="mt-2 mb-0 text-xs italic text-gray-600">{translate("UserDetails.ProvisionalNotice")}</p>
                         : <></>
                 }
+                <p className="mt-2 mb-0 text-xs">
+                    <Link to="/LocalRatings" className="underline hover:no-underline">{translate("UserDetails.ViewLeaderboard")}</Link>
+                </p>
             </article>
             {
                 props.user.graph ? <Line data={data} options={options} /> : <></>

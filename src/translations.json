@@ -116,8 +116,8 @@
         "EN": "Glicko 2 rating (1v1)"
     },
     "UserDetails.RatedMatches": {
-        "fr-FR": "Matchs évalués",
-        "EN": "Rated matches"
+        "fr-FR": "Matchs évalués (1c1)",
+        "EN": "Rated matches (1v1)"
     },
     "UserDetails.ProjectedDeviation": {
         "fr-FR": "Déviation projetée",
@@ -582,5 +582,9 @@
     "AdministrationPage.UserDeleteConfirm": {
         "fr-FR": "Supprimer cet utilisateur ? Cette action ne peut pas être annulée.",
         "EN": "Delete this user? This cannot be undone."
+    },
+    "UserDetails.ViewLeaderboard": {
+        "fr-FR": "Voir le classement complet",
+        "EN": "See the full leaderboard"
     }
 }
