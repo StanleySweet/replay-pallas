@@ -6,6 +6,7 @@ import { ChartData, ChartOptions } from "chart.js";
 import 'chartjs-adapter-moment';
 import "chart.js/auto";
 import { Glicko2Rating } from "../types/Glicko2Rating";
+import { useTranslation as translate } from "../contexts/Models/useTranslation";
 
 interface SeriesData { x: string, y: number }
 
@@ -67,16 +68,26 @@ const UserRatingBlock: React.FC<IUserRatingBlockProps> = (props: IUserRatingBloc
     } as ChartData<'line', SeriesData[]>;
 
     const glicko : Glicko2Rating = Object.assign(new Glicko2Rating(), props.user.graph.current_glicko_elo);
+    const provisional = glicko.is_provisional();
 
     return (
         <div id="user-rating-container" className="text-sm p-6 mt-4 bg-white shadow-md" style={{ border: "1px solid", borderRadius: "4px" }}>
             <BlockTitle titleKey="UserDetails.Title" />
             <article className="mb-[1em] pt-3" style={{ borderTop: "1px solid #C7CCD9" }} >
-                <div className="grid grid-cols-2">
-                    <span className="text-sm">Rating in game:&nbsp;<b>{props.user.graph.current_game_elo}</b></span>
-                    <span className="text-sm">Glicko 2 rating for 1v1:&nbsp;<b>{glicko.toString()}</b></span>
-                    <span className="text-sm">Projected deviation:&nbsp;<b>{Math.round(glicko.preview_deviation)} </b></span>
+                <div className="grid grid-cols-2 gap-y-1">
+                    <span className="text-sm">{translate("UserDetails.RatingInGame")}:&nbsp;<b>{props.user.graph.current_game_elo}</b></span>
+                    <span className="text-sm">{translate("UserDetails.GlickoRating")}:&nbsp;<b>{glicko.toString()}</b></span>
+                    <span className="text-sm">{translate("UserDetails.RatedMatches")}:&nbsp;<b>{glicko.match_count}</b></span>
+                    <span className="text-sm">{translate("UserDetails.ProjectedDeviation")}:&nbsp;<b>{Math.round(glicko.preview_deviation)}</b></span>
                 </div>
+                {
+                    // A "?" after the rating means Glicko has not settled yet. Half of the
+                    // current rankings are provisional, so spell it out rather than leaving
+                    // the marker unexplained - people were reading those as top positions.
+                    provisional
+                        ? <p className="mt-2 mb-0 text-xs italic text-gray-600">{translate("UserDetails.ProvisionalNotice")}</p>
+                        : <></>
+                }
             </article>
             {
                 props.user.graph ? <Line data={data} options={options} /> : <></>

@@ -4,7 +4,11 @@ class Glicko2Rating {
     elo: number = 1500;
     deviation: number = 350;
     volatility: number = 0.09;
-    preview_deviation: number = 0.09;
+    // deviation scale, not volatility scale. Only used when the API omits it.
+    preview_deviation: number = 350;
+    // Number of rated matches behind this rating. 0 until the API reports it,
+    // which is also what stale user caches deserialize to.
+    match_count: number = 0;
 
     intRating(): number {
         return Math.round(this.elo);
