@@ -41,6 +41,7 @@ export type ReplayListItem = {
     "civs": string[]
     "matchId": string
     "date": string
+    "mods": string[]
 }
 
 export interface Mod {

@@ -586,5 +586,17 @@
     "UserDetails.ViewLeaderboard": {
         "fr-FR": "Voir le classement complet",
         "EN": "See the full leaderboard"
+    },
+    "ReplayDateRange.From": {
+        "fr-FR": "Du",
+        "EN": "From"
+    },
+    "ReplayDateRange.To": {
+        "fr-FR": "Au",
+        "EN": "To"
+    },
+    "ReplayBlock.Mods": {
+        "fr-FR": "Mods",
+        "EN": "Mods"
     }
 }

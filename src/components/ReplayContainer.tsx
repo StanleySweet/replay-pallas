@@ -11,11 +11,14 @@ import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
 import { authHeaders } from "../utils";
+import { isWithinDateRange } from "./replayDateFilter";
 
 interface IReplayContainerProps {
     replays?:ReplayListItem[]
     maxItems?: number
     filter?: string
+    fromDate?: string
+    toDate?: string
 }
 
 const PAGE_SIZE = 100;
@@ -44,7 +47,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     // something with 3 hits, clear the box and are still stuck showing 3.
     useEffect(() => {
         setLimit(props.maxItems ?? PAGE_SIZE);
-    }, [props.filter, props.maxItems]);
+    }, [props.filter, props.maxItems, props.fromDate, props.toDate]);
 
 
     if (isLoading) {
@@ -62,7 +65,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
         return r.matchId.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
         r.playerNames.some(a => a.toLowerCase().includes(props.filter?.toLowerCase() ?? ""))  ||
         r.mapName?.toLowerCase().includes(props.filter.toLowerCase());
-    });
+    }).filter(r => isWithinDateRange(r, props.fromDate, props.toDate));
     const filteredReplays = matchedReplays.slice(0, limit);
     const hiddenCount = matchedReplays.length - filteredReplays.length;
 

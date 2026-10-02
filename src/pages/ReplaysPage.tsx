@@ -13,6 +13,7 @@ import { NavigationBar } from "../components/NavigationBar";
 import EUserRole from "../enumerations/EUserRole";
 import { HouseIcon } from "../icons/HouseIcon";
 import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
+import { ReplayDateRange } from "../components/LocalRatings/ReplayDateRange";
 import PlusIcon from "../icons/PlusIcon";
 import { tailWindColors, tailWindColorsTransparent, authHeaders } from "../utils";
 
@@ -23,6 +24,8 @@ const ReplaysPage = (): ReactNode => {
     const [isLoading, setLoading] = useState(true);
     const [replays, setReplays] = useState<ReplayListItem[]>();
     const [filter, setFilter] = useState<string>();
+    const [fromDate, setFromDate] = useState<string>();
+    const [toDate, setToDate] = useState<string>();
     const [civDoughnutData, setCivDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const [mapDoughnutData, setMapDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const { token, role } = useAuth();
@@ -102,7 +105,8 @@ const ReplaysPage = (): ReactNode => {
                         </div>
                         <div className="mt-2 lg:mt-0 lg:col-span-4">
                             <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
-                            <ReplayContainer filter={filter} replays={replays}></ReplayContainer>
+                            <ReplayDateRange from={fromDate} to={toDate} onFromChange={setFromDate} onToChange={setToDate} />
+                            <ReplayContainer filter={filter} fromDate={fromDate} toDate={toDate} replays={replays}></ReplayContainer>
                         </div>
                     </div>
             }
