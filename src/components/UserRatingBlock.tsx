@@ -80,6 +80,11 @@ const UserRatingBlock: React.FC<IUserRatingBlockProps> = (props: IUserRatingBloc
                     <span className="text-sm">{translate("UserDetails.GlickoRating")}:&nbsp;<b>{glicko.toString()}</b></span>
                     <span className="text-sm">{translate("UserDetails.RatedMatches")}:&nbsp;<b>{glicko.match_count}</b></span>
                     <span className="text-sm">{translate("UserDetails.ProjectedDeviation")}:&nbsp;<b>{Math.round(glicko.preview_deviation)}</b></span>
+                    {/* Only the in-game rating ignores the match outcome. The Glicko number beside
+                        it is built from 1v1 wins and losses, so a blanket "this is not a win rate"
+                        note on the whole block would be wrong for that column. Players were reading
+                        the in-game rating as a win rate because nothing said otherwise next to it. */}
+                    <p className="col-span-2 mt-1 mb-0 text-xs italic text-gray-600">{translate("UserDetails.InGameRatingCaveat")}</p>
                 </div>
                 {
                     // A "?" after the rating means Glicko has not settled yet. Half of the

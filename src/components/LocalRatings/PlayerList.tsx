@@ -141,6 +141,9 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
                 </table>
             </div>
         </div>
+        {/* Same rating as the in-game number on the player page, so it carries the same
+            caveat: it is built from performance graphs, never from the match outcome. */}
+        <p className="mt-1 mb-0 text-xs italic text-gray-600">{translate("UserDetails.InGameRatingCaveat")}</p>
 
         <div className="p-2"></div>
         {

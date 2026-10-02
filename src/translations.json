@@ -127,6 +127,10 @@
         "fr-FR": "Note provisoire : elle repose sur peu de résultats et bougera à mesure que vous jouez.",
         "EN": "Provisional rating: it rests on few results and will move as you play more."
     },
+    "UserDetails.InGameRatingCaveat": {
+        "fr-FR": "La note dans le jeu compare vos graphiques à la moyenne de la partie. Elle n'utilise pas le résultat du match et ne prédit donc pas votre fréquence de victoires.",
+        "EN": "The in-game rating compares your graphs with the game average. It does not use the match outcome, so it does not predict how often you win."
+    },
     "UserRatingBlock.Title": {
         "fr-FR": "Classement utilisateur",
         "EN": "User rating"
