@@ -32,7 +32,7 @@ const ChartFrame = (props: IChartFrameProps): JSX.Element => {
             chart = <CivilizationChart user={props.user} />;
             break;
         case ETabType.Distribution:
-            chart = <DistributionChart />;
+            chart = <DistributionChart user={props.user} />;
             break;
         default:
             chart = <EvolutionChart user={props.user} />;

@@ -14,6 +14,10 @@ interface LocalRatingUserProfile {
     "averagePerformanceText": string,
     "performanceAverageDeviationText": string,
     "performanceStandardDeviationText": string,
+    "glickoElo": number | null,
+    "glickoDeviation": number | null,
+    "glickoMatchCount": number | null,
+    "gameElo": number | null,
 }
 
 export type  {

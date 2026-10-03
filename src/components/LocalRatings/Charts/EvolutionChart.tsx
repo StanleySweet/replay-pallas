@@ -14,6 +14,7 @@ import { ChartData } from "chart.js";
 import "chart.js/auto";
 import { ITranslationDictionaryKey } from "../../../types/ITranslationDictionaryEntry";
 import { tailWindColors, authHeaders } from "../../../utils";
+import { chartTheme, watchChartTheme } from "./chartTheme";
 
 interface EvolutionChartProps {
     user?: LocalRatingUser
@@ -29,7 +30,9 @@ interface EvolutionChart {
 const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
     const { token } = useAuth();
     const [data, setData] = useState<ChartData<'line', SeriesData[]>>();
+    const [themeVersion, setThemeVersion] = useState(0);
 
+    useEffect(() => watchChartTheme(() => setThemeVersion(version => version + 1)), []);
 
     useEffect(() => {
 
@@ -67,8 +70,29 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
     if (!data)
         return <>{translate("App.LoadingInProgress")}</>;
 
+    const theme = chartTheme();
 
-    return (<><Line data={data} options={{responsive:true}}></Line></>);
+    return (<><Line
+        data={data}
+        key={themeVersion}
+        options={{
+            responsive: true,
+            plugins: {
+                legend: { labels: { color: theme.text } },
+                tooltip: {
+                    backgroundColor: theme.tooltipBackground,
+                    titleColor: theme.tooltipText,
+                    bodyColor: theme.tooltipText,
+                    borderColor: theme.grid,
+                    borderWidth: 1
+                }
+            },
+            scales: {
+                x: { ticks: { color: theme.mutedText }, grid: { color: theme.grid } },
+                y: { ticks: { color: theme.mutedText }, grid: { color: theme.grid } }
+            }
+        }}
+    ></Line></>);
 };
 export {
     EvolutionChart

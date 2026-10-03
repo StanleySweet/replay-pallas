@@ -19,6 +19,8 @@ interface IReplayContainerProps {
     filter?: string
     fromDate?: string
     toDate?: string
+    civ?: string
+    map?: string
 }
 
 const PAGE_SIZE = 100;
@@ -47,7 +49,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     // something with 3 hits, clear the box and are still stuck showing 3.
     useEffect(() => {
         setLimit(props.maxItems ?? PAGE_SIZE);
-    }, [props.filter, props.maxItems, props.fromDate, props.toDate]);
+    }, [props.filter, props.maxItems, props.fromDate, props.toDate, props.civ, props.map]);
 
 
     if (isLoading) {
@@ -65,7 +67,9 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
         return r.matchId.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
         r.playerNames.some(a => a.toLowerCase().includes(props.filter?.toLowerCase() ?? ""))  ||
         r.mapName?.toLowerCase().includes(props.filter.toLowerCase());
-    }).filter(r => isWithinDateRange(r, props.fromDate, props.toDate));
+    }).filter(r => isWithinDateRange(r, props.fromDate, props.toDate))
+    .filter(r => !props.civ || r.civs.includes(props.civ))
+    .filter(r => !props.map || r.mapName === props.map);
     const filteredReplays = matchedReplays.slice(0, limit);
     const hiddenCount = matchedReplays.length - filteredReplays.length;
 

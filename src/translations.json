@@ -595,6 +595,18 @@
         "fr-FR": "Du",
         "EN": "From"
     },
+    "ReplayFilters.Civilization": {
+        "fr-FR": "Civilisation",
+        "EN": "Civilization"
+    },
+    "ReplayFilters.Map": {
+        "fr-FR": "Carte",
+        "EN": "Map"
+    },
+    "ReplayFilters.All": {
+        "fr-FR": "Toutes",
+        "EN": "All"
+    },
     "ReplayDateRange.To": {
         "fr-FR": "Au",
         "EN": "To"
@@ -602,5 +614,53 @@
     "ReplayBlock.Mods": {
         "fr-FR": "Mods",
         "EN": "Mods"
+    },
+    "PlayerList.Performance": {
+        "fr-FR": "Performance",
+        "EN": "Performance"
+    },
+    "PlayerList.Current": {
+        "fr-FR": "Actuel",
+        "EN": "Current"
+    },
+    "PlayerList.Highest": {
+        "fr-FR": "Plus haut",
+        "EN": "Highest"
+    },
+    "PlayerList.Lowest": {
+        "fr-FR": "Plus bas",
+        "EN": "Lowest"
+    },
+    "PlayerList.Average": {
+        "fr-FR": "Moyenne",
+        "EN": "Average"
+    },
+    "PlayerList.AvgDeviation": {
+        "fr-FR": "Écart moyen",
+        "EN": "Avg deviation"
+    },
+    "PlayerList.StdDeviation": {
+        "fr-FR": "Écart-type",
+        "EN": "Std deviation"
+    },
+    "PlayerList.Last": {
+        "fr-FR": "Dernier",
+        "EN": "Last"
+    },
+    "PlayerList.Best": {
+        "fr-FR": "Meilleur",
+        "EN": "Best"
+    },
+    "PlayerList.Worst": {
+        "fr-FR": "Pire",
+        "EN": "Worst"
+    },
+    "PlayerList.GameElo": {
+        "fr-FR": "ELO en jeu",
+        "EN": "Game ELO"
+    },
+    "PlayerList.NoUsersFound": {
+        "fr-FR": "Aucun joueur trouvé",
+        "EN": "No users found"
     }
 }

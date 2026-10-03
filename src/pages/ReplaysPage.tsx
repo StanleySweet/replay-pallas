@@ -14,6 +14,7 @@ import EUserRole from "../enumerations/EUserRole";
 import { HouseIcon } from "../icons/HouseIcon";
 import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import { ReplayDateRange } from "../components/LocalRatings/ReplayDateRange";
+import { ReplayFilters } from "../components/ReplayFilters";
 import PlusIcon from "../icons/PlusIcon";
 import { tailWindColors, tailWindColorsTransparent, authHeaders } from "../utils";
 
@@ -28,6 +29,8 @@ const ReplaysPage = (): ReactNode => {
     const [toDate, setToDate] = useState<string>();
     const [civDoughnutData, setCivDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
     const [mapDoughnutData, setMapDoughnutData] = useState<ChartData<"doughnut", number[], unknown>>();
+    const [civFilter, setCivFilter] = useState<string>();
+    const [mapFilter, setMapFilter] = useState<string>();
     const { token, role } = useAuth();
 
     useEffect(() => {
@@ -106,7 +109,15 @@ const ReplaysPage = (): ReactNode => {
                         <div className="mt-2 lg:mt-0 lg:col-span-4">
                             <SearchReplayBar onChange={(evt) => { setFilter(evt.target.value); }} />
                             <ReplayDateRange from={fromDate} to={toDate} onFromChange={setFromDate} onToChange={setToDate} />
-                            <ReplayContainer filter={filter} fromDate={fromDate} toDate={toDate} replays={replays}></ReplayContainer>
+                            <ReplayFilters
+                                civs={[...new Set((replays ?? []).flatMap(a => a.civs))].sort()}
+                                maps={[...new Set((replays ?? []).map(a => a.mapName))].sort()}
+                                civ={civFilter}
+                                map={mapFilter}
+                                onCivChange={setCivFilter}
+                                onMapChange={setMapFilter}
+                            />
+                            <ReplayContainer filter={filter} fromDate={fromDate} toDate={toDate} civ={civFilter} map={mapFilter} replays={replays}></ReplayContainer>
                         </div>
                     </div>
             }

@@ -101,7 +101,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     else {
         body = <tbody className="w-full"><tr className={
             "hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b"
-        }><td className="text-center" colSpan={4}>No users found</td></tr></tbody>;
+        }><td className="text-center" colSpan={4}>{translate("PlayerList.NoUsersFound")}</td></tr></tbody>;
     }
 
     const onSearchBarChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -153,36 +153,48 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr style={{ borderBottom: '1px solid' }}>
-                                    <th className="text-center px-6 py-3" colSpan={2}>Score</th>
-                                    <th className="text-center px-6 py-3" colSpan={2}>Performance</th>
+                                    <th className="text-center px-6 py-3" colSpan={2}>{translate("PlayerList.Rating")}</th>
+                                    <th className="text-center px-6 py-3" colSpan={2}>{translate("PlayerList.Performance")}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr className="odd:bg-white even:bg-gray-50 border-b">
-                                    <td className="text-right">Current</td>
+                                    <td className="text-right">{translate("PlayerList.Current")}</td>
                                     <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.currentRatingText}</td>
-                                    <td className="text-right" >Last</td><td className="font-bold text-center">{userProfile.lastPerformanceText}</td>
+                                    <td className="text-right" >{translate("PlayerList.Last")}</td><td className="font-bold text-center">{userProfile.lastPerformanceText}</td>
                                 </tr>
                                 <tr className="odd:bg-white even:bg-gray-50 border-b">
-                                    <td className="text-right">Highest</td>
+                                    <td className="text-right">{translate("PlayerList.Highest")}</td>
                                     <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.highestRatingText}</td>
-                                    <td className="text-right">Best</td><td className="font-bold text-center">{userProfile.bestPerformanceText}</td></tr>
+                                    <td className="text-right">{translate("PlayerList.Best")}</td><td className="font-bold text-center">{userProfile.bestPerformanceText}</td></tr>
                                 <tr className="odd:bg-white even:bg-gray-50 border-b">
-                                    <td className="text-right">Lowest</td>
+                                    <td className="text-right">{translate("PlayerList.Lowest")}</td>
                                     <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.lowestRatingText}</td>
-                                    <td className="text-right">Worst</td><td className="font-bold text-center">{userProfile.worstPerformanceText}</td></tr>
+                                    <td className="text-right">{translate("PlayerList.Worst")}</td><td className="font-bold text-center">{userProfile.worstPerformanceText}</td></tr>
                                 <tr className="odd:bg-white even:bg-gray-50 border-b">
-                                    <td className="text-right">Average</td>
+                                    <td className="text-right">{translate("PlayerList.Average")}</td>
                                     <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.averageRatingText}</td>
-                                    <td className="text-right">Lowest</td><td className="font-bold text-center">{userProfile.lowestRatingText}</td></tr>
+                                    <td className="text-right">{translate("PlayerList.Average")}</td><td className="font-bold text-center">{userProfile.averagePerformanceText}</td></tr>
                                 <tr className="odd:bg-white even:bg-gray-50 border-b">
-                                    <td className="text-right">Avg deviation</td>
+                                    <td className="text-right">{translate("PlayerList.AvgDeviation")}</td>
                                     <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingAverageDeviationText}</td>
-                                    <td className="text-right">Avg deviation</td><td className="font-bold text-center">{userProfile.averagePerformanceText}</td></tr>
+                                    <td className="text-right">{translate("PlayerList.AvgDeviation")}</td><td className="font-bold text-center">{userProfile.performanceAverageDeviationText}</td></tr>
                                 <tr className="odd:bg-white even:bg-gray-50 border-b">
-                                    <td className="text-right">Std deviation</td>
+                                    <td className="text-right">{translate("PlayerList.StdDeviation")}</td>
                                     <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.ratingStandardDeviationText}</td>
-                                    <td className="text-right">Std deviation</td><td className="font-bold text-center">{userProfile.performanceStandardDeviationText}</td>
+                                    <td className="text-right">{translate("PlayerList.StdDeviation")}</td><td className="font-bold text-center">{userProfile.performanceStandardDeviationText}</td>
+                                </tr>
+<tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">{translate("PlayerList.GameElo")}</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.gameElo === null ? "-" : userProfile.gameElo}</td>
+                                    <td className="text-right" />
+                                    <td className="font-bold text-center" />
+                                </tr>
+                                <tr className="odd:bg-white even:bg-gray-50 border-b">
+                                    <td className="text-right">{translate("UserDetails.GlickoRating")}</td>
+                                    <td className="font-bold text-center" style={{ borderRight: '1px solid' }}>{userProfile.glickoElo === null ? "-" : Math.round(userProfile.glickoElo)}</td>
+                                    <td className="text-right">{translate("UserDetails.RatedMatches")}</td>
+                                    <td className="font-bold text-center">{userProfile.glickoMatchCount === null ? "-" : userProfile.glickoMatchCount}</td>
                                 </tr>
                             </tbody>
                         </table>
