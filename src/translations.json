@@ -359,13 +359,13 @@
         "fr-FR": "Classée :",
         "EN": "Ranked:"
     },
-    "ReplayDetails.RatingDistribution": {
-        "fr-FR": "Distribution des classements",
-        "EN": "Rating distribution"
+    "ReplayDetails.CommandsPerTurn": {
+        "fr-FR": "Commandes par tour (CPT)",
+        "EN": "Commands per turn (CPT)"
     },
-    "ReplayDetails.NotRanked": {
-        "fr-FR": "Rejoueur non classé",
-        "EN": "Unranked replay"
+    "ReplayDetails.CommandsPerMinute": {
+        "fr-FR": "Commandes par minute (CPM)",
+        "EN": "Commands per minute (CPM)"
     },
     "ReplayDetails.TeamsLocked": {
         "fr-FR": "Equipes vérouillées :",
@@ -558,6 +558,10 @@
     "DistributionChart.AverageRating": {
         "fr-FR": "Classement moyen",
         "EN": "Average rating"
+    },
+    "DistributionChart.YourRanking": {
+        "fr-FR": "Votre classement",
+        "EN": "Your ranking"
     },
     "DistributionChart.PlayerCount": {
         "fr-FR": "Nombre de joueurs",

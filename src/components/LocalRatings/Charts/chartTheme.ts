@@ -17,6 +17,8 @@ interface IDecorationOptions {
     theme: IChartTheme
     mean: number | null
     meanLabel: string
+    viewerRating: number | null
+    viewerLabel: string | null
 }
 
 /** Lets `options.plugins.xmlDecorations` typecheck against our own plugin. */
@@ -37,6 +39,24 @@ interface IChartTheme {
     tooltipBackground: string
     tooltipText: string
 }
+
+/**
+ * The API hands out fixed bin colours interpolated between the game's
+ * `colorbinleft` and `colorbinright` (both dark, e.g. "100 100 140 255"), which
+ * were chosen for the light chart box in the original GUI. On the nightwind dark
+ * panel they are effectively black, so bars have to be mixed toward white there.
+ * Mixing rather than re-ramping keeps the tier gradient readable and leaves the
+ * gold "current player" bins gold.
+ */
+const binColor = (color: string, theme: IChartTheme, alpha: number): string => {
+    const [r, g, b] = color.trim().split(/\s+/).map(Number);
+    if ([r, g, b].some(Number.isNaN))
+        return color;
+
+    const mix = theme.dark ? 0.45 : 0;
+    const channel = (value: number): number => Math.round(value + (255 - value) * mix);
+    return `rgba(${channel(r)}, ${channel(g)}, ${channel(b)}, ${alpha})`;
+};
 
 const isDark = (): boolean =>
     typeof document !== "undefined" &&
@@ -67,6 +87,7 @@ const chartTheme = (): IChartTheme => {
 };
 
 export {
+    binColor,
     chartTheme,
     isDark,
     watchChartTheme

@@ -13,7 +13,7 @@ import { useAuth } from "../../../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../../../contexts/Models/useTranslation";
 import { LocalRatingUser } from "../../../types/LocalRatingUser";
 import { authHeaders } from "../../../utils";
-import { chartTheme, IDecorationOptions, IChartTheme, watchChartTheme } from "./chartTheme";
+import { binColor, chartTheme, IDecorationOptions, IChartTheme, watchChartTheme } from "./chartTheme";
 
 interface DistributionChartProps {
     user?: LocalRatingUser
@@ -44,6 +44,7 @@ interface DistributionChartResponse {
     showMean: boolean
     currentRating: number
     playerCount: number
+    viewerRating: number | null
 }
 
 type DistributionPoint = HistogramBar | { x: number, y: number };
@@ -57,7 +58,7 @@ type DistributionPoint = HistogramBar | { x: number, y: number };
 const xmlDecorations: Plugin<"bar" | "line"> = {
     id: "xmlDecorations",
     afterDatasetsDraw(chart, _args, options: IDecorationOptions) {
-        const { theme, mean, meanLabel } = options;
+        const { theme, mean, meanLabel, viewerRating, viewerLabel } = options;
         const { ctx, chartArea } = chart;
         if (!chartArea)
             return;
@@ -84,6 +85,16 @@ const xmlDecorations: Plugin<"bar" | "line"> = {
             ctx.fillText(meanLabel, x + (x > chartArea.right - 60 ? -6 : 6), chartArea.top + 12);
         }
 
+        // The caller's own rating, captioned under the mean one so the two
+        // reference lines can be told apart without reading the legend.
+        if (viewerRating !== null && viewerLabel) {
+            const x = chart.scales.x.getPixelForValue(viewerRating);
+            ctx.fillStyle = theme.mutedText;
+            ctx.font = "11px sans-serif";
+            ctx.textAlign = x > chartArea.right - 60 ? "right" : "left";
+            ctx.fillText(viewerLabel, x + (x > chartArea.right - 60 ? -6 : 6), chartArea.top + 26);
+        }
+
         ctx.restore();
     }
 };
@@ -95,7 +106,7 @@ const toChartData = (response: DistributionChartResponse): ChartData<"bar" | "li
         rangeStart: bin.rangeStart,
         rangeEnd: bin.rangeEnd,
         tier: bin.tier,
-        color: `rgba(${bin.color.replace(/\s+255$/, "")}, 0.85)`
+        color: bin.color
     }));
     const maxCount = Math.max(...bars.map(bar => bar.y), 1);
 
@@ -106,8 +117,6 @@ const toChartData = (response: DistributionChartResponse): ChartData<"bar" | "li
                 label: translate("DistributionChart.PlayersInTier"),
                 data: bars,
                 parsing: false as const,
-                backgroundColor: bars.map(bar => bar.color),
-                borderColor: bars.map(bar => bar.color.replace("0.85", "1")),
                 borderWidth: 1,
                 barPercentage: 1,
                 categoryPercentage: 1
@@ -124,16 +133,39 @@ const toChartData = (response: DistributionChartResponse): ChartData<"bar" | "li
                 borderColor: "rgba(209, 174, 132, 1)",
                 borderDash: [6, 6],
                 borderWidth: 2
+            }] : []),
+            // The caller's own standing, drawn like the mean line. This one is not
+            // the selected player: it is whoever is logged in, so the chart still
+            // says where "you" are while browsing somebody else.
+            ...(response.viewerRating !== null ? [{
+                type: "line" as const,
+                label: translate("DistributionChart.YourRanking"),
+                data: [
+                    { x: response.viewerRating, y: 0 },
+                    { x: response.viewerRating, y: maxCount }
+                ],
+                parsing: false as const,
+                pointRadius: 0,
+                borderColor: "rgba(56, 189, 248, 1)",
+                borderDash: [2, 2],
+                borderWidth: 2
             }] : [])
         ]
     };
 };
 
-const buildOptions = (data: ChartData<"bar" | "line", DistributionPoint[]>, theme: IChartTheme, mean: number | null): ChartOptions<"bar" | "line"> => ({
+const buildOptions = (data: ChartData<"bar" | "line", DistributionPoint[]>, theme: IChartTheme, mean: number | null, viewerRating: number | null): ChartOptions<"bar" | "line"> => ({
     animation: false,
     responsive: true,
     maintainAspectRatio: false,
     parsing: false,
+    datasets: {
+        bar: {
+            backgroundColor: (data.datasets[0].data as HistogramBar[]).map(bar => binColor(bar.color, theme, 0.85)),
+            borderColor: (data.datasets[0].data as HistogramBar[]).map(bar => binColor(bar.color, theme, 1)),
+            borderWidth: 1
+        }
+    },
     plugins: {
         legend: {
             display: true,
@@ -169,7 +201,11 @@ const buildOptions = (data: ChartData<"bar" | "line", DistributionPoint[]>, them
         xmlDecorations: {
             theme,
             mean,
-            meanLabel: `${translate("DistributionChart.AverageRating")}: ${mean === null ? "-" : mean.toFixed(2)}`
+            meanLabel: `${translate("DistributionChart.AverageRating")}: ${mean === null ? "-" : mean.toFixed(2)}`,
+            viewerRating,
+            viewerLabel: viewerRating === null || viewerRating === undefined
+                ? null
+                : `${translate("DistributionChart.YourRanking")}: ${viewerRating.toFixed(2)}`
         }
     },
     scales: {
@@ -203,25 +239,22 @@ const DistributionChart = (props: DistributionChartProps): JSX.Element => {
     const { token } = useAuth();
     const [data, setData] = useState<ChartData<"bar" | "line", DistributionPoint[]>>();
     const [mean, setMean] = useState<number | null>(null);
+    const [viewerRating, setViewerRating] = useState<number | null>(null);
     const [themeVersion, setThemeVersion] = useState(0);
-    const byMatch = !props.user && !!props.matchId;
 
     useEffect(() => watchChartTheme(() => setThemeVersion(version => version + 1)), []);
 
     useEffect(() => {
-        if (!props.user && !props.matchId) {
+        if (!props.user) {
             setData(undefined);
             return;
         }
 
-        const endpoint = byMatch
-            ? `${import.meta.env.VITE_API_URL}/local-ratings/replay-distribution-data`
-            : `${import.meta.env.VITE_API_URL}/local-ratings/distribution-data`;
-        const body = byMatch
-            ? { matchId: props.matchId }
-            : { player: props.user?.user.nick, rank: props.user?.rank, players: props.user?.matches };
-
-        axios.post<unknown, AxiosResponse<DistributionChartResponse>>(endpoint, body, {
+        axios.post<unknown, AxiosResponse<DistributionChartResponse>>(`${import.meta.env.VITE_API_URL}/local-ratings/distribution-data`, {
+            player: props.user.user.nick,
+            rank: props.user.rank,
+            players: props.user.matches
+        }, {
             headers: authHeaders(token)
         }).then(response => {
             if (!response.data.bins.length) {
@@ -230,11 +263,12 @@ const DistributionChart = (props: DistributionChartProps): JSX.Element => {
             }
 
             setMean(response.data.mean);
+            setViewerRating(response.data.viewerRating);
             setData(toChartData(response.data));
         });
-    }, [props.user, props.matchId, byMatch, token]);
+    }, [props.user, token]);
 
-    if (!props.user && !props.matchId)
+    if (!props.user)
         return <>{translate("App.SelectAPlayer")}</>;
     if (!data)
         return <>{translate("App.LoadingInProgress")}</>;
@@ -243,7 +277,7 @@ const DistributionChart = (props: DistributionChartProps): JSX.Element => {
 
     return (
         <div className="h-[260px] w-full">
-            <ChartJS type="bar" data={data} options={buildOptions(data, theme, mean)} plugins={[xmlDecorations]} key={themeVersion} />
+            <ChartJS type="bar" data={data} options={buildOptions(data, theme, mean, viewerRating)} plugins={[xmlDecorations]} key={themeVersion} />
         </div>
     );
 };
