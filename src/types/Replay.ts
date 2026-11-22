@@ -84,7 +84,9 @@ export interface PlayerData {
     Civ: string
     AverageCPM: number
     State: string
-    Commands: Command[]
+    NumberOfCommands?: number
+    // Rows not rebuilt yet still carry the commands, remove once every replay is rebuilt.
+    Commands?: Command[]
     SecondMostUsedCmd: string
     MostUsedCmd: string;
 }
