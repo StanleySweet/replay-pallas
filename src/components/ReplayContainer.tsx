@@ -32,7 +32,9 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     const { token } = useAuth();
 
     useEffect(() => {
-        if(!props.replays || !props.replays.length){
+        // No list given: load every replay. A list that is given, empty included, is what is shown, and it
+        // is followed when it changes (another 0 A.D. release chosen), not read once.
+        if(props.replays === undefined){
             axios.get(`${import.meta.env.VITE_API_URL}/replays/all`, {
                 headers: authHeaders(token)
             }).then(response => {
@@ -41,6 +43,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
             });
         }
         else{
+            setReplays(props.replays);
             setLoading(false);
         }
     }, [token, props.replays]);

@@ -11,21 +11,23 @@ import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
 import { authHeaders } from "../utils";
+import { useRelease, withRelease } from "../release";
 
 const LatestReplayContainer = (): JSX.Element => {
     const [isLoading, setLoading] = useState(true);
     const { token } = useAuth();
+    const release = useRelease();
     const [replays, setReplays] = useState<ReplayListItem[]>([]);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/replays/latest-list-items`, {
+        axios.get(withRelease(`${import.meta.env.VITE_API_URL}/replays/latest-list-items`), {
             headers: authHeaders(token)
         }).then(response => {
 
             setReplays(response.data);
             setLoading(false);
         });
-    }, [token]);
+    }, [token, release]);
 
 
     let body: JSX.Element;

@@ -15,6 +15,7 @@ import "chart.js/auto";
 import { ITranslationDictionaryKey } from "../../../types/ITranslationDictionaryEntry";
 import { tailWindColors, authHeaders } from "../../../utils";
 import { chartTheme, watchChartTheme } from "./chartTheme";
+import { useRelease, withRelease } from "../../../release";
 
 interface EvolutionChartProps {
     user?: LocalRatingUser
@@ -29,6 +30,7 @@ interface EvolutionChart {
 
 const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
     const { token } = useAuth();
+    const release = useRelease();
     const [data, setData] = useState<ChartData<'line', SeriesData[]>>();
     const [themeVersion, setThemeVersion] = useState(0);
 
@@ -38,7 +40,7 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
 
         if (props.user)
 
-            axios.post<LocalRatingUser, AxiosResponse<EvolutionChart>>(`${import.meta.env.VITE_API_URL}/local-ratings/evolution-data`, {
+            axios.post<LocalRatingUser, AxiosResponse<EvolutionChart>>(withRelease(`${import.meta.env.VITE_API_URL}/local-ratings/evolution-data`), {
                 player: props.user.user.nick,
                 rank: props.user.rank,
                 players: props.user.matches
@@ -62,7 +64,7 @@ const EvolutionChart = (props: EvolutionChartProps): JSX.Element => {
                     } as ChartData<'line', SeriesData[]>);
                 }
             });
-    }, [token, props]);
+    }, [token, props, release]);
 
 
     if (!props.user)

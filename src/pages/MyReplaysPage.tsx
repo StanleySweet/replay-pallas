@@ -15,11 +15,13 @@ import { SearchReplayBar } from "../components/LocalRatings/SearchReplay";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { authHeaders } from "../utils";
+import { useRelease, withRelease } from "../release";
 
 
 
 const MyReplaysPage = (): ReactNode => {
     const { token } = useAuth();
+    const release = useRelease();
     const [replays, setReplays] = useState<ReplayListItem[]>();
     const [isLoading, setLoading] = useState<boolean>();
     const [filter, setFilter] = useState<string>("");
@@ -48,7 +50,7 @@ const MyReplaysPage = (): ReactNode => {
     }
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/replays/my-list-items`, {
+        axios.get(withRelease(`${import.meta.env.VITE_API_URL}/replays/my-list-items`), {
             headers: authHeaders(token)
         }).then((response: AxiosResponse<ReplayListItem[]>) => {
             setLoading(false);
@@ -57,7 +59,7 @@ const MyReplaysPage = (): ReactNode => {
             }
         });
         setLoading(true);
-    }, [token]);
+    }, [token, release]);
 
     const filteredReplays: ReplayListItem[] = (replays ?? []).filter(r => {
         return r.matchId.toString().toLowerCase().includes(filter.toLowerCase()) ||

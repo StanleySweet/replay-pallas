@@ -15,6 +15,7 @@ import { LocalRatingUserProfile } from "../../types/LocalRatingUserProfile";
 import { LobbyUserBlock } from "../LobbyUserBlock";
 import { uid } from "chart.js/helpers";
 import { authHeaders } from "../../utils";
+import { useRelease, withRelease } from "../../release";
 
 interface IPlayerListProps {
     onPlayerSelected?: (user: LocalRatingUser) => void
@@ -27,24 +28,25 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     const [user, setUser] = useState<LocalRatingUser>();
     const [userProfile, setUserProfile] = useState<LocalRatingUserProfile>();
     const { token } = useAuth();
+    const release = useRelease();
 
     let body: JSX.Element;
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`${import.meta.env.VITE_API_URL}/local-ratings/users`, {
+        axios.get(withRelease(`${import.meta.env.VITE_API_URL}/local-ratings/users`), {
             headers: authHeaders(token)
         }).then(response => {
             setUsers(response.data);
             setFilteredUsers(response.data);
             setLoading(false);
         });
-    }, [token]);
+    }, [token, release]);
 
     const onPlayerSelected = async (evt: React.MouseEvent<HTMLTableRowElement>, user: LocalRatingUser) => {
         evt.preventDefault();
         setUser(user);
-        axios.post(`${import.meta.env.VITE_API_URL}/local-ratings/player-profile`, {
+        axios.post(withRelease(`${import.meta.env.VITE_API_URL}/local-ratings/player-profile`), {
             player: user.user.nick,
             rank: user.rank,
             players: user.matches

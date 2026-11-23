@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import "chart.js/auto";
 import { tailWindColors, tailWindColorsTransparent, authHeaders } from "../../../utils";
 import { chartTheme, watchChartTheme } from "./chartTheme";
+import { useRelease, withRelease } from "../../../release";
 
 type CivilizationChartProps = {
     user?: LocalRatingUser
@@ -28,6 +29,7 @@ type CivilizationChartData ={
 
 const CivilizationChart = (props : CivilizationChartProps): JSX.Element => {
     const { token } = useAuth();
+    const release = useRelease();
     const [data, setData] = useState<ChartData<'bar', number[]>>();
     const [themeVersion, setThemeVersion] = useState(0);
 
@@ -35,7 +37,7 @@ const CivilizationChart = (props : CivilizationChartProps): JSX.Element => {
 
     useEffect(() => {
         if (props.user)
-            axios.post<LocalRatingUser, AxiosResponse<CivilizationChartData>>(`${import.meta.env.VITE_API_URL}/local-ratings/civilization-data`, {
+            axios.post<LocalRatingUser, AxiosResponse<CivilizationChartData>>(withRelease(`${import.meta.env.VITE_API_URL}/local-ratings/civilization-data`), {
                 player: props.user.user.nick,
                 rank: props.user.rank,
                 players: props.user.matches
@@ -58,7 +60,7 @@ const CivilizationChart = (props : CivilizationChartProps): JSX.Element => {
                     });
                 }
             });
-    }, [token, props]);
+    }, [token, props, release]);
 
 
     if (!props.user)

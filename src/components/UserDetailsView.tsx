@@ -15,6 +15,7 @@ import { ReplayContainer } from "./ReplayContainer";
 import SaveIcon from "../icons/SaveIcon";
 import EUserRole from "../enumerations/EUserRole";
 import { authHeaders } from "../utils";
+import { useRelease, withRelease } from "../release";
 
 interface UserDetailsViewProps {
     requestUrl: string
@@ -23,6 +24,7 @@ interface UserDetailsViewProps {
 
 const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewProps): JSX.Element => {
     const { token, role } = useAuth();
+    const release = useRelease();
     const [userDetails, setUserDetails] = useState<User>();
     const [isLoading, setLoading] = useState(true);
     const [filter, setFilter] = useState<string>();
@@ -30,7 +32,7 @@ const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewP
     const [message, setMessage] = useState<string>();
 
     useEffect(() => {
-        axios.get<undefined, AxiosResponse<User>>(requestUrl, {
+        axios.get<undefined, AxiosResponse<User>>(withRelease(requestUrl), {
             headers: authHeaders(token)
         }).then((response: AxiosResponse<User>) => {
             setUserDetails(response.data);
@@ -38,7 +40,7 @@ const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewP
         }).catch(() => {
             setLoading(false);
         });
-    }, [requestUrl, token]);
+    }, [requestUrl, token, release]);
 
     const onClick = () => {
         if (!adminSelectValue || !userDetails)

@@ -667,4 +667,13 @@
         "fr-FR": "Aucun joueur trouvé",
         "EN": "No users found"
     }
+    ,
+    "Release.Label": {
+        "fr-FR": "Version de 0 A.D.",
+        "EN": "0 A.D. release"
+    },
+    "Release.All": {
+        "fr-FR": "Toutes les versions",
+        "EN": "All releases"
+    }
 }

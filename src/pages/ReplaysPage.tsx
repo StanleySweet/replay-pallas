@@ -17,6 +17,7 @@ import { ReplayDateRange } from "../components/LocalRatings/ReplayDateRange";
 import { ReplayFilters } from "../components/ReplayFilters";
 import PlusIcon from "../icons/PlusIcon";
 import { tailWindColors, tailWindColorsTransparent, authHeaders } from "../utils";
+import { useRelease, withRelease } from "../release";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -32,9 +33,10 @@ const ReplaysPage = (): ReactNode => {
     const [civFilter, setCivFilter] = useState<string>();
     const [mapFilter, setMapFilter] = useState<string>();
     const { token, role } = useAuth();
+    const release = useRelease();
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/replays/all-list-items`, {
+        axios.get(withRelease(`${import.meta.env.VITE_API_URL}/replays/all-list-items`), {
             headers: authHeaders(token)
         }).then((response: AxiosResponse<ReplayListItem[]>) => {
             if (response.data && response.data) {
@@ -69,7 +71,7 @@ const ReplaysPage = (): ReactNode => {
 
             setLoading(false);
         });
-    }, [token]);
+    }, [token, release]);
 
 
 

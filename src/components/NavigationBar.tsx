@@ -5,6 +5,7 @@ import EUserRole from "../enumerations/EUserRole";
 import Avatar from "boring-avatars";
 import { enable } from "../nightwind";
 import { useState } from "react";
+import ReleaseSelect from "./ReleaseSelect";
 
 const storageKey = 'nightwind-mode';
 const getColorPreference = (): string => {
@@ -100,7 +101,7 @@ const NavigationBar = () => {
                     </div>
                     <div className="">
                         <div className="flex">
-                            {lightButton}
+                            <ReleaseSelect />{lightButton}
                             <div className="pr-4">
                                 {loginBlock}
                             </div>
@@ -212,7 +213,7 @@ const NavigationBar = () => {
                         }
                     </div>
                     <div className="flex-1 flex">
-                        {lightButton}
+                        <ReleaseSelect />{lightButton}
                         <div className="pr-4">
                             {loginBlock}
                         </div>

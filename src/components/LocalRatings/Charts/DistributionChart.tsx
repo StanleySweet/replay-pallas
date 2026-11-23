@@ -14,6 +14,7 @@ import { useTranslation as translate } from "../../../contexts/Models/useTransla
 import { LocalRatingUser } from "../../../types/LocalRatingUser";
 import { authHeaders } from "../../../utils";
 import { binColor, chartTheme, IDecorationOptions, IChartTheme, watchChartTheme } from "./chartTheme";
+import { useRelease, withRelease } from "../../../release";
 
 interface DistributionChartProps {
     user?: LocalRatingUser
@@ -237,6 +238,7 @@ const buildOptions = (data: ChartData<"bar" | "line", DistributionPoint[]>, them
 
 const DistributionChart = (props: DistributionChartProps): JSX.Element => {
     const { token } = useAuth();
+    const release = useRelease();
     const [data, setData] = useState<ChartData<"bar" | "line", DistributionPoint[]>>();
     const [mean, setMean] = useState<number | null>(null);
     const [viewerRating, setViewerRating] = useState<number | null>(null);
@@ -250,7 +252,7 @@ const DistributionChart = (props: DistributionChartProps): JSX.Element => {
             return;
         }
 
-        axios.post<unknown, AxiosResponse<DistributionChartResponse>>(`${import.meta.env.VITE_API_URL}/local-ratings/distribution-data`, {
+        axios.post<unknown, AxiosResponse<DistributionChartResponse>>(withRelease(`${import.meta.env.VITE_API_URL}/local-ratings/distribution-data`), {
             player: props.user.user.nick,
             rank: props.user.rank,
             players: props.user.matches
@@ -266,7 +268,7 @@ const DistributionChart = (props: DistributionChartProps): JSX.Element => {
             setViewerRating(response.data.viewerRating);
             setData(toChartData(response.data));
         });
-    }, [props.user, token]);
+    }, [props.user, token, release]);
 
     if (!props.user)
         return <>{translate("App.SelectAPlayer")}</>;
