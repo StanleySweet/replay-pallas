@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-import { RELEASES, releaseLabel, setRelease, useRelease } from "../release";
+import { releaseLabel, setRelease, useRelease, useReleases } from "../release";
+import { useAuth } from "../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 
 const ReleaseSelect = () => {
+    const { token } = useAuth();
     const release = useRelease();
+    const releases = useReleases(token);
 
     return (
         <select
@@ -14,7 +17,7 @@ const ReleaseSelect = () => {
             className="self-center bg-white border border-gray-700 rounded-sm p-1 mr-4 text-sm"
         >
             <option value="">{translate("Release.All")}</option>
-            {RELEASES.map(value => <option key={value} value={value}>{releaseLabel(value)}</option>)}
+            {releases.map(({ release: value, replays }) => <option key={value} value={value}>{releaseLabel(value)} ({replays})</option>)}
         </select>
     );
 };
