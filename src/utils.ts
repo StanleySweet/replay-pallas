@@ -1,8 +1,11 @@
 import colors from 'tailwindcss/colors';
 
-const authHeaders = (token: string | null, contentType: string = 'application/json') => ({
+// The session is the httpOnly cookie, which the browser sends by itself (axios.defaults.withCredentials).
+// The first argument is the session marker from useAuth: it is kept so that the callers do not change and
+// their effects still run again on login and logout, but no token is sent from here.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const authHeaders = (_session: string | null, contentType: string = 'application/json') => ({
     'Content-Type': contentType,
-    'Authorization': `Bearer ${token}`
 });
 
 const toHHMMSS = function (s: string) {

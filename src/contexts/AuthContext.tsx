@@ -12,21 +12,28 @@ import { HeaderBar } from "../components/HeaderBar";
 import axios from "axios";
 import { PallasToken } from "../types/PallasToken";
 
+// Send the session cookie with every call to the API.
+axios.defaults.withCredentials = true;
+
+const SESSION_MARKER = "session";
+
 interface IAuthContextProviderProps {
     children: ReactNode;
 }
 
 const AuthContextProvider = (props: IAuthContextProviderProps) => {
-    function getPreviousSession(): PallasToken | null {
+    // The token itself is in an httpOnly cookie the page cannot read. What is kept here is only who is logged
+    // in, to draw the page. The cookie decides: when it is gone or expired the API answers 401 and the
+    // interceptor below logs out. A session saved by the earlier version holds a token and no cookie, so it
+    // is dropped and the person logs in again.
+    function getPreviousSession(): Omit<PallasToken, "token"> | null {
         const data = localStorage.getItem("user-info");
-
         if (!data)
             return null;
 
         const previousSession = JSON.parse(data);
-        // Handle expiration
-        const tokenObj = JSON.parse(atob(previousSession?.token.split(".")[1] || ""));
-        if (tokenObj.exp * 1000 < Date.now()) {
+        if (previousSession?.token) {
+            localStorage.removeItem("user-info");
             return null;
         }
 
@@ -34,12 +41,11 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
     }
 
     const previousSession = getPreviousSession();
-    useEffect(() => {
-    }, []);
 
-
+    // "session" stands for the cookie: it is only here so that what depends on being logged in loads again
+    // when that changes. It is not sent anywhere.
     const [isLogged, setIsLogged] = useState<boolean>(!!previousSession);
-    const [token, setToken] = useState<string | null>(previousSession?.token ?? null);
+    const [token, setToken] = useState<string | null>(previousSession ? SESSION_MARKER : null);
     const [role, setRole] = useState<EUserRole>(previousSession?.role ?? EUserRole.UNKNOWN);
     const [nick, setNick] = useState<string | null>(previousSession?.nick ?? null);
     const [id, setId] = useState<number | null>(previousSession?.id ?? null);
@@ -55,11 +61,32 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
         onLoginSession: handleLogin,
     };
 
-    function handleLogout()
+    function clearSession()
     {
         localStorage.removeItem("user-info");
+        setToken(null);
+        setRole(EUserRole.UNKNOWN);
+        setNick(null);
+        setId(null);
         setIsLogged(false);
     }
+
+    function handleLogout()
+    {
+        // Only the server can clear an httpOnly cookie.
+        axios.post(`${import.meta.env.VITE_API_URL}/users/logout`).catch(console.error);
+        clearSession();
+    }
+
+    // A 401 on a call made with a session means the cookie is gone or expired.
+    useEffect(() => {
+        const interceptor = axios.interceptors.response.use(response => response, error => {
+            if (error?.response?.status === 401 && localStorage.getItem("user-info"))
+                clearSession();
+            return Promise.reject(error);
+        });
+        return () => axios.interceptors.response.eject(interceptor);
+    }, []);
 
     function handleLogin(email: string, password: string): void {
         hash(password, import.meta.env.VITE_PASSWORD_SALT, function (err, hashedPassword) {
@@ -85,12 +112,13 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
                     setLoginFailed(true);
                 }
                 else {
-                    const user: PallasToken = response.data;
-                    setRole(user.role);
-                    setToken(user.token);
-                    setNick(user.nick);
-                    setId(user.id);
-                    localStorage.setItem("user-info", JSON.stringify(user));
+                    // The response body still carries the token for scripts; the browser lives on the cookie.
+                    const { role: userRole, nick: userNick, id: userId }: PallasToken = response.data;
+                    setRole(userRole);
+                    setToken(SESSION_MARKER);
+                    setNick(userNick);
+                    setId(userId);
+                    localStorage.setItem("user-info", JSON.stringify({ role: userRole, nick: userNick, id: userId }));
                     setIsLogged(true);
                     setLoginFailed(false);
                 }
