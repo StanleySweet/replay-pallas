@@ -679,5 +679,29 @@
     "PlayerList.NoUsersOnRelease": {
         "fr-FR": "Pas assez de parties sur cette version pour classer des joueurs.",
         "EN": "Not enough games on this release to rate players."
+    },
+    "Maintenance.RebuildReading": {
+        "fr-FR": "Lecture des replays :",
+        "EN": "Reading replays:"
+    },
+    "Maintenance.RebuildWriting": {
+        "fr-FR": "Enregistrement des résultats…",
+        "EN": "Saving the results…"
+    },
+    "Maintenance.RebuildFinishing": {
+        "fr-FR": "Mise à jour des classements…",
+        "EN": "Refreshing the ratings…"
+    },
+    "Maintenance.RebuildDone": {
+        "fr-FR": "Reconstruction terminée",
+        "EN": "Rebuild finished"
+    },
+    "Maintenance.RebuildFailed": {
+        "fr-FR": "La reconstruction a échoué :",
+        "EN": "Rebuild failed:"
+    },
+    "Maintenance.RebuildSkipped": {
+        "fr-FR": "ignorés",
+        "EN": "skipped"
     }
 }
