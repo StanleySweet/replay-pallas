@@ -103,7 +103,7 @@ const PlayerList = (props: IPlayerListProps): JSX.Element => {
     else {
         body = <tbody className="w-full"><tr className={
             "hover:bg-red-700 hover:text-white hover:font-semibold odd:bg-white even:bg-gray-50 border-b"
-        }><td className="text-center" colSpan={4}>{translate("PlayerList.NoUsersFound")}</td></tr></tbody>;
+        }><td className="text-center" colSpan={4}>{translate(release !== null && users?.length === 0 ? "PlayerList.NoUsersOnRelease" : "PlayerList.NoUsersFound")}</td></tr></tbody>;
     }
 
     const onSearchBarChange = (evt: ChangeEvent<HTMLInputElement>) => {

@@ -675,5 +675,9 @@
     "Release.All": {
         "fr-FR": "Toutes les versions",
         "EN": "All releases"
+    },
+    "PlayerList.NoUsersOnRelease": {
+        "fr-FR": "Pas assez de parties sur cette version pour classer des joueurs.",
+        "EN": "Not enough games on this release to rate players."
     }
 }
