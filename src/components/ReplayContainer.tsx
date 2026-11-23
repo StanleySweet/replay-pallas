@@ -66,7 +66,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     }
 
     const matchedReplays = replays.filter(r => {
-        if(!props.filter || props.filter.length < 3)
+        if (!props.filter)
             return true;
 
         return r.matchId.toString().toLowerCase().includes(props.filter.toLowerCase()) ||
