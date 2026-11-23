@@ -666,8 +666,7 @@
     "PlayerList.NoUsersFound": {
         "fr-FR": "Aucun joueur trouvé",
         "EN": "No users found"
-    }
-    ,
+    },
     "NavigationBar.Leaderboard": {
         "fr-FR": "Classement",
         "EN": "Leaderboard"
@@ -735,5 +734,45 @@
     "Maintenance.RebuildSkipped": {
         "fr-FR": "ignorés",
         "EN": "skipped"
+    },
+    "Erasure.Title": {
+        "fr-FR": "Effacement d'un joueur",
+        "EN": "Erase a player"
+    },
+    "Erasure.Hint": {
+        "fr-FR": "Le pseudo est remplacé par un pseudonyme dans les replays enregistrés et dans les fichiers servis. Indiquez tous les pseudos de la personne : un pseudo oublié n'est pas reconnu. Faites une sauvegarde avant d'appliquer.",
+        "EN": "The nickname is replaced by a pseudonym in the stored replays and in the files served. Enter every nickname of the person: a nickname left out is not recognised. Take a backup before applying."
+    },
+    "Erasure.Nick": {
+        "fr-FR": "Pseudo",
+        "EN": "Nickname"
+    },
+    "Erasure.Person": {
+        "fr-FR": "Personne n° (pour un autre pseudo de la même personne)",
+        "EN": "Person no. (for another nickname of the same person)"
+    },
+    "Erasure.Add": {
+        "fr-FR": "Ajouter à la liste",
+        "EN": "Add to the list"
+    },
+    "Erasure.Added": {
+        "fr-FR": "ajouté :",
+        "EN": "added:"
+    },
+    "Erasure.Apply": {
+        "fr-FR": "Appliquer aux replays enregistrés",
+        "EN": "Apply to the stored replays"
+    },
+    "Erasure.Confirm": {
+        "fr-FR": "Réécrire les replays enregistrés des joueurs de la liste ? Avez-vous fait une sauvegarde ?",
+        "EN": "Rewrite the stored replays of the players on the list? Did you take a backup?"
+    },
+    "Erasure.Applied": {
+        "fr-FR": "Terminé :",
+        "EN": "Done:"
+    },
+    "Erasure.Failed": {
+        "fr-FR": "Échec (code",
+        "EN": "Failed (code"
     }
 }
