@@ -9,10 +9,6 @@ export interface Replay {
     metadata: ReplayMetadata
 }
 
-export interface Command {
-    type: string
-}
-
 export interface ReplayDetails {
     match_id: string
     metadata: ReplayMetadata
@@ -85,8 +81,6 @@ export interface PlayerData {
     AverageCPM: number
     State: string
     NumberOfCommands?: number
-    // Rows not rebuilt yet still carry the commands, remove once every replay is rebuilt.
-    Commands?: Command[]
     SecondMostUsedCmd: string
     MostUsedCmd: string;
 }

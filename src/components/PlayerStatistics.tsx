@@ -71,7 +71,7 @@ const PlayerStatistics = (props: IPlayerStatisticsProps): JSX.Element => {
                             {translate("PlayerStatistics.Civilization")} <b>{playerInfo.Civ}</b>
                         </span><br />
                         <span className="text-sm">
-                            {translate("PlayerStatistics.NumberOfOrdersGiven")} <b>{playerInfo.NumberOfCommands ?? playerInfo.Commands?.length}</b>
+                            {translate("PlayerStatistics.NumberOfOrdersGiven")} <b>{playerInfo.NumberOfCommands}</b>
                         </span><br />
                         <span className="text-sm">
                             {translate("PlayerStatistics.MostUsedOrder")} <b>{playerInfo.MostUsedCmd}</b>
