@@ -46,11 +46,9 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
         if (passwordErrorVisible || emailErrorVisible)
             return;
 
-        hash(password, import.meta.env.VITE_PASSWORD_SALT, function (err, hashedPassword) {
-            if (err) {
-                console.error(err);
-                return;
-            }
+        // The email is only a lookup key, so it stays hashed. The password goes over HTTPS as it is and the
+        // server hashes it with a salt per user.
+        {
             hash(email, import.meta.env.VITE_EMAIL_SALT, async function (err2, hashedEmail) {
                 if (err2) {
                     console.error(err2);
@@ -58,7 +56,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
                 }
                 try {
                     const response = await axios.post<User, AxiosResponse<User>>(`${import.meta.env.VITE_API_URL}/users/`, {
-                        "password": hashedPassword,
+                        "password": password,
                         "email": hashedEmail,
                         "nick": nick
                     }, {
@@ -75,7 +73,7 @@ const RegisterBlock = (props: ILoginPageProps): ReactNode => {
                     setRegisterErrorVisible(true);
                 }
             });
-        });
+        }
     };
 
     return (

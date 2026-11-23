@@ -73,9 +73,12 @@ const AuthContextProvider = (props: IAuthContextProviderProps) => {
                     return;
                 }
 
+                // The plain password goes over HTTPS and the server hashes it with a salt per user. The old
+                // hash is sent beside it only so an account made before that can move over on this login.
                 const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/token`, {
                     email: hashedEmail,
-                    password: hashedPassword,
+                    password: password,
+                    legacy: hashedPassword,
                 });
 
                 if (response.status !== 200) {
