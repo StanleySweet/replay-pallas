@@ -668,6 +668,26 @@
         "EN": "No users found"
     }
     ,
+    "NavigationBar.Leaderboard": {
+        "fr-FR": "Classement",
+        "EN": "Leaderboard"
+    },
+    "Leaderboard.Title": {
+        "fr-FR": "Classement Glicko",
+        "EN": "Glicko leaderboard"
+    },
+    "Leaderboard.Player": {
+        "fr-FR": "Joueur",
+        "EN": "Player"
+    },
+    "Leaderboard.Rating": {
+        "fr-FR": "Note",
+        "EN": "Rating"
+    },
+    "Leaderboard.Games": {
+        "fr-FR": "Parties",
+        "EN": "Games"
+    },
     "Release.Label": {
         "fr-FR": "Version de 0 A.D.",
         "EN": "0 A.D. release"

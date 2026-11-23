@@ -143,6 +143,11 @@ const NavigationBar = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link to="/Leaderboard" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
+                                    <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.Leaderboard")}</div>
+                                </Link>
+                            </li>
+                            <li>
                                 <Link to="/PrivacyPolicy" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
                                     <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.PrivacyPolicy")}</div>
                                 </Link>
@@ -190,6 +195,9 @@ const NavigationBar = () => {
                         </Link>
                         <Link to="/LocalRatings" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
                             <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.LocalRatings")}</div>
+                        </Link>
+                        <Link to="/Leaderboard" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
+                            <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.Leaderboard")}</div>
                         </Link>
                         <Link to="/PrivacyPolicy" className="m-auto flex flex-grow justify-center cursor-pointer py-2 px-4">
                             <div style={{ fontSize: "14px", fontWeight: 700, textTransform: "uppercase" }}>{translate("NavigationBar.PrivacyPolicy")}</div>

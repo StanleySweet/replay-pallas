@@ -7,6 +7,7 @@ import { AdministrationPage } from './pages/AdministrationPage';
 import { ReplayDetailsPage } from './pages/ReplayDetailsPage';
 import { UserDetailsPage } from './pages/UserDetailsPage';
 import { LobbyUserDetailsPage } from './pages/LobbyUserDetailsPage';
+import { LeaderboardPage } from './pages/LeaderboardPage';
 import { LocalRatingsPage } from './pages/LocalRatingsPage';
 import { ReplaysPage } from './pages/ReplaysPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
@@ -35,6 +36,7 @@ function App() {
             <Route path='/UserDetails/:userId' element={<UserDetailsPage />}></Route>
             <Route path='/LobbyUserDetails/:userId' element={<LobbyUserDetailsPage />}></Route>
             <Route path='/LocalRatings' element={<LocalRatingsPage />}></Route>
+            <Route path='/Leaderboard' element={<LeaderboardPage />}></Route>
             <Route path='/MyReplays' element={<MyReplaysPage />}></Route>
             <Route path='/About' element={<AboutPage />}></Route>
             <Route path='/Replays/Upload' element={<ReplayUploadPage />}></Route>
