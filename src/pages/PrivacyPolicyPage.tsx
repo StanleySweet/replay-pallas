@@ -108,6 +108,30 @@ const PrivacyPolicyBlock = (): ReactNode => {
             your request, such as when the request is manifestly
             unfounded or excessive.
         </p>
+        <h3 className="font-semibold mt-1 mb-1">How We Erase a Player</h3>
+        <p className="text-justify">
+            When you ask us to erase your nickname, we replace it by a
+            pseudonym of the form "Player~" followed by a code, in the
+            replays we store and in the files we serve for them. The
+            same pseudonym is used for all the nicknames you give us,
+            so your games stay linked to each other but not to you.
+        </p>
+        <p className="text-justify">
+            To keep your nickname from coming back when someone else
+            uploads a game you played, we keep one keyed hash of each
+            nickname you gave us. A keyed hash is not your nickname and
+            cannot be read back into it, but it is still pseudonymised
+            personal data, and we keep it only for this purpose. We
+            hold the key apart from the database and its backups.
+        </p>
+        <p className="text-justify">
+            We erase the nicknames you tell us about. A nickname you do
+            not list, such as an old one, is not recognised. Backups
+            made before the erasure still hold your nickname until they
+            are replaced, which takes about five days. Replay files on
+            your own computer, or on the computers of other players, are
+            not ours to change.
+        </p>
         <h3 className="font-semibold mt-1 mb-1">Contact Us</h3>
         <p className="text-justify">
             If you have any questions or concerns about our privacy
