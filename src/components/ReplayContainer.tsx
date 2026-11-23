@@ -12,6 +12,7 @@ import { useAuth } from "../contexts/Models/IAuthContext";
 import { BlockTitle } from "./BlockTitle";
 import { authHeaders } from "../utils";
 import { isWithinDateRange } from "./replayDateFilter";
+import { useRelease, withRelease } from "../release";
 
 interface IReplayContainerProps {
     replays?:ReplayListItem[]
@@ -30,12 +31,13 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
     const [replays, setReplays] = useState<ReplayListItem[]>(props.replays ?? []);
     const [limit, setLimit] = useState<number>(props.maxItems ?? PAGE_SIZE);
     const { token } = useAuth();
+    const release = useRelease();
 
     useEffect(() => {
         // No list given: load every replay. A list that is given, empty included, is what is shown, and it
         // is followed when it changes (another 0 A.D. release chosen), not read once.
         if(props.replays === undefined){
-            axios.get(`${import.meta.env.VITE_API_URL}/replays/all`, {
+            axios.get(withRelease(`${import.meta.env.VITE_API_URL}/replays/all`), {
                 headers: authHeaders(token)
             }).then(response => {
                 setReplays(response.data);
@@ -46,7 +48,7 @@ const ReplayContainer = (props : IReplayContainerProps) : JSX.Element => {
             setReplays(props.replays);
             setLoading(false);
         }
-    }, [token, props.replays]);
+    }, [token, props.replays, release]);
 
     // A new search should start from the top again, otherwise you search for
     // something with 3 hits, clear the box and are still stuck showing 3.
