@@ -688,6 +688,18 @@
         "fr-FR": "Parties",
         "EN": "Games"
     },
+    "Leaderboard.MinGames": {
+        "fr-FR": "Parties minimum",
+        "EN": "Minimum games"
+    },
+    "Leaderboard.Conservative": {
+        "fr-FR": "Classer par note prudente (note - 2 × incertitude)",
+        "EN": "Rank by conservative rating (rating - 2 × deviation)"
+    },
+    "Release.Unknown": {
+        "fr-FR": "Version inconnue",
+        "EN": "Unknown release"
+    },
     "Release.Label": {
         "fr-FR": "Version de 0 A.D.",
         "EN": "0 A.D. release"

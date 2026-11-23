@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import { useLocation } from "react-router-dom";
-import { releaseLabel, setRelease, useRelease, useReleases } from "../release";
+import { useEffect } from "react";
+import { releaseLabel, setRelease, syncAddress, useRelease, useReleases } from "../release";
 import { useAuth } from "../contexts/Models/IAuthContext";
 import { useTranslation as translate } from "../contexts/Models/useTranslation";
 
@@ -13,8 +14,12 @@ const ReleaseSelect = () => {
     const { token } = useAuth();
     const release = useRelease();
     const releases = useReleases(token);
+    const hidden = WITHOUT_SELECTOR.some(prefix => pathname.startsWith(prefix));
 
-    if (WITHOUT_SELECTOR.some(prefix => pathname.startsWith(prefix)))
+    // Every page that offers the selector carries the choice in its address, so the link can be shared.
+    useEffect(() => { if (!hidden) syncAddress(release); }, [pathname, release, hidden]);
+
+    if (hidden)
         return null;
 
     return (
