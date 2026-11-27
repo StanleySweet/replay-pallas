@@ -22,7 +22,7 @@ const ApiKeysBlock = (): ReactNode => {
     const [label, setLabel] = useState("");
     const [keyRole, setKeyRole] = useState<number>(EUserRole.CONTRIBUTOR);
     const [days, setDays] = useState("");
-    const [secret, setSecret] = useState<string>();
+    const [secret, setSecret] = useState<{ id: number, key: string }>();
     const [copied, setCopied] = useState(false);
     const [confirming, setConfirming] = useState<number>();
     const [failure, setFailure] = useState<number>();
@@ -36,8 +36,8 @@ const ApiKeysBlock = (): ReactNode => {
         event.preventDefault();
         setFailure(undefined);
         try {
-            const response = await axios.post<{ key: string }>(url, { label: label.trim(), role: keyRole, ...(days ? { expires_in_days: +days } : {}) }, { headers: authHeaders(token) });
-            setSecret(response.data.key);
+            const response = await axios.post<{ id: number, key: string }>(url, { label: label.trim(), role: keyRole, ...(days ? { expires_in_days: +days } : {}) }, { headers: authHeaders(token) });
+            setSecret({ id: response.data.id, key: response.data.key });
             setCopied(false);
             setLabel("");
             await load();
@@ -50,6 +50,9 @@ const ApiKeysBlock = (): ReactNode => {
         try {
             await axios.delete(`${url}/${id}`, { headers: authHeaders(token) });
             setConfirming(undefined);
+            // A deleted key must not stay on screen: it would still look usable.
+            if (secret?.id === id)
+                setSecret(undefined);
             await load();
         }
         catch (error) { fail(error); }
@@ -59,7 +62,7 @@ const ApiKeysBlock = (): ReactNode => {
         if (!secret)
             return;
         try {
-            await navigator.clipboard.writeText(secret);
+            await navigator.clipboard.writeText(secret.key);
             setCopied(true);
         }
         catch { /* the key stays selectable in the page */ }
@@ -104,7 +107,7 @@ const ApiKeysBlock = (): ReactNode => {
                     <b>{text("ApiKeys.NewKey")}</b>
                     <p className="mt-1 mb-3 text-gray-500">{text("ApiKeys.CopyNow")}</p>
                     <div className="flex flex-wrap items-center gap-3 p-3 rounded bg-gray-100">
-                        <code className="flex-1 min-w-0 basis-64 text-xs break-all font-mono">{secret}</code>
+                        <code className="flex-1 min-w-0 basis-64 text-xs break-all font-mono">{secret.key}</code>
                         <button className={button} onClick={copy}>{text("ApiKeys.Copy")}</button>
                     </div>
                     {copied && <div className="mt-2 font-medium">{text("ApiKeys.Copied")}</div>}
