@@ -10,6 +10,7 @@ import { BlockTitle } from "./BlockTitle";
 import { UserBlock } from "./UserBlock";
 import { UserStatisticsBlock } from "./UserStatisticsBlock";
 import { UserRatingBlock } from "./UserRatingBlock";
+import { ApiKeysBlock } from "./ApiKeysBlock";
 import { SearchReplayBar } from "./LocalRatings/SearchReplay";
 import { ReplayContainer } from "./ReplayContainer";
 import SaveIcon from "../icons/SaveIcon";
@@ -23,7 +24,7 @@ interface UserDetailsViewProps {
 }
 
 const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewProps): JSX.Element => {
-    const { token, role } = useAuth();
+    const { token, role, id } = useAuth();
     const release = useRelease();
     const [userDetails, setUserDetails] = useState<User>();
     const [isLoading, setLoading] = useState(true);
@@ -114,6 +115,8 @@ const UserDetailsView = ({ requestUrl, hidePermissionForZero }: UserDetailsViewP
                         </div> :
                         null
                 }
+
+                {userDetails.id === id && <ApiKeysBlock />}
 
                 <div className="mt-4"></div>
                 {

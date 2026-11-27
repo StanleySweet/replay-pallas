@@ -774,5 +774,109 @@
     "Erasure.Failed": {
         "fr-FR": "Échec (code",
         "EN": "Failed (code"
+    },
+    "ApiKeys.Title": {
+        "fr-FR": "Clés d'API",
+        "EN": "API keys"
+    },
+    "ApiKeys.Hint": {
+        "fr-FR": "Une clé permet à un outil, comme le mod Replay Pallas, d'envoyer et de lire des replays à votre place sans connaître votre mot de passe. Supprimez-la quand vous voulez : elle cesse de fonctionner aussitôt. Cinq clés au plus.",
+        "EN": "A key lets a tool such as the Replay Pallas mod upload and read replays for you without knowing your password. Delete it at any time and it stops working at once. Five keys at most."
+    },
+    "ApiKeys.None": {
+        "fr-FR": "Aucune clé pour l'instant.",
+        "EN": "No keys yet."
+    },
+    "ApiKeys.Name": {
+        "fr-FR": "Nom",
+        "EN": "Name"
+    },
+    "ApiKeys.Can": {
+        "fr-FR": "Droits",
+        "EN": "Can"
+    },
+    "ApiKeys.Read": {
+        "fr-FR": "Lire les replays",
+        "EN": "Read replays"
+    },
+    "ApiKeys.Upload": {
+        "fr-FR": "Lire et envoyer des replays",
+        "EN": "Read and upload replays"
+    },
+    "ApiKeys.Expires": {
+        "fr-FR": "Expire",
+        "EN": "Expires"
+    },
+    "ApiKeys.Never": {
+        "fr-FR": "Jamais",
+        "EN": "Never"
+    },
+    "ApiKeys.Days30": {
+        "fr-FR": "Dans 30 jours",
+        "EN": "After 30 days"
+    },
+    "ApiKeys.Days90": {
+        "fr-FR": "Dans 90 jours",
+        "EN": "After 90 days"
+    },
+    "ApiKeys.Year": {
+        "fr-FR": "Dans 1 an",
+        "EN": "After 1 year"
+    },
+    "ApiKeys.Create": {
+        "fr-FR": "Créer la clé",
+        "EN": "Create key"
+    },
+    "ApiKeys.NewKey": {
+        "fr-FR": "Votre nouvelle clé",
+        "EN": "Your new key"
+    },
+    "ApiKeys.CopyNow": {
+        "fr-FR": "Copiez-la maintenant et collez-la dans l'outil. Elle ne sera plus affichée.",
+        "EN": "Copy it now and paste it into the tool. It is not shown again."
+    },
+    "ApiKeys.Copy": {
+        "fr-FR": "Copier la clé",
+        "EN": "Copy key"
+    },
+    "ApiKeys.Copied": {
+        "fr-FR": "Copiée.",
+        "EN": "Copied."
+    },
+    "ApiKeys.Created": {
+        "fr-FR": "créée le",
+        "EN": "created"
+    },
+    "ApiKeys.NoExpiry": {
+        "fr-FR": "n'expire pas",
+        "EN": "does not expire"
+    },
+    "ApiKeys.ExpiresOn": {
+        "fr-FR": "expire le",
+        "EN": "expires"
+    },
+    "ApiKeys.LastUsed": {
+        "fr-FR": "dernier usage",
+        "EN": "last used"
+    },
+    "ApiKeys.NeverUsed": {
+        "fr-FR": "jamais utilisée",
+        "EN": "never"
+    },
+    "ApiKeys.Delete": {
+        "fr-FR": "Supprimer la clé",
+        "EN": "Delete key"
+    },
+    "ApiKeys.Keep": {
+        "fr-FR": "La garder",
+        "EN": "Keep it"
+    },
+    "ApiKeys.Failed": {
+        "fr-FR": "Échec (code",
+        "EN": "Failed (code"
+    },
+    "ApiKeys.Limit": {
+        "fr-FR": "Vous avez déjà cinq clés : supprimez-en une d'abord.",
+        "EN": "You already have five keys: delete one first."
     }
 }
